@@ -2,6 +2,7 @@ import { useState } from "react";
 import PageHeader from "../components/layout/PageHeader";
 import Button from "../components/ui/Button";
 import { Card, CardBody } from "../components/ui/Card";
+import Icon from "../components/ui/Icon";
 import { usePov } from "../context/PovContext";
 
 export default function AiAssistant() {
@@ -19,7 +20,10 @@ export default function AiAssistant() {
       <div className="grid gap-4 lg:grid-cols-[280px_1fr]">
         <Card>
           <CardBody className="space-y-2">
-            <p className="text-sm font-semibold text-text-primary">Quick prompts</p>
+            <p className="inline-flex items-center gap-1 text-sm font-semibold text-text-primary">
+              <Icon name="spark" className="h-4 w-4" />
+              Quick prompts
+            </p>
             {profile.ai.prompts.map((prompt) => (
               <button
                 key={prompt}
@@ -27,6 +31,7 @@ export default function AiAssistant() {
                 onClick={() => setMessage(prompt)}
                 className="w-full rounded-2xl bg-[#f8fafc] p-3 text-left text-sm text-text-secondary"
               >
+                <Icon name="spark" className="mr-1 inline h-4 w-4" />
                 {prompt}
               </button>
             ))}
@@ -35,7 +40,10 @@ export default function AiAssistant() {
 
         <Card>
           <CardBody className="flex h-[560px] flex-col p-0">
-            <div className="border-b border-gray-100 px-4 py-3 text-sm font-semibold text-text-primary">Conversation</div>
+            <div className="border-b border-gray-100 px-4 py-3 text-sm font-semibold text-text-primary">
+              <Icon name="spark" className="mr-1 inline h-4 w-4" />
+              Conversation
+            </div>
             <div className="flex-1 space-y-3 overflow-y-auto bg-[#f8fafc] p-4">
               <div className="max-w-[75%] rounded-2xl bg-white p-3 text-sm text-text-primary">{profile.ai.starter}</div>
               {message && <div className="ml-auto max-w-[75%] rounded-2xl bg-blue p-3 text-sm text-white">{message}</div>}

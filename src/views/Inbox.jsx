@@ -2,6 +2,7 @@ import { useState } from "react";
 import PageHeader from "../components/layout/PageHeader";
 import { Card, CardBody } from "../components/ui/Card";
 import Button from "../components/ui/Button";
+import Icon from "../components/ui/Icon";
 import { usePov } from "../context/PovContext";
 
 export default function Inbox() {
@@ -24,6 +25,9 @@ export default function Inbox() {
                 onClick={() => setSelected(thread.id)}
                 className={`w-full rounded-2xl p-3 text-left ${thread.id === active.id ? "bg-blue-tint" : "bg-[#f8fafc]"}`}
               >
+                <span className="mb-1 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-white text-blue">
+                  <Icon name="inbox" className="h-4 w-4" />
+                </span>
                 <p className="text-sm font-semibold text-text-primary">{thread.name}</p>
                 <p className="text-xs text-text-muted">{thread.preview}</p>
               </button>
@@ -51,10 +55,13 @@ export default function Inbox() {
 
         <Card>
           <CardBody className="space-y-3">
-            <p className="text-sm font-semibold text-text-primary">Context panel</p>
-            <div className="rounded-2xl bg-[#f8fafc] p-3 text-sm text-text-secondary">Employee: {profile.name}</div>
-            <div className="rounded-2xl bg-[#f8fafc] p-3 text-sm text-text-secondary">Life stage: {profile.lifeStage}</div>
-            <div className="rounded-2xl bg-[#f8fafc] p-3 text-sm text-text-secondary">{profile.inbox.context}</div>
+            <p className="inline-flex items-center gap-1 text-sm font-semibold text-text-primary">
+              <Icon name="spark" className="h-4 w-4" />
+              Context panel
+            </p>
+            <div className="rounded-2xl bg-blue-tint p-3 text-sm text-text-secondary"><Icon name="user" className="mr-1 inline h-4 w-4" />Employee: {profile.name}</div>
+            <div className="rounded-2xl bg-green-tint p-3 text-sm text-text-secondary"><Icon name="family" className="mr-1 inline h-4 w-4" />Life stage: {profile.lifeStage}</div>
+            <div className="rounded-2xl bg-violet-tint p-3 text-sm text-text-secondary"><Icon name="spark" className="mr-1 inline h-4 w-4" />{profile.inbox.context}</div>
           </CardBody>
         </Card>
       </div>

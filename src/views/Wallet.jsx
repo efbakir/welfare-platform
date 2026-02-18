@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PageHeader from "../components/layout/PageHeader";
 import Button from "../components/ui/Button";
 import { Card, CardBody } from "../components/ui/Card";
+import Icon from "../components/ui/Icon";
 import { usePov } from "../context/PovContext";
 
 export default function Wallet() {
@@ -19,6 +20,17 @@ export default function Wallet() {
   }, [profile, familyAllocations]);
 
   const remaining = profile.budget.total - allocated;
+  const usagePct = Math.min(100, Math.round((allocated / profile.budget.total) * 100));
+  const autoSplit = () => {
+    if (!profile.familyEnabled) return;
+    const perMember = Math.floor(profile.budget.total / profile.familyMembers.length / 10) * 10;
+    const next = profile.familyMembers.reduce((acc, member) => ({ ...acc, [member.id]: perMember }), {});
+    setFamilyAllocations(next);
+  };
+  const resetSplit = () => {
+    const next = (profile.familyMembers || []).reduce((acc, member) => ({ ...acc, [member.id]: member.allocation }), {});
+    setFamilyAllocations(next);
+  };
 
   return (
     <>
@@ -30,14 +42,31 @@ export default function Wallet() {
       />
 
       <Card>
-        <CardBody className="flex items-end justify-between gap-4">
+        <CardBody className="space-y-4">
+          <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm text-text-muted">Remaining budget</p>
+              <p className="inline-flex items-center gap-1 text-sm text-text-muted">
+                <Icon name="wallet" className="h-4 w-4" />
+                Remaining budget
+              </p>
             <p className="text-4xl font-bold tracking-tight text-text-primary">{remaining} pts</p>
           </div>
           <div>
-            <p className="text-sm text-text-muted">Allocated</p>
+              <p className="inline-flex items-center gap-1 text-sm text-text-muted">
+                <Icon name="family" className="h-4 w-4" />
+                Allocated
+              </p>
             <p className="text-2xl font-semibold text-text-primary">{allocated} pts</p>
+          </div>
+          </div>
+          <div>
+            <div className="mb-1 flex items-center justify-between text-xs text-text-muted">
+              <span>Budget usage</span>
+              <span>{usagePct}%</span>
+            </div>
+            <div className="h-2 rounded-full bg-[#e6edf6]">
+              <div className="h-full rounded-full bg-blue transition-all" style={{ width: `${usagePct}%` }} />
+            </div>
           </div>
         </CardBody>
       </Card>
@@ -45,11 +74,23 @@ export default function Wallet() {
       {profile.familyEnabled ? (
         <Card>
           <CardBody className="space-y-4">
-            <p className="text-lg font-semibold text-text-primary">Family allocation</p>
+            <div className="flex items-center justify-between">
+              <p className="inline-flex items-center gap-1 text-lg font-semibold text-text-primary">
+                <Icon name="family" className="h-5 w-5" />
+                Family allocation
+              </p>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={autoSplit}>Auto split</Button>
+                <Button variant="outline" size="sm" onClick={resetSplit}>Reset</Button>
+              </div>
+            </div>
             {profile.familyMembers.map((member) => (
               <div key={member.id} className="rounded-2xl bg-[#f8fafc] p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <p className="text-sm font-semibold text-text-primary">{member.name} · {member.relation}</p>
+                  <p className="text-sm font-semibold text-text-primary">
+                    <span className="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-tint text-xs text-blue">{member.name.slice(0, 1)}</span>
+                    {member.name} · {member.relation}
+                  </p>
                   <p className="text-sm font-semibold text-blue">{familyAllocations[member.id] || 0} pts</p>
                 </div>
                 <input
@@ -69,7 +110,10 @@ export default function Wallet() {
       ) : (
         <Card>
           <CardBody className="space-y-3">
-            <p className="text-lg font-semibold text-text-primary">Personal budget</p>
+            <p className="inline-flex items-center gap-1 text-lg font-semibold text-text-primary">
+              <Icon name="wallet" className="h-5 w-5" />
+              Personal budget
+            </p>
             <p className="text-sm text-text-secondary">Family wallet is not enabled for this profile.</p>
             <div className="rounded-2xl bg-[#f8fafc] p-4">
               <p className="text-sm text-text-muted">Monthly goal</p>

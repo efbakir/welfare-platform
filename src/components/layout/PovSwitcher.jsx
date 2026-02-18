@@ -3,7 +3,7 @@ import { usePov } from "../../context/PovContext";
 import { ONBOARDING_KEY } from "../../constants/onboarding";
 
 export default function PovSwitcher() {
-  const { profile, profiles, povId, setPovId } = usePov();
+  const { profiles, povId, setPovId } = usePov();
   const navigate = useNavigate();
 
   const restartOnboarding = () => {
@@ -25,11 +25,10 @@ export default function PovSwitcher() {
       >
         {profiles.map((item) => (
           <option key={item.id} value={item.id}>
-            {item.name}
+            {item.name} — {item.role}
           </option>
         ))}
       </select>
-      <span className="text-xs text-text-muted">{profile.role}</span>
       <button
         type="button"
         onClick={restartOnboarding}
