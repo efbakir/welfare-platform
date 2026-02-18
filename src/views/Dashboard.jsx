@@ -29,6 +29,7 @@ function feedAction(item) {
 
 export default function Dashboard() {
   const { feedItems, benefitsThatBringTogether } = mockData;
+  const trendBg = ["bg-blue-tint", "bg-secondary-tint", "bg-cyan-tint"];
 
   return (
     <>
@@ -72,7 +73,7 @@ export default function Dashboard() {
           <h2 className="mb-5 text-3xl font-bold tracking-tight text-text-primary">Trending</h2>
           <div className="space-y-3">
             {benefitsThatBringTogether.map((stat, i) => (
-              <div key={stat.id} className="rounded-2xl bg-[#edf5ff] p-4">
+              <div key={stat.id} className={`rounded-2xl p-4 ${trendBg[i % trendBg.length]}`}>
                 <p className="text-4xl font-bold tracking-tight text-text-primary">{12 + i * 3}</p>
                 <p className="text-sm font-medium text-gray-400">{stat.title}</p>
               </div>

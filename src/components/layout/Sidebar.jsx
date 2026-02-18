@@ -36,10 +36,10 @@ const iconSvg = (icon) => {
 
 export default function Sidebar({ user }) {
   return (
-    <aside className="fixed left-4 top-4 z-40 hidden h-[calc(100vh-2rem)] w-[var(--sidebar-w)] rounded-2xl bg-white p-3 shadow-[0_8px_24px_rgb(0,0,0,0.035)] md:flex md:flex-col">
+    <aside className="fixed left-4 top-4 z-40 hidden h-[calc(100vh-2rem)] w-[var(--sidebar-w)] rounded-2xl bg-sidebar-bg p-3 shadow-[0_14px_32px_rgba(2,6,23,0.26)] md:flex md:flex-col">
       <div className="flex items-center px-2 py-2.5">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue text-xs font-bold text-white">W</div>
-        <span className="ml-2 text-sm font-bold tracking-tight text-text-primary">Welfare</span>
+        <span className="ml-2 text-sm font-semibold tracking-tight text-white">Welfare</span>
       </div>
 
       <nav className="mt-2">
@@ -49,7 +49,7 @@ export default function Sidebar({ user }) {
             to={item.to}
             className={({ isActive }) =>
               `mb-1 flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all ${
-                isActive ? "bg-blue-tint text-blue" : "text-text-secondary hover:bg-[#f1f5f9]"
+                isActive ? "bg-sidebar-active text-white" : "text-sidebar-text hover:bg-sidebar-hover"
               }`
             }
           >
@@ -62,13 +62,13 @@ export default function Sidebar({ user }) {
       </nav>
 
       <div className="mt-auto p-1">
-        <div className="flex items-center gap-2 rounded-2xl bg-[#f8fafc] p-2.5">
+        <div className="flex items-center gap-2 rounded-2xl bg-white/10 p-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue text-xs font-semibold text-white">
             {user?.avatar ?? "U"}
           </div>
           <div className="min-w-0">
-            <p className="truncate text-xs font-semibold text-text-primary">{user?.name ?? "User"}</p>
-            <p className="truncate text-[11px] font-medium text-text-muted">Online</p>
+            <p className="truncate text-xs font-semibold text-white">{user?.name ?? "User"}</p>
+            <p className="truncate text-[11px] font-medium text-white/70">Online</p>
           </div>
         </div>
       </div>
