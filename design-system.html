@@ -6,14 +6,14 @@
   <title>Welfare Platform — Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --color-blue: #0057b8;
-      --color-blue-dark: #00479a;
-      --color-blue-mid: #2f73c2;
-      --color-blue-tint: #eaf2fb;
-      --color-blue-glow: rgba(0, 87, 184, 0.16);
+      --color-blue: #004080;
+      --color-blue-dark: #003366;
+      --color-blue-mid: #1d5a9e;
+      --color-blue-tint: #e6edf6;
+      --color-blue-glow: rgba(0, 64, 128, 0.2);
       --color-secondary: #c00b6c;
       --color-secondary-dark: #9e0859;
       --color-secondary-tint: #fde8f3;
@@ -40,21 +40,21 @@
       --color-text-white: #ffffff;
       --color-sidebar-bg: #0f172a;
       --color-sidebar-hover: rgba(255,255,255,0.08);
-      --color-sidebar-active: rgba(0,87,184,0.28);
+      --color-sidebar-active: rgba(0,64,128,0.34);
       --color-sidebar-text: rgba(255,255,255,0.84);
-      --font-display: "Inter", "DM Sans", "Helvetica Neue", Arial, sans-serif;
-      --font-body: "Inter", "DM Sans", "Helvetica Neue", Arial, sans-serif;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 14px;
-      --radius-xl: 16px;
-      --radius-2xl: 20px;
-      --radius-3xl: 24px;
+      --font-display: "Cairo", "Helvetica Neue", Arial, sans-serif;
+      --font-body: "Cairo", "Helvetica Neue", Arial, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 10px;
+      --radius-xl: 12px;
+      --radius-2xl: 14px;
+      --radius-3xl: 16px;
       --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
       --shadow-sm: 0 3px 12px rgba(15, 23, 42, 0.035);
       --shadow-md: 0 6px 22px rgba(15, 23, 42, 0.045);
       --shadow-lg: 0 10px 28px rgba(15, 23, 42, 0.055);
-      --shadow-blue: 0 10px 28px rgba(0, 87, 184, 0.2);
+      --shadow-blue: 0 10px 28px rgba(0, 64, 128, 0.2);
       --shadow-pink: 0 8px 24px rgba(15, 23, 42, 0.12);
       --sidebar-w: 242px;
     }
@@ -203,9 +203,9 @@
       <h2>Colors</h2>
       <h3 style="font-size:13px; color: var(--color-text-muted); margin: 0 0 12px;">Brand — Blue</h3>
       <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#0057b8"></div><div class="label">blue</div><div class="value">#0057b8</div></div>
-        <div class="color-swatch"><div class="block" style="background:#00479a"></div><div class="label">blue-dark</div><div class="value">#00479a</div></div>
-        <div class="color-swatch"><div class="block" style="background:#2f73c2"></div><div class="label">blue-mid</div><div class="value">#2f73c2</div></div>
+        <div class="color-swatch"><div class="block" style="background:#004080"></div><div class="label">blue</div><div class="value">#004080</div></div>
+        <div class="color-swatch"><div class="block" style="background:#003366"></div><div class="label">blue-dark</div><div class="value">#003366</div></div>
+        <div class="color-swatch"><div class="block" style="background:#1d5a9e"></div><div class="label">blue-mid</div><div class="value">#1d5a9e</div></div>
         <div class="color-swatch"><div class="block" style="background:#eaf2fb"></div><div class="label">blue-tint</div><div class="value">#eaf2fb</div></div>
       </div>
       <h3 style="font-size:13px; color: var(--color-text-muted); margin: 24px 0 12px;">Semantic — Secondary / Orange / Green / Red</h3>
@@ -250,12 +250,12 @@
         <div class="font-sample">
           <div class="name">font-display</div>
           <div class="font-display-sample">Dashboard</div>
-          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Inter, DM Sans, Helvetica Neue, Arial, sans-serif</div>
+          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Cairo, Helvetica Neue, Arial, sans-serif</div>
         </div>
         <div class="font-sample">
           <div class="name">font-body</div>
           <div class="font-body-sample">The quick brown fox jumps over the lazy dog. 0123456789</div>
-          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Inter, DM Sans, Helvetica Neue, Arial, sans-serif</div>
+          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Cairo, Helvetica Neue, Arial, sans-serif</div>
         </div>
       </div>
     </section>
@@ -263,12 +263,12 @@
     <section>
       <h2>Border radius</h2>
       <div class="radius-grid">
-        <div class="radius-item"><div class="radius-box" style="border-radius: 8px;"></div><div class="name">sm</div><div class="value">8px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 12px;"></div><div class="name">md</div><div class="value">12px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 14px;"></div><div class="name">lg</div><div class="value">14px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">xl</div><div class="value">16px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 20px;"></div><div class="name">2xl</div><div class="value">20px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 24px;"></div><div class="name">3xl</div><div class="value">24px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 6px;"></div><div class="name">sm</div><div class="value">6px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 8px;"></div><div class="name">md</div><div class="value">8px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 10px;"></div><div class="name">lg</div><div class="value">10px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 12px;"></div><div class="name">xl</div><div class="value">12px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 14px;"></div><div class="name">2xl</div><div class="value">14px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">3xl</div><div class="value">16px</div></div>
       </div>
     </section>
 
@@ -279,7 +279,7 @@
         <div class="shadow-card" style="box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);"><span class="name">sm</span><div class="value">0 3px 12px rgba(15,23,42,0.035)</div></div>
         <div class="shadow-card" style="box-shadow: 0 6px 22px rgba(15, 23, 42, 0.045);"><span class="name">md</span><div class="value">0 6px 22px rgba(15,23,42,0.045)</div></div>
         <div class="shadow-card" style="box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);"><span class="name">lg</span><div class="value">0 10px 28px rgba(15,23,42,0.055)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 10px 28px rgba(0, 87, 184, 0.2);"><span class="name">blue</span><div class="value">0 10px 28px rgba(0,87,184,0.2)</div></div>
+        <div class="shadow-card" style="box-shadow: 0 10px 28px rgba(0, 64, 128, 0.2);"><span class="name">blue</span><div class="value">0 10px 28px rgba(0,64,128,0.2)</div></div>
         <div class="shadow-card" style="box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);"><span class="name">pink</span><div class="value">0 8px 24px rgba(15,23,42,0.12)</div></div>
       </div>
     </section>

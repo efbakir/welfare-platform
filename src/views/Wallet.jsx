@@ -59,7 +59,7 @@ export default function Wallet() {
                   step={10}
                   value={familyAllocations[member.id] || 0}
                   onChange={(e) => setFamilyAllocations((prev) => ({ ...prev, [member.id]: Number(e.target.value) }))}
-                  className="w-full accent-[#0057b8]"
+                  className="w-full accent-blue"
                 />
               </div>
             ))}

@@ -13,7 +13,7 @@ const motivations = ["Learning", "Wellbeing", "Social", "Financial", "Impact"];
 
 function PillMulti({ options, value, onChange }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" role="group">
       {options.map((item) => {
         const active = value.includes(item);
         return (
@@ -23,6 +23,7 @@ function PillMulti({ options, value, onChange }) {
             onClick={() => {
               onChange(active ? value.filter((v) => v !== item) : [...value, item]);
             }}
+            aria-pressed={active}
             className={`rounded-full px-3 py-2 text-sm font-medium transition ${active ? "bg-blue text-white" : "bg-[#eef2f7] text-text-secondary"}`}
           >
             {item}
@@ -88,13 +89,13 @@ export default function Onboarding() {
   return (
     <div className="mx-auto max-w-3xl">
       <Card>
-        <CardBody className="space-y-5">
+        <CardBody className="flex min-h-[740px] flex-col gap-5">
           <div>
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-semibold text-text-muted">Step {step + 1} / {totalSteps}</p>
               <p className="text-sm font-semibold text-text-muted">~5-7 min</p>
             </div>
-            <div className="h-2 rounded-full bg-[#e6ebf2]">
+            <div className="h-2 rounded-full bg-[#e6ebf2]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label="Onboarding progress">
               <div className="h-full rounded-full bg-blue transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           </div>
@@ -104,8 +105,9 @@ export default function Onboarding() {
             <p className="mt-1 text-sm text-text-secondary">A quick setup to make welfare feel personally relevant from day one.</p>
           </div>
 
-          {step === 0 && (
-            <div className="space-y-4">
+          <div className="flex-1">
+            {step === 0 && (
+              <div className="space-y-4">
               <div className="rounded-2xl bg-[#f8fafc] p-4">
                 <p className="text-sm text-text-secondary">We will only ask what improves recommendations. You can edit everything later.</p>
               </div>
@@ -115,6 +117,7 @@ export default function Onboarding() {
                   value={form.preferredName}
                   onChange={(e) => setForm((f) => ({ ...f, preferredName: e.target.value }))}
                   className="w-full rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none"
+                  autoComplete="name"
                 />
               </div>
               <div className="rounded-2xl bg-[#f8fafc] p-4">
@@ -124,24 +127,24 @@ export default function Onboarding() {
                   <button type="button" onClick={() => setForm((f) => ({ ...f, advanced: true }))} className={`rounded-full px-4 py-2 text-sm ${form.advanced ? "bg-blue text-white" : "bg-[#eef2f7] text-text-secondary"}`}>Advanced personalization</button>
                 </div>
               </div>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 1 && (
-            <div className="space-y-4">
+            {step === 1 && (
+              <div className="space-y-4">
               <div>
                 <label className="mb-1 block text-sm font-semibold text-text-primary">Team / department</label>
-                <input value={form.department} onChange={(e) => setForm((f) => ({ ...f, department: e.target.value }))} className="w-full rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="e.g. Product" />
+                <input value={form.department} onChange={(e) => setForm((f) => ({ ...f, department: e.target.value }))} className="w-full rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="e.g. Product" autoComplete="organization-title" />
               </div>
               <div>
                 <label className="mb-1 block text-sm font-semibold text-text-primary">Location</label>
-                <input value={form.location} onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))} className="w-full rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="City or Remote hub" />
+                <input value={form.location} onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))} className="w-full rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="City or Remote hub" autoComplete="address-level2" />
               </div>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 2 && (
-            <div className="space-y-4">
+            {step === 2 && (
+              <div className="space-y-4">
               <div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">How do you usually work?</p>
                 <div className="flex gap-2">
@@ -152,13 +155,13 @@ export default function Onboarding() {
               </div>
               <div>
                 <p className="mb-1 text-sm font-semibold text-text-primary">How much flexibility do you need this quarter?</p>
-                <input type="range" min={0} max={100} value={form.flexibility} onChange={(e) => setForm((f) => ({ ...f, flexibility: Number(e.target.value) }))} className="w-full accent-[#0057b8]" />
+                <input type="range" min={0} max={100} value={form.flexibility} onChange={(e) => setForm((f) => ({ ...f, flexibility: Number(e.target.value) }))} className="w-full accent-blue" aria-label="Flexibility need this quarter" />
               </div>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 3 && (
-            <div className="space-y-4">
+            {step === 3 && (
+              <div className="space-y-4">
               <div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">Which situations are relevant right now?</p>
                 <PillMulti options={lifeContexts} value={form.lifeContext} onChange={(nextValue) => setForm((f) => ({ ...f, lifeContext: nextValue }))} />
@@ -167,11 +170,11 @@ export default function Onboarding() {
                 <input value={form.household} onChange={(e) => setForm((f) => ({ ...f, household: e.target.value }))} className="rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="Household setup" />
                 <input value={form.mobility} onChange={(e) => setForm((f) => ({ ...f, mobility: e.target.value }))} className="rounded-2xl bg-[#f1f5f9] px-4 py-2.5 outline-none" placeholder="Mobility preference" />
               </div>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 4 && (
-            <div className="space-y-4">
+            {step === 4 && (
+              <div className="space-y-4">
               <div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">Interests and hobbies</p>
                 <PillMulti options={interests} value={form.interests} onChange={(nextValue) => setForm((f) => ({ ...f, interests: nextValue }))} />
@@ -180,11 +183,11 @@ export default function Onboarding() {
                 <p className="mb-2 text-sm font-semibold text-text-primary">Skills and strengths</p>
                 <PillMulti options={strengths} value={form.strengths} onChange={(nextValue) => setForm((f) => ({ ...f, strengths: nextValue }))} />
               </div>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 5 && (
-            <div className="space-y-4">
+            {step === 5 && (
+              <div className="space-y-4">
               <div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">How do you like to be recognized?</p>
                 <PillMulti options={recognitionStyles} value={form.recognition} onChange={(nextValue) => setForm((f) => ({ ...f, recognition: nextValue }))} />
@@ -212,11 +215,11 @@ export default function Onboarding() {
                   </div>
                 </div>
               )}
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 6 && (
-            <div className="space-y-4">
+            {step === 6 && (
+              <div className="space-y-4">
               <div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">Community preference</p>
                 <div className="flex gap-2">
@@ -227,17 +230,17 @@ export default function Onboarding() {
               </div>
               <div>
                 <p className="mb-1 text-sm font-semibold text-text-primary">Privacy comfort level</p>
-                <input type="range" min={0} max={100} value={form.privacy} onChange={(e) => setForm((f) => ({ ...f, privacy: Number(e.target.value) }))} className="w-full accent-[#0057b8]" />
+                <input type="range" min={0} max={100} value={form.privacy} onChange={(e) => setForm((f) => ({ ...f, privacy: Number(e.target.value) }))} className="w-full accent-blue" aria-label="Privacy comfort level" />
               </div>
               <label className="flex items-center gap-2 text-sm text-text-secondary">
                 <input type="checkbox" checked={form.aiConsent} onChange={(e) => setForm((f) => ({ ...f, aiConsent: e.target.checked }))} />
                 AI can suggest opportunities based on my profile
               </label>
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === 7 && (
-            <div className="space-y-4">
+            {step === 7 && (
+              <div className="space-y-4">
               <p className="text-sm text-text-secondary">Here’s what your welfare experience will look like.</p>
               <div className="grid gap-3 md:grid-cols-2">
                 {profile.recommended.slice(0, 2).map((rec) => (
@@ -250,17 +253,18 @@ export default function Onboarding() {
               <div className="rounded-2xl bg-blue-tint p-4 text-sm text-text-secondary">
                 Based on your inputs: {form.workMode}, {form.lifeContext.slice(0, 2).join(", ") || "general context"}, and {form.motivation.slice(0, 2).join(", ") || "your goals"}.
               </div>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="sticky bottom-0 flex items-center justify-between border-t border-[#e8edf3] bg-white pt-4">
             <button type="button" onClick={back} disabled={step === 0} className="rounded-full px-4 py-2 text-sm text-text-secondary disabled:opacity-40">Back</button>
-            <div className="flex gap-2">
+            <div className="flex min-w-[200px] justify-end gap-2">
               {step < totalSteps - 1 && (
-                <button type="button" onClick={next} className="rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Continue</button>
+                <button type="button" onClick={next} className="w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Continue</button>
               )}
               {step === totalSteps - 1 && (
-                <button type="button" onClick={finish} className="rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Start my experience</button>
+                <button type="button" onClick={finish} className="w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Start experience</button>
               )}
             </div>
           </div>
