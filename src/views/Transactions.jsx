@@ -27,7 +27,7 @@ export default function Transactions() {
       <Card>
         <CardBody className="space-y-3 p-4">
           {transactions.map((transaction) => (
-            <Link key={transaction.id} to={`/transactions/${transaction.id}`} className="block rounded-2xl bg-white p-4 shadow-[0_6px_18px_rgb(0,0,0,0.04)] transition hover:bg-gray-50">
+            <Link key={transaction.id} to={`/welfare/transactions/${transaction.id}`} className="block rounded-2xl bg-white p-4 shadow-[0_6px_18px_rgb(0,0,0,0.04)] transition hover:bg-gray-50">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-2xl font-semibold text-text-primary">{transaction.label}</p>

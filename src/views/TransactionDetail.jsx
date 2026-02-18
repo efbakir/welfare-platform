@@ -20,7 +20,7 @@ export default function TransactionDetail() {
         title={detail.label}
         subtitle={detail.ref}
         actions={
-          <Link to="/transactions">
+          <Link to="/welfare/transactions">
             <Button variant="outline" size="sm">Back</Button>
           </Link>
         }

@@ -33,7 +33,7 @@ export default function BenefitRequests() {
             <p className="mt-1 text-4xl font-bold text-text-primary">$12,500.00</p>
             <div className="mt-4 grid grid-cols-2 gap-2">
               <button className="rounded-full bg-blue px-4 py-2.5 text-sm font-semibold text-white">Withdraw</button>
-              <Link to="/transactions" className="rounded-full bg-white px-4 py-2.5 text-center text-sm font-semibold text-text-secondary shadow-[0_6px_18px_rgb(0,0,0,0.04)]">Transaction</Link>
+              <Link to="/welfare/transactions" className="rounded-full bg-white px-4 py-2.5 text-center text-sm font-semibold text-text-secondary shadow-[0_6px_18px_rgb(0,0,0,0.04)]">Transaction</Link>
             </div>
           </div>
 
@@ -54,7 +54,7 @@ export default function BenefitRequests() {
 
           <div className="space-y-3">
             {filtered.map((item) => (
-              <Link key={item.id} to={`/requests/${item.id}`} className="block">
+              <Link key={item.id} to={`/welfare/requests/${item.id}`} className="block">
                 <div className="rounded-2xl bg-white p-4 shadow-[0_6px_18px_rgb(0,0,0,0.04)] transition hover:bg-gray-50">
                   <div className="flex items-start justify-between gap-3">
                     <p className="text-[28px] leading-[1] text-text-primary">•</p>

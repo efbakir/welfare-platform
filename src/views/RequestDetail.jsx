@@ -45,7 +45,7 @@ export default function RequestDetail() {
         title={detail.title}
         subtitle={`Owner: ${detail.owner}`}
         actions={
-          <Link to="/requests">
+          <Link to="/welfare/requests">
             <Button variant="outline" size="sm">Back</Button>
           </Link>
         }
