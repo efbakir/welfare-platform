@@ -45,7 +45,7 @@ export default function PortalSidebar({ compact = false }) {
                 key={item.label}
                 to={item.to}
                 className={`flex w-full items-center gap-2 rounded-full px-3 py-2 text-left text-sm font-medium transition-all ${
-                  isActive ? "bg-sidebar-active text-white" : "text-sidebar-text hover:bg-sidebar-hover"
+                  isActive ? "bg-sidebar-active text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
                 }`}
               >
                 <span className="w-4 text-center">

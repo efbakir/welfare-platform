@@ -13,6 +13,7 @@ import BenefitRequests from "./views/BenefitRequests";
 import RequestDetail from "./views/RequestDetail";
 import Transactions from "./views/Transactions";
 import TransactionDetail from "./views/TransactionDetail";
+import Onboarding from "./views/Onboarding";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
 
           <Route path="/welfare" element={<WelfareLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="onboarding" element={<Onboarding />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
             <Route path="wallet" element={<Wallet />} />
