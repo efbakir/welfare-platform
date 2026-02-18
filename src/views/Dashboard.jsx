@@ -172,7 +172,13 @@ export default function Dashboard() {
                     <p className="text-lg font-semibold text-text-primary">{item.title}</p>
                     <p className="text-sm text-text-secondary">{item.description}</p>
                   </div>
-                  <span className="inline-flex items-center gap-1 rounded-sm bg-blue-tint px-2.5 py-1 text-xs font-semibold text-blue">
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-sm px-2.5 py-1 text-xs font-semibold ${
+                      item.score > 90
+                        ? "bg-green-tint text-green shadow-[0_0_10px_rgba(47,158,68,0.3)] ring-1 ring-green/20"
+                        : "bg-blue-tint text-blue"
+                    }`}
+                  >
                     <Icon name={item.kind === "Experience" ? "users" : "spark"} className="h-3.5 w-3.5" />
                     {item.score}% fit
                   </span>
@@ -207,7 +213,7 @@ export default function Dashboard() {
           <CardBody className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold tracking-tight text-text-primary">Trending in your organization</h2>
-              <div className="flex gap-1 bg-[#edf2f7] p-1">
+              <div className="flex gap-1 rounded-lg bg-[#edf2f7] p-1">
                 {["similar", "company"].map((scope) => (
                   <button
                     key={scope}
@@ -231,7 +237,10 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <p className="text-sm text-text-secondary">{t.label}</p>
-                  <p className="mt-1 inline-flex rounded-sm bg-secondary-tint px-2.5 py-1 text-xs font-semibold text-secondary">{t.spots} spots left</p>
+                  <p className="mt-1 inline-flex items-center gap-1 rounded-sm bg-orange-tint px-2.5 py-1 text-xs font-semibold text-orange">
+                    <Icon name="exclamation" className="h-3.5 w-3.5" />
+                    {t.spots} spots left
+                  </p>
                 </div>
               );
             })}
@@ -245,11 +254,11 @@ export default function Dashboard() {
               <span className="text-xs text-text-muted">Secondary signal</span>
             </div>
             {profile.dashboard.feed.map((item, index) => (
-              <article key={`${item.actor}-${index}`} className="flex items-start gap-3 bg-[#f8fafc] p-4">
-                <div className={`flex h-11 w-11 items-center justify-center text-xs font-semibold ${getFeedMeta(item).tone}`}>
+              <article key={`${item.actor}-${index}`} className="flex items-start gap-3 rounded-lg bg-[#f8fafc] p-4">
+                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${getFeedMeta(item).tone}`}>
                   <Icon name={getFeedMeta(item).icon} className="h-4.5 w-4.5" />
                 </div>
-                <div className="flex h-11 w-11 items-center justify-center bg-blue text-xs font-semibold text-white">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue text-xs font-semibold text-white">
                   {item.actor.slice(0, 2).toUpperCase()}
                 </div>
                 <div className="flex-1">
