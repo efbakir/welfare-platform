@@ -20,7 +20,7 @@ export default function PovSwitcher() {
         id="pov-select"
         value={povId}
         onChange={(e) => setPovId(e.target.value)}
-        className="min-w-0 max-w-[180px] shrink rounded-full bg-blue-tint py-1 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
+        className="mx-0 min-w-0 max-w-[180px] shrink rounded-full bg-blue-tint py-1 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
         aria-label="Select employee perspective"
       >
         {profiles.map((item) => (

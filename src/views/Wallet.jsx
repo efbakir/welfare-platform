@@ -64,8 +64,8 @@ export default function Wallet() {
               <span>Budget usage</span>
               <span>{usagePct}%</span>
             </div>
-            <div className="h-2 rounded-full bg-[#e6edf6]">
-              <div className="h-full rounded-full bg-blue transition-all" style={{ width: `${usagePct}%` }} />
+            <div className="h-2 rounded-sm overflow-hidden bg-[#e6edf6]">
+              <div className="h-full rounded-sm bg-blue transition-all" style={{ width: `${usagePct}%` }} />
             </div>
           </div>
         </CardBody>
@@ -85,10 +85,10 @@ export default function Wallet() {
               </div>
             </div>
             {profile.familyMembers.map((member) => (
-              <div key={member.id} className="rounded-2xl bg-[#f8fafc] p-4">
+              <div key={member.id} className="rounded-md bg-[#f8fafc] p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <p className="text-sm font-semibold text-text-primary">
-                    <span className="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-tint text-xs text-blue">{member.name.slice(0, 1)}</span>
+                    <span className="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-sm bg-blue-tint text-xs text-blue">{member.name.slice(0, 1)}</span>
                     {member.name} · {member.relation}
                   </p>
                   <p className="text-sm font-semibold text-blue">{familyAllocations[member.id] || 0} pts</p>
@@ -115,7 +115,7 @@ export default function Wallet() {
               Personal budget
             </p>
             <p className="text-sm text-text-secondary">Family wallet is not enabled for this profile.</p>
-            <div className="rounded-2xl bg-[#f8fafc] p-4">
+            <div className="rounded-md bg-[#f8fafc] p-4">
               <p className="text-sm text-text-muted">Monthly goal</p>
               <p className="text-2xl font-semibold text-text-primary">{profile.monthlyGoal} pts</p>
             </div>
