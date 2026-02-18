@@ -16,7 +16,7 @@ export default function WelfareSidebar() {
   const { profile } = usePov();
 
   return (
-    <aside className="fixed left-[5.25rem] top-4 z-40 hidden h-[calc(100vh-2rem)] w-[var(--sidebar-w)] rounded-2xl bg-white p-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:flex md:flex-col">
+    <aside className="fixed left-[5.25rem] top-4 z-40 hidden h-[calc(100vh-2rem)] w-[var(--sidebar-w)] rounded-2xl bg-white p-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 peer-hover:left-[15.5rem] md:flex md:flex-col">
       <div className="flex items-center gap-2 px-2 py-2.5">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue text-xs font-semibold text-white">W</div>
         <span className="text-sm font-semibold text-text-primary">Welfare</span>
