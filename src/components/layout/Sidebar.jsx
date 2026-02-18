@@ -49,7 +49,7 @@ export default function Sidebar({ user }) {
             to={item.to}
             className={({ isActive }) =>
               `mb-1 flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all ${
-                isActive ? "bg-sidebar-active text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
+                isActive ? "bg-transparent text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
               }`
             }
           >

@@ -39,13 +39,13 @@ export default function PortalSidebar({ compact = false }) {
 
         <div className="mt-2 space-y-1">
           {portalItems.map((item) => {
-            const isActive = item.label === "Welfare" ? inWelfare : location.pathname === item.to;
+            const isActive = item.label === "Welfare" ? inWelfare : false;
             return (
               <NavLink
                 key={item.label}
                 to={item.to}
                 className={`flex w-full items-center gap-2 rounded-full px-3 py-2 text-left text-sm font-medium transition-all ${
-                  isActive ? "bg-sidebar-active text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
+                  isActive ? "bg-transparent text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
                 }`}
               >
                 <span className="w-4 text-center">
