@@ -134,6 +134,14 @@ textarea:focus-visible,
   border-radius: 16px !important;
 }
 
+/* Pill-like interactive controls must be 8px (not fully soft). */
+button.rounded-full,
+a.rounded-full,
+select.rounded-full,
+input.rounded-full {
+  border-radius: 8px !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

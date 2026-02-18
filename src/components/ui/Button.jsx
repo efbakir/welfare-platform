@@ -23,7 +23,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-full font-body font-semibold transition-all duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md font-body font-semibold transition-all duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
       {...props}
     >
       {children}
