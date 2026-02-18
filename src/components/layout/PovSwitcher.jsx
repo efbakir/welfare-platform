@@ -12,15 +12,15 @@ export default function PovSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_8px_20px_rgb(0,0,0,0.04)]">
-      <label htmlFor="pov-select" className="text-xs font-semibold text-text-muted">
+    <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 shadow-[0_8px_20px_rgb(0,0,0,0.04)]">
+      <label htmlFor="pov-select" className="shrink-0 text-xs font-semibold text-text-muted">
         Viewing as:
       </label>
       <select
         id="pov-select"
         value={povId}
         onChange={(e) => setPovId(e.target.value)}
-        className="rounded-full bg-blue-tint px-3 py-1 text-sm font-semibold text-text-primary outline-none"
+        className="min-w-0 max-w-[180px] shrink rounded-full bg-blue-tint py-1 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
         aria-label="Select employee perspective"
       >
         {profiles.map((item) => (

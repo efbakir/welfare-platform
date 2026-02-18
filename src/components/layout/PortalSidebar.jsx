@@ -61,12 +61,14 @@ function ItemIcon({ type, active = false }) {
   }
   if (type === "welfare") {
     return (
-      <img
-        src="/logo-ts.png"
-        alt=""
-        aria-hidden
-        className={`h-[18px] w-[18px] object-contain object-center ${active ? "brightness-0 invert" : "brightness-0 invert opacity-75"}`}
-      />
+      <span className={`inline-flex h-[18px] w-[18px] items-center justify-center rounded-md border border-white/30 ${active ? "bg-white/10" : "bg-white/5"}`}>
+        <img
+          src="/logo-ts.png"
+          alt=""
+          aria-hidden
+          className={`h-3 w-3 object-contain object-center ${active ? "brightness-0 invert" : "brightness-0 invert opacity-80"}`}
+        />
+      </span>
     );
   }
   return (
@@ -89,11 +91,11 @@ export default function PortalSidebar({ compact = false }) {
     >
       <div className="flex h-full flex-col p-3">
         <div className="flex items-center gap-2 px-2 py-2.5">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-sidebar-bg">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/20 bg-white/5">
             <img
               src="/logo-ts.png"
               alt="TeamSystems"
-              className="h-full w-full object-cover object-center brightness-0 invert"
+              className="h-full w-full object-contain object-center brightness-0 invert"
             />
           </div>
           <span className={`text-sm font-semibold text-white transition-all ${compact ? "max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:ml-1 group-hover:max-w-[140px] group-hover:opacity-100" : "opacity-100"}`}>

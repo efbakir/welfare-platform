@@ -14,6 +14,7 @@ import RequestDetail from "./views/RequestDetail";
 import Transactions from "./views/Transactions";
 import TransactionDetail from "./views/TransactionDetail";
 import Onboarding from "./views/Onboarding";
+import Settings from "./views/Settings";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="requests/:requestId" element={<RequestDetail />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="transactions/:transactionId" element={<TransactionDetail />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </BrowserRouter>
