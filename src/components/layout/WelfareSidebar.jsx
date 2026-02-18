@@ -113,7 +113,7 @@ export default function WelfareSidebar() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `mb-1 flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all ${
+              `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
                 isActive ? "bg-blue-tint text-blue" : "text-text-secondary hover:bg-[#f1f5f9]"
               }`
             }
@@ -132,7 +132,7 @@ export default function WelfareSidebar() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `mb-1 flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium transition-all ${
+              `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
                 item.gradient
                   ? `bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-violet-500/10 text-text-primary hover:from-blue-500/15 hover:via-indigo-500/15 hover:to-violet-500/15 ${isActive ? "ring-1 ring-blue-200" : ""}`
                   : isActive

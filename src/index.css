@@ -113,9 +113,9 @@ textarea:focus-visible,
   min-height: 100vh;
 }
 
-/* Enforce hard radius system: only 4 / 8 / 12 / 16 */
+/* Enforce hard radius system: 4 (chips, selected, nav pills) / 8 / 12 / 16 */
 .rounded-sm {
-  border-radius: 4px !important;
+  border-radius: var(--radius-sm) !important; /* 4px – chips, badges, selected items, nav pills */
 }
 
 .rounded,

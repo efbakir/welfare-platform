@@ -110,7 +110,7 @@ export default function PortalSidebar({ compact = false }) {
               <NavLink
                 key={item.label}
                 to={item.to}
-                className={`flex w-full items-center gap-2 rounded-full px-3 py-2 text-left text-sm font-medium transition-all ${
+                className={`flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-sm font-medium transition-all ${
                   isActive ? "bg-transparent text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
                 }`}
               >

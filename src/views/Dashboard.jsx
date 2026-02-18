@@ -78,21 +78,21 @@ export default function Dashboard() {
                 <h2 className="text-2xl font-bold tracking-tight text-text-primary">{personalizedRecs[0]?.title}</h2>
                 <p className="mt-1 text-sm text-text-secondary">Because you are {profile.lifeStage.toLowerCase()}, work {workMode.toLowerCase()}, and prioritize {primaryGoal.toLowerCase()}.</p>
               </div>
-              <span className="inline-flex items-center gap-1 rounded-full bg-green-tint px-3 py-1 text-xs font-semibold text-green">
+              <span className="inline-flex items-center gap-1 rounded-sm bg-green-tint px-3 py-1 text-xs font-semibold text-green">
                 <Icon name="spark" className="h-3.5 w-3.5" />
                 Fit score {fitScore}%
               </span>
             </div>
             <div className="grid gap-3 md:grid-cols-3">
-              <div className="rounded-xl bg-blue-tint p-3">
+              <div className="rounded-sm bg-blue-tint p-3">
                 <p className="text-xs font-semibold text-text-muted">Top match now</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{personalizedRecs[0]?.title}</p>
               </div>
-              <div className="rounded-xl bg-violet-tint p-3">
+              <div className="rounded-sm bg-violet-tint p-3">
                 <p className="text-xs font-semibold text-text-muted">Credits at risk</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{Math.max(35, Math.round((100 - goalWeight) * 1.3))} pts expiring in 14 days</p>
               </div>
-              <div className="rounded-xl bg-cyan-tint p-3">
+              <div className="rounded-sm bg-cyan-tint p-3">
                 <p className="text-xs font-semibold text-text-muted">Last refresh</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{profile.dashboard.feed[0]?.time ?? "recently"}</p>
               </div>
@@ -116,7 +116,7 @@ export default function Dashboard() {
                     key={mode}
                     type="button"
                     onClick={() => setWorkMode(mode)}
-                    className={`px-3 py-1.5 text-xs font-semibold ${workMode === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
+                    className={`rounded-sm px-3 py-1.5 text-xs font-semibold ${workMode === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
                   >
                     {mode}
                   </button>
@@ -147,7 +147,7 @@ export default function Dashboard() {
                     key={mode}
                     type="button"
                     onClick={() => setCommunityStyle(mode)}
-                    className={`px-3 py-1.5 text-xs font-semibold ${communityStyle === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
+                    className={`rounded-sm px-3 py-1.5 text-xs font-semibold ${communityStyle === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
                   >
                     {mode}
                   </button>
@@ -172,15 +172,15 @@ export default function Dashboard() {
                     <p className="text-lg font-semibold text-text-primary">{item.title}</p>
                     <p className="text-sm text-text-secondary">{item.description}</p>
                   </div>
-                  <span className="inline-flex items-center gap-1 bg-blue-tint px-2.5 py-1 text-xs font-semibold text-blue">
+                  <span className="inline-flex items-center gap-1 rounded-sm bg-blue-tint px-2.5 py-1 text-xs font-semibold text-blue">
                     <Icon name={item.kind === "Experience" ? "users" : "spark"} className="h-3.5 w-3.5" />
                     {item.score}% fit
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 text-xs">
-                  <span className="bg-violet-tint px-2 py-1 text-text-secondary">{profile.lifeStage}</span>
-                  <span className="bg-cyan-tint px-2 py-1 text-text-secondary">{workMode}</span>
-                  <span className="bg-green-tint px-2 py-1 text-green">{item.kind}</span>
+                  <span className="rounded-sm bg-violet-tint px-2 py-1 text-text-secondary">{profile.lifeStage}</span>
+                  <span className="rounded-sm bg-cyan-tint px-2 py-1 text-text-secondary">{workMode}</span>
+                  <span className="rounded-sm bg-green-tint px-2 py-1 text-green">{item.kind}</span>
                 </div>
                 <button
                   type="button"
@@ -223,7 +223,7 @@ export default function Dashboard() {
             {profile.dashboard.trending.map((t) => {
               const value = trendScope === "similar" ? Math.round(t.value * 0.65) : t.value;
               return (
-                <div key={t.label} className="bg-blue-tint p-4">
+                <div key={t.label} className="rounded-sm bg-blue-tint p-4">
                   <div className="flex items-center justify-between">
                     <p className="text-3xl font-bold tracking-tight text-text-primary">{value}</p>
                     <span className="inline-flex h-9 w-9 items-center justify-center bg-white text-blue">
@@ -231,7 +231,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <p className="text-sm text-text-secondary">{t.label}</p>
-                  <p className="mt-1 inline-flex bg-secondary-tint px-2.5 py-1 text-xs font-semibold text-secondary">{t.spots} spots left</p>
+                  <p className="mt-1 inline-flex rounded-sm bg-secondary-tint px-2.5 py-1 text-xs font-semibold text-secondary">{t.spots} spots left</p>
                 </div>
               );
             })}
@@ -258,7 +258,7 @@ export default function Dashboard() {
                   </p>
                   <p className="mt-1 text-sm text-text-secondary">{item.text}</p>
                 </div>
-                <span className="bg-white px-2.5 py-1 text-xs font-medium text-text-muted">{item.time}</span>
+                <span className="rounded-sm bg-white px-2.5 py-1 text-xs font-medium text-text-muted">{item.time}</span>
               </article>
             ))}
           </CardBody>
