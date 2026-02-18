@@ -55,6 +55,31 @@ export default function Dashboard() {
     return { icon: "users", tone: "bg-green-tint text-green" };
   };
 
+  const REC_IMAGES = {
+    language: "1481627834876-b7833e8f5570",       // books / library / learning
+    mentalHealth: "1544367567-0f2fcb009e0b",      // wellness / meditation
+    workshop: "1522071820081-009f0129c71c",        // team / career workshop
+    climbing: "1522163182402-834f871fd851",        // rock climbing
+    transport: "1506905925346-21bda4d32df4",      // commute / travel
+    family: "1511895426328-dc8714191300",         // family
+    cooking: "1556909114-f6e7ad7a0eec",           // cooking class
+    wellness: "1571019613454-1cb2f99b2d8b",       // gym / wellness
+    default: "1521737711867-e3b97375f902",        // office / collaboration
+  };
+  const getRecImage = (item) => {
+    const t = (item.title || "").toLowerCase();
+    const id = item.id?.toLowerCase();
+    if (id === "r1" || t.includes("language")) return REC_IMAGES.language;
+    if (id === "r2" || t.includes("mental health") || t.includes("mental health support")) return REC_IMAGES.mentalHealth;
+    if (id === "t1" || t.includes("career") || t.includes("workshop") || t.includes("sprint")) return REC_IMAGES.workshop;
+    if (id === "t2" || t.includes("climbing")) return REC_IMAGES.climbing;
+    if (t.includes("transport") || t.includes("commute") || t.includes("flexible")) return REC_IMAGES.transport;
+    if (t.includes("family planning") || t.includes("family")) return REC_IMAGES.family;
+    if (t.includes("cooking")) return REC_IMAGES.cooking;
+    if (t.includes("wellness day") || t.includes("wellness")) return REC_IMAGES.wellness;
+    return REC_IMAGES.default;
+  };
+
   return (
     <>
       <PageHeader
@@ -166,6 +191,13 @@ export default function Dashboard() {
         <div className="grid gap-4 md:grid-cols-2">
           {personalizedRecs.map((item) => (
             <Card key={item.id}>
+              <div className="relative h-36 w-full shrink-0 overflow-hidden bg-[#f1f5f9]">
+                <img
+                  src={`https://images.unsplash.com/photo-${getRecImage(item)}?w=400&h=200&fit=crop&q=80`}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <CardBody className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
                   <div>
@@ -219,7 +251,7 @@ export default function Dashboard() {
                     key={scope}
                     type="button"
                     onClick={() => setTrendScope(scope)}
-                    className={`px-2 py-1 text-[11px] font-semibold capitalize ${trendScope === scope ? "bg-white text-text-primary" : "text-text-muted"}`}
+                    className={`rounded-sm px-2 py-1 text-[11px] font-semibold capitalize ${trendScope === scope ? "bg-white text-text-primary" : "text-text-muted"}`}
                   >
                     {scope === "similar" ? "People like you" : "Company-wide"}
                   </button>
@@ -237,7 +269,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <p className="text-sm text-text-secondary">{t.label}</p>
-                  <p className="mt-1 inline-flex items-center gap-1 rounded-sm bg-orange-tint px-2.5 py-1 text-xs font-semibold text-orange">
+                  <p className="mt-1 inline-flex items-center gap-1 rounded-sm bg-red-tint px-2.5 py-1 text-xs font-semibold text-red">
                     <Icon name="exclamation" className="h-3.5 w-3.5" />
                     {t.spots} spots left
                   </p>
