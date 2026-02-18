@@ -53,7 +53,7 @@ export default function BenefitRequests() {
         <Card>
           <CardBody className="space-y-4 p-5">
             <div className="flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center bg-blue-tint text-blue">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-sm bg-blue-tint text-blue">
                 <Icon name="wallet" className="h-4 w-4" />
               </span>
               <h2 className="text-lg font-semibold text-text-primary">Contextual credit status</h2>
@@ -67,7 +67,7 @@ export default function BenefitRequests() {
                 <p className="text-xs font-semibold text-text-muted">Expiring soon</p>
                 <p className="mt-1 text-2xl font-bold text-text-primary">{expiringSoon} pts</p>
               </div>
-              <div className="bg-cyan-tint p-3">
+              <div className="rounded-sm bg-cyan-tint p-3">
                 <p className="text-xs font-semibold text-text-muted">Category caps</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{caps[0].used}% wellbeing · {caps[1].used}% education</p>
               </div>
@@ -99,7 +99,7 @@ export default function BenefitRequests() {
             <div className="space-y-2">
               {eligibility.map((item) => (
                 <div key={item} className="bg-[#f8fafc] p-3 text-sm text-text-secondary">
-                  <span className="mr-2 inline-flex h-5 w-5 items-center justify-center bg-blue-tint text-[11px] font-semibold text-blue">i</span>
+                  <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-sm bg-blue-tint text-[11px] font-semibold text-blue">i</span>
                   {item}
                 </div>
               ))}
@@ -174,14 +174,14 @@ export default function BenefitRequests() {
               <Link key={item.id} to={`/welfare/requests/${item.id}`} className="block">
                 <div className="bg-white p-4 shadow-[0_6px_18px_rgb(0,0,0,0.04)] transition hover:bg-gray-50">
                   <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex h-8 w-8 items-center justify-center bg-blue-tint text-blue">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-sm bg-blue-tint text-blue">
                       <Icon name={item.role === "Education" ? "education" : item.role === "Family" ? "family" : "wellness"} className="h-4 w-4" />
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="text-xl font-semibold text-text-primary">{item.title}</p>
                       <p className="mt-1 text-sm text-text-muted">for {item.owner} · {item.role}</p>
                     </div>
-                    <span className="bg-[#f8f8f8] px-3 py-1 text-xs font-semibold text-text-secondary">
+                    <span className="rounded-sm bg-[#f8f8f8] px-3 py-1 text-xs font-semibold text-text-secondary">
                       {item.due}
                     </span>
                   </div>

@@ -23,7 +23,7 @@ export default function Inbox() {
                 key={thread.id}
                 type="button"
                 onClick={() => setSelected(thread.id)}
-                className={`w-full rounded-2xl p-3 text-left ${thread.id === active.id ? "bg-blue-tint" : "bg-[#f8fafc]"}`}
+                className={`w-full rounded-sm p-3 text-left ${thread.id === active.id ? "bg-blue-tint" : "bg-[#f8fafc]"}`}
               >
                 <span className="mb-1 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-white text-blue">
                   <Icon name="inbox" className="h-4 w-4" />
@@ -59,9 +59,9 @@ export default function Inbox() {
               <Icon name="spark" className="h-4 w-4" />
               Context panel
             </p>
-            <div className="rounded-2xl bg-blue-tint p-3 text-sm text-text-secondary"><Icon name="user" className="mr-1 inline h-4 w-4" />Employee: {profile.name}</div>
-            <div className="rounded-2xl bg-green-tint p-3 text-sm text-text-secondary"><Icon name="family" className="mr-1 inline h-4 w-4" />Life stage: {profile.lifeStage}</div>
-            <div className="rounded-2xl bg-violet-tint p-3 text-sm text-text-secondary"><Icon name="spark" className="mr-1 inline h-4 w-4" />{profile.inbox.context}</div>
+            <div className="rounded-sm bg-blue-tint p-3 text-sm text-text-secondary"><Icon name="user" className="mr-1 inline h-4 w-4" />Employee: {profile.name}</div>
+            <div className="rounded-sm bg-green-tint p-3 text-sm text-text-secondary"><Icon name="family" className="mr-1 inline h-4 w-4" />Life stage: {profile.lifeStage}</div>
+            <div className="rounded-sm bg-violet-tint p-3 text-sm text-text-secondary"><Icon name="spark" className="mr-1 inline h-4 w-4" />{profile.inbox.context}</div>
           </CardBody>
         </Card>
       </div>

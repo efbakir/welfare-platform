@@ -45,7 +45,7 @@ export default function Marketplace() {
             key={item}
             type="button"
             onClick={() => setCategory(item)}
-            className={`rounded-full px-4 py-2 text-sm font-semibold ${category === item ? "bg-blue text-white" : "bg-white text-text-secondary shadow-[0_8px_20px_rgb(0,0,0,0.04)]"}`}
+            className={`rounded-sm px-4 py-2 text-sm font-semibold ${category === item ? "bg-blue text-white" : "bg-white text-text-secondary shadow-[0_8px_20px_rgb(0,0,0,0.04)]"}`}
           >
             {item}
           </button>
@@ -58,7 +58,7 @@ export default function Marketplace() {
           {profile.marketplace.featured.map((name) => (
             <Card key={name}>
               <CardBody className="space-y-2">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${categoryMeta[benefitCategory(name)]?.chip ?? "bg-blue-tint text-blue"}`}>
+                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-sm ${categoryMeta[benefitCategory(name)]?.chip ?? "bg-blue-tint text-blue"}`}>
                   <Icon name={categoryMeta[benefitCategory(name)]?.icon ?? "spark"} className="h-5 w-5" />
                 </span>
                 <p className="text-lg font-semibold text-text-primary">{name}</p>
@@ -74,7 +74,7 @@ export default function Marketplace() {
           <Card key={item.id}>
             <CardBody className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${categoryMeta[item.category]?.chip ?? "bg-blue-tint text-blue"}`}>
+                <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm ${categoryMeta[item.category]?.chip ?? "bg-blue-tint text-blue"}`}>
                   <Icon name={categoryMeta[item.category]?.icon ?? "spark"} className="h-5 w-5" />
                 </span>
                 <div>

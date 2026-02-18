@@ -63,10 +63,10 @@ export default function Profile() {
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
-            <div className="rounded-2xl bg-cyan-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="calendar" className="h-4 w-4" /></span>Work mode: {profile.profileAnswers.workMode}</div>
-            <div className="rounded-2xl bg-violet-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="education" className="h-4 w-4" /></span>Primary goal: {profile.profileAnswers.focus}</div>
-            <div className="rounded-2xl bg-green-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="users" className="h-4 w-4" /></span>Social preference: {profile.profileAnswers.socialStyle}</div>
-            <div className="rounded-2xl bg-blue-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="user" className="h-4 w-4" /></span>Current POV: {profile.name}</div>
+            <div className="rounded-sm bg-cyan-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="calendar" className="h-4 w-4" /></span>Work mode: {profile.profileAnswers.workMode}</div>
+            <div className="rounded-sm bg-violet-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="education" className="h-4 w-4" /></span>Primary goal: {profile.profileAnswers.focus}</div>
+            <div className="rounded-sm bg-green-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="users" className="h-4 w-4" /></span>Social preference: {profile.profileAnswers.socialStyle}</div>
+            <div className="rounded-sm bg-blue-tint p-3 text-sm text-text-secondary"><span className="mr-1 inline-flex"><Icon name="user" className="h-4 w-4" /></span>Current POV: {profile.name}</div>
           </div>
 
           {saved && <p className="text-sm font-semibold text-green">Recommendations refreshed.</p>}
@@ -79,7 +79,7 @@ export default function Profile() {
           {profile.recommended.map((item) => (
             <Card key={item.id}>
               <CardBody className="space-y-1.5">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-blue-tint text-blue">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-sm bg-blue-tint text-blue">
                   <Icon name={item.title.toLowerCase().includes("support") ? "wellness" : "spark"} className="h-4.5 w-4.5" />
                 </span>
                 <p className="text-lg font-semibold text-text-primary">{item.title}</p>
