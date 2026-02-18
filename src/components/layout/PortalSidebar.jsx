@@ -59,6 +59,16 @@ function ItemIcon({ type, active = false }) {
       </svg>
     );
   }
+  if (type === "welfare") {
+    return (
+      <img
+        src="/logo-ts.png"
+        alt=""
+        aria-hidden
+        className={`h-[18px] w-[18px] object-contain object-center ${active ? "brightness-0 invert" : "brightness-0 invert opacity-75"}`}
+      />
+    );
+  }
   return (
     <svg viewBox="0 0 24 24" fill="none" className={sharedClass} stroke="currentColor" strokeWidth="1.8">
       <path d="M12 3.5a7.5 7.5 0 0 0-7.5 7.5c0 5.2 7.5 9.5 7.5 9.5s7.5-4.3 7.5-9.5A7.5 7.5 0 0 0 12 3.5Z" />
@@ -83,7 +93,7 @@ export default function PortalSidebar({ compact = false }) {
             <img
               src="/logo-ts.png"
               alt="TeamSystems"
-              className="h-full w-full object-cover object-center [mix-blend-mode:multiply]"
+              className="h-full w-full object-cover object-center brightness-0 invert"
             />
           </div>
           <span className={`text-sm font-semibold text-white transition-all ${compact ? "max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:ml-1 group-hover:max-w-[140px] group-hover:opacity-100" : "opacity-100"}`}>

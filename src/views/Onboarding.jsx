@@ -108,9 +108,10 @@ export default function Onboarding() {
           <div className="flex-1">
             {step === 0 && (
               <div className="space-y-4">
-              <div className="rounded-2xl bg-[#f8fafc] p-4">
-                <p className="text-sm text-text-secondary">We will only ask what improves recommendations. You can edit everything later.</p>
-              </div>
+              <p className="flex items-center gap-2 text-sm italic text-text-secondary">
+                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#e2e8f0] text-[10px] font-bold text-text-muted" aria-hidden>i</span>
+                We will only ask what improves recommendations. You can edit everything later.
+              </p>
               <div>
                 <label className="mb-1 block text-sm font-semibold text-text-primary">What should we call you?</label>
                 <input
@@ -257,14 +258,16 @@ export default function Onboarding() {
             )}
           </div>
 
-          <div className="sticky bottom-0 flex items-center justify-between border-t border-[#e8edf3] bg-white pt-4">
-            <button type="button" onClick={back} disabled={step === 0} className="rounded-full px-4 py-2 text-sm text-text-secondary disabled:opacity-40">Back</button>
-            <div className="flex min-w-[200px] justify-end gap-2">
+          <div className="sticky bottom-0 grid w-full grid-cols-[1fr_200px] items-center gap-4 border-t border-[#e8edf3] bg-white pt-4">
+            <div className="min-w-0">
+              <button type="button" onClick={back} disabled={step === 0} className="rounded-full px-4 py-2 text-sm text-text-secondary disabled:opacity-40">Back</button>
+            </div>
+            <div className="flex justify-end">
               {step < totalSteps - 1 && (
-                <button type="button" onClick={next} className="w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Continue</button>
+                <button type="button" onClick={next} className="w-full min-w-[200px] max-w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Continue</button>
               )}
               {step === totalSteps - 1 && (
-                <button type="button" onClick={finish} className="w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Start experience</button>
+                <button type="button" onClick={finish} className="w-full min-w-[200px] max-w-[200px] rounded-full bg-blue px-4 py-2 text-sm font-semibold text-white">Start experience</button>
               )}
             </div>
           </div>
