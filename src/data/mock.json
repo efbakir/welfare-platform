@@ -1,0 +1,259 @@
+{
+  "user": {
+    "id": "u1",
+    "name": "Mario Rossi",
+    "avatar": "MR",
+    "lifeStage": "parent",
+    "lastProfileUpdate": "2025-02-10",
+    "budgetTotal": 800,
+    "currency": "USD",
+    "email": "mario.rossi@company.com"
+  },
+  "familySubProfiles": [
+    {
+      "id": "f1",
+      "name": "Laura Rossi",
+      "relation": "partner",
+      "allocatedAmount": 200,
+      "avatar": "LR"
+    },
+    {
+      "id": "f2",
+      "name": "Marco",
+      "relation": "child",
+      "allocatedAmount": 150,
+      "avatar": "M"
+    },
+    {
+      "id": "f3",
+      "name": "Sofia",
+      "relation": "child",
+      "allocatedAmount": 150,
+      "avatar": "S"
+    }
+  ],
+  "budget": {
+    "total": 800,
+    "spent": 420,
+    "remaining": 380,
+    "perCategory": [
+      { "category": "Wellness", "amount": 120 },
+      { "category": "Family", "amount": 200 },
+      { "category": "Education", "amount": 100 }
+    ],
+    "perPerson": [
+      { "name": "Mario Rossi", "amount": 300 },
+      { "name": "Laura Rossi", "amount": 80 },
+      { "name": "Marco", "amount": 20 },
+      { "name": "Sofia", "amount": 20 }
+    ]
+  },
+  "feedItems": [
+    {
+      "id": "feed1",
+      "type": "benefit_used",
+      "title": "Wellness voucher redeemed",
+      "description": "Used your monthly wellness credit at GymPlus.",
+      "actor": "You",
+      "timestamp": "2025-02-17T10:30:00Z",
+      "metadata": { "benefitName": "Gym membership", "points": 50 }
+    },
+    {
+      "id": "feed2",
+      "type": "milestone",
+      "title": "New recommendation for you",
+      "description": "Based on your life stage we suggest daycare support.",
+      "actor": "System",
+      "timestamp": "2025-02-16T14:00:00Z",
+      "metadata": { "reason": "parent" }
+    },
+    {
+      "id": "feed3",
+      "type": "social",
+      "title": "Team experience available",
+      "description": "Join the cooking class with 8 colleagues next Friday.",
+      "actor": "HR",
+      "timestamp": "2025-02-15T09:00:00Z",
+      "metadata": { "eventName": "Cooking class", "spotsLeft": 5 }
+    },
+    {
+      "id": "feed4",
+      "type": "fomo",
+      "title": "12 colleagues used wellness this week",
+      "description": "Don't miss your monthly wellness benefit.",
+      "actor": "System",
+      "timestamp": "2025-02-17T08:00:00Z",
+      "metadata": { "count": 12, "benefitType": "wellness" }
+    },
+    {
+      "id": "feed5",
+      "type": "benefit_used",
+      "title": "Daycare subsidy applied",
+      "description": "Your allocated family budget was used for Little Stars daycare.",
+      "actor": "You",
+      "timestamp": "2025-02-14T16:45:00Z",
+      "metadata": { "benefitName": "Daycare support", "amount": 150 }
+    }
+  ],
+  "suggestedBenefits": [
+    {
+      "id": "sb1",
+      "name": "Daycare subsidy",
+      "category": "Family",
+      "reason": "Because you're a new parent"
+    },
+    {
+      "id": "sb2",
+      "name": "Parenting workshops",
+      "category": "Family",
+      "reason": "Recommended for your life stage"
+    },
+    {
+      "id": "sb3",
+      "name": "Child education fund",
+      "category": "Education",
+      "reason": "Save for your children's future"
+    },
+    {
+      "id": "sb4",
+      "name": "Family wellness package",
+      "category": "Wellness",
+      "reason": "Health support for the whole family"
+    }
+  ],
+  "profileQuestions": [
+    {
+      "id": "pq1",
+      "question": "What best describes your current life stage?",
+      "required": true,
+      "options": ["Single", "Partnered", "Married", "Parent", "Caregiver"]
+    },
+    {
+      "id": "pq2",
+      "question": "Do you have children in daycare or school?",
+      "required": false,
+      "options": ["Yes", "No", "Planning to"]
+    }
+  ],
+  "marketplaceCategories": [
+    { "id": "cat1", "name": "Wellness", "icon": "wellness" },
+    { "id": "cat2", "name": "Family", "icon": "family" },
+    { "id": "cat3", "name": "Education", "icon": "education" },
+    { "id": "cat4", "name": "Child & Education", "icon": "childcare" }
+  ],
+  "benefits": [
+    {
+      "id": "b1",
+      "name": "Gym membership",
+      "categoryId": "cat1",
+      "pointsCost": 50,
+      "expiry": "2025-12-31",
+      "charityEligible": false
+    },
+    {
+      "id": "b2",
+      "name": "Mental health support",
+      "categoryId": "cat1",
+      "pointsCost": 80,
+      "expiry": "2025-12-31",
+      "charityEligible": false
+    },
+    {
+      "id": "b3",
+      "name": "Family day out voucher",
+      "categoryId": "cat2",
+      "pointsCost": 100,
+      "expiry": "2025-06-30",
+      "charityEligible": false
+    },
+    {
+      "id": "b4",
+      "name": "Daycare subsidy",
+      "categoryId": "cat4",
+      "pointsCost": 200,
+      "expiry": "2025-12-31",
+      "charityEligible": false
+    },
+    {
+      "id": "b5",
+      "name": "After-school program",
+      "categoryId": "cat4",
+      "pointsCost": 120,
+      "expiry": "2025-07-31",
+      "charityEligible": false
+    },
+    {
+      "id": "b6",
+      "name": "Training course voucher",
+      "categoryId": "cat3",
+      "pointsCost": 150,
+      "expiry": "2025-12-31",
+      "charityEligible": true
+    },
+    {
+      "id": "b7",
+      "name": "Language classes",
+      "categoryId": "cat3",
+      "pointsCost": 90,
+      "expiry": "2025-12-31",
+      "charityEligible": false
+    }
+  ],
+  "daycare": [
+    {
+      "id": "dc1",
+      "name": "Little Stars Daycare",
+      "subsidyEligible": true,
+      "pointsCost": 200,
+      "description": "On-site daycare with early learning program"
+    },
+    {
+      "id": "dc2",
+      "name": "Bright Futures Nursery",
+      "subsidyEligible": true,
+      "pointsCost": 180,
+      "description": "Partner network daycare near office"
+    },
+    {
+      "id": "dc3",
+      "name": "Sunrise Kids",
+      "subsidyEligible": true,
+      "pointsCost": 220,
+      "description": "Full-day care with meals included"
+    }
+  ],
+  "expiringPoints": {
+    "amount": 45,
+    "expiryDate": "2025-02-28",
+    "charityOptions": [
+      { "id": "ch1", "name": "Local Food Bank" },
+      { "id": "ch2", "name": "Children's Education Fund" },
+      { "id": "ch3", "name": "Community Health Initiative" }
+    ]
+  },
+  "benefitsThatBringTogether": [
+    {
+      "id": "bt1",
+      "title": "Team cooking class",
+      "description": "Join colleagues for a Friday evening cooking workshop.",
+      "spotsLeft": 5
+    },
+    {
+      "id": "bt2",
+      "title": "Family wellness day",
+      "description": "Bring your family to our annual health & fun day.",
+      "spotsLeft": 20
+    },
+    {
+      "id": "bt3",
+      "title": "Parent support group",
+      "description": "Monthly meetup for parents to share and learn.",
+      "spotsLeft": 12
+    }
+  ],
+  "fomoStats": [
+    { "label": "Colleagues used wellness this week", "count": 12 },
+    { "label": "Families claimed daycare support", "count": 3 },
+    { "label": "Team experiences booked this month", "count": 8 }
+  ]
+}
