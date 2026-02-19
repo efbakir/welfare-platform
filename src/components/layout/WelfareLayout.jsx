@@ -18,15 +18,15 @@ export default function WelfareLayout() {
   }, [inOnboarding, navigate]);
 
   return (
-    <div className="min-h-screen bg-transparent p-4">
+    <div className="min-h-screen bg-transparent px-4 py-5">
       <PortalSidebar compact />
       {!inOnboarding && <WelfareSidebar />}
 
       <div
         className={
           inOnboarding
-            ? "ml-[5.25rem] min-h-[calc(100vh-2rem)] rounded-2xl bg-[rgba(247,247,251,0.76)] p-3 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[15.5rem]"
-            : "ml-[calc(5.25rem+var(--sidebar-w)+1rem)] min-h-[calc(100vh-2rem)] rounded-2xl bg-[rgba(247,247,251,0.76)] p-3 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[calc(15.5rem+var(--sidebar-w)+1rem)]"
+            ? "ml-[5.25rem] min-h-[calc(100vh-2rem)] rounded-2xl border border-[rgba(255,255,255,0.58)] bg-[rgba(247,247,251,0.64)] p-4 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[15.5rem]"
+            : "ml-[calc(5.25rem+var(--sidebar-w)+1rem)] min-h-[calc(100vh-2rem)] rounded-2xl border border-[rgba(255,255,255,0.58)] bg-[rgba(247,247,251,0.64)] p-4 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[calc(15.5rem+var(--sidebar-w)+1rem)]"
         }
       >
         {!inOnboarding && (
