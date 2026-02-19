@@ -9,83 +9,49 @@ import { usePov } from "../context/PovContext";
 export default function Dashboard() {
   const { profile } = usePov();
   const [workMode, setWorkMode] = useState(profile.workMode);
-  const [goalWeight, setGoalWeight] = useState(60);
-  const [communityStyle, setCommunityStyle] = useState("Group");
-  const [expandedId, setExpandedId] = useState(null);
+  const [goalWeight, setGoalWeight] = useState(58);
+  const [communityStyle, setCommunityStyle] = useState("Balanced");
   const [trendScope, setTrendScope] = useState("similar");
 
   const primaryGoal = profile.profileAnswers.focus;
-  const fitScore = Math.max(72, Math.min(97, 80 + (workMode === profile.workMode ? 5 : 0) + (goalWeight > 55 ? 4 : 1)));
 
-  const personalizedRecs = useMemo(() => {
-    const seeds = [
-      ...profile.recommended.map((item) => ({
-        id: item.id,
-        title: item.title,
-        description: item.reason,
+  const recs = useMemo(() => {
+    const base = [
+      ...profile.recommended.map((item, idx) => ({
+        ...item,
         kind: "Benefit",
+        score: 92 - idx * 5,
       })),
-      ...profile.dashboard.together.map((item) => ({
+      ...profile.dashboard.together.map((item, idx) => ({
         id: item.id,
         title: item.title,
-        description: item.description,
+        reason: item.why,
         kind: "Experience",
+        score: 86 - idx * 5,
       })),
     ];
 
-    const scored = seeds.map((item, idx) => {
-      let score = 90 - idx * 5;
-      if (workMode === profile.workMode) score += 4;
-      if (communityStyle === "Group" && item.kind === "Experience") score += 4;
-      if (communityStyle === "Solo" && item.kind === "Experience") score -= 4;
-      if (goalWeight >= 55 && item.title.toLowerCase().includes(primaryGoal.toLowerCase().split(" ")[0])) score += 6;
-
-      return {
-        ...item,
-        score: Math.max(62, Math.min(98, score)),
-      };
-    });
-
-    return scored.sort((a, b) => b.score - a.score);
+    return base
+      .map((item) => {
+        let score = item.score;
+        if (workMode === profile.workMode) score += 3;
+        if (communityStyle === "Social" && item.kind === "Experience") score += 4;
+        if (communityStyle === "Focused" && item.kind === "Experience") score -= 3;
+        if (goalWeight >= 55 && item.title.toLowerCase().includes(primaryGoal.toLowerCase().split(" ")[0])) score += 4;
+        return { ...item, score: Math.max(64, Math.min(98, score)) };
+      })
+      .sort((a, b) => b.score - a.score);
   }, [communityStyle, goalWeight, primaryGoal, profile, workMode]);
 
-  const getFeedMeta = (item) => {
-    if (item.actor === "System") return { icon: "spark", tone: "bg-blue-tint text-blue" };
-    if (item.actor === "HR") return { icon: "calendar", tone: "bg-violet-tint text-blue" };
-    return { icon: "users", tone: "bg-green-tint text-green" };
-  };
-
-  const REC_IMAGES = {
-    language: "1481627834876-b7833e8f5570",       // books / library / learning
-    mentalHealth: "1544367567-0f2fcb009e0b",      // wellness / meditation
-    workshop: "1522071820081-009f0129c71c",        // team / career workshop
-    climbing: "1522163182402-834f871fd851",        // rock climbing
-    transport: "1506905925346-21bda4d32df4",      // commute / travel
-    family: "1511895426328-dc8714191300",         // family
-    cooking: "1556909114-f6e7ad7a0eec",           // cooking class
-    wellness: "1571019613454-1cb2f99b2d8b",       // gym / wellness
-    default: "1521737711867-e3b97375f902",        // office / collaboration
-  };
-  const getRecImage = (item) => {
-    const t = (item.title || "").toLowerCase();
-    const id = item.id?.toLowerCase();
-    if (id === "r1" || t.includes("language")) return REC_IMAGES.language;
-    if (id === "r2" || t.includes("mental health") || t.includes("mental health support")) return REC_IMAGES.mentalHealth;
-    if (id === "t1" || t.includes("career") || t.includes("workshop") || t.includes("sprint")) return REC_IMAGES.workshop;
-    if (id === "t2" || t.includes("climbing")) return REC_IMAGES.climbing;
-    if (t.includes("transport") || t.includes("commute") || t.includes("flexible")) return REC_IMAGES.transport;
-    if (t.includes("family planning") || t.includes("family")) return REC_IMAGES.family;
-    if (t.includes("cooking")) return REC_IMAGES.cooking;
-    if (t.includes("wellness day") || t.includes("wellness")) return REC_IMAGES.wellness;
-    return REC_IMAGES.default;
-  };
+  const fitScore = Math.round(recs.reduce((acc, i) => acc + i.score, 0) / recs.length);
+  const creditsRisk = Math.max(24, Math.round((100 - goalWeight) * 1.4));
 
   return (
-    <>
+    <div className="mx-auto w-full max-w-[1220px] space-y-6">
       <PageHeader
-        eyebrow="Continuous touchpoint"
+        eyebrow="Personalized Welfare"
         title="Welfare Dashboard"
-        subtitle="Personalized recommendations based on your profile signals and work context"
+        subtitle="Clean operational view with explainable recommendations for each employee POV."
         actions={
           <>
             <Link to="/welfare/inbox"><Button variant="outline" size="sm">Open inbox</Button></Link>
@@ -94,217 +60,159 @@ export default function Dashboard() {
         }
       />
 
-      <section className="grid gap-6 xl:grid-cols-[1.45fr_0.85fr]">
-        <Card>
-          <CardBody className="space-y-4">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-blue">Personalized for {profile.name}</p>
-                <h2 className="text-2xl font-bold tracking-tight text-text-primary">{personalizedRecs[0]?.title}</h2>
-                <p className="mt-1 text-sm text-text-secondary">Because you are {profile.lifeStage.toLowerCase()}, work {workMode.toLowerCase()}, and prioritize {primaryGoal.toLowerCase()}.</p>
-              </div>
-              <span className="inline-flex items-center gap-1 rounded-sm bg-green-tint px-3 py-1 text-xs font-semibold text-green">
-                <Icon name="spark" className="h-3.5 w-3.5" />
-                Fit score {fitScore}%
-              </span>
+      <Card className="overflow-hidden">
+        <CardBody className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-1.5 rounded-md bg-blue-tint px-2.5 py-1 text-[11px] font-semibold text-blue">
+              <Icon name="spark" className="h-3.5 w-3.5" />
+              Tailored for {profile.name}
             </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              <div className="rounded-sm bg-blue-tint p-3">
-                <p className="text-xs font-semibold text-text-muted">Top match now</p>
-                <p className="mt-1 text-sm font-semibold text-text-primary">{personalizedRecs[0]?.title}</p>
-              </div>
-              <div className="rounded-sm bg-violet-tint p-3">
-                <p className="text-xs font-semibold text-text-muted">Credits at risk</p>
-                <p className="mt-1 text-sm font-semibold text-text-primary">{Math.max(35, Math.round((100 - goalWeight) * 1.3))} pts expiring in 14 days</p>
-              </div>
-              <div className="rounded-sm bg-cyan-tint p-3">
-                <p className="text-xs font-semibold text-text-muted">Last refresh</p>
-                <p className="mt-1 text-sm font-semibold text-text-primary">{profile.dashboard.feed[0]?.time ?? "recently"}</p>
-              </div>
+            <h2 className="text-[32px] font-semibold leading-[1.15] tracking-[-0.02em] text-text-primary">{recs[0]?.title}</h2>
+            <p className="max-w-2xl text-[15px] text-text-secondary">
+              Because you are {profile.lifeStage.toLowerCase()}, work {workMode.toLowerCase()}, and currently prioritize {primaryGoal.toLowerCase()}.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm">Review recommendation set</Button>
+              <Link to="/welfare/profile"><Button variant="outline" size="sm">Update profile signals</Button></Link>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Button size="sm">Review recommendations</Button>
-              <Link to="/welfare/profile"><Button variant="outline" size="sm">Adjust profile signals</Button></Link>
-            </div>
-          </CardBody>
-        </Card>
+          </div>
 
-        <Card>
-          <CardBody className="space-y-3">
-            <h2 className="text-lg font-semibold text-text-primary">Recommendation controls</h2>
-            <p className="text-xs text-text-muted">Preview how recommendations adapt before updating your profile.</p>
-            <div>
-              <p className="mb-2 text-xs font-semibold text-text-muted">Work mode</p>
-              <div className="flex gap-2">
-                {["Remote", "Hybrid", "On-site"].map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    onClick={() => setWorkMode(mode)}
-                    className={`rounded-sm px-3 py-1.5 text-xs font-semibold ${workMode === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
-                  >
-                    {mode}
-                  </button>
-                ))}
-              </div>
+          <div className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="rounded-md bg-violet-tint p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Fit score</p>
+              <p className="mt-1 text-2xl font-semibold text-text-primary">{fitScore}%</p>
             </div>
-            <div>
-              <p className="mb-1 text-xs font-semibold text-text-muted">Goal emphasis</p>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={goalWeight}
-                onChange={(e) => setGoalWeight(Number(e.target.value))}
-                className="w-full accent-blue"
-                aria-label="Goal emphasis"
-              />
-              <div className="mt-1 flex justify-between text-[11px] text-text-muted">
-                <span>Stability</span>
-                <span>Growth</span>
-              </div>
+            <div className="rounded-md bg-cyan-tint p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Credits at risk</p>
+              <p className="mt-1 text-2xl font-semibold text-text-primary">{creditsRisk} pts</p>
             </div>
-            <div>
-              <p className="mb-2 text-xs font-semibold text-text-muted">Community preference</p>
-              <div className="flex gap-2">
-                {["Solo", "Group"].map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    onClick={() => setCommunityStyle(mode)}
-                    className={`rounded-sm px-3 py-1.5 text-xs font-semibold ${communityStyle === mode ? "bg-blue text-white" : "bg-[#edf2f7] text-text-secondary"}`}
-                  >
-                    {mode}
-                  </button>
-                ))}
-              </div>
+            <div className="rounded-md bg-green-tint p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Last refresh</p>
+              <p className="mt-1 text-base font-semibold text-text-primary">{profile.dashboard.feed[0]?.time ?? "recently"}</p>
             </div>
-          </CardBody>
-        </Card>
-      </section>
+          </div>
+        </CardBody>
+      </Card>
 
-      <section>
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-2xl font-bold tracking-tight text-text-primary">Recommended for you</h2>
-          <span className="text-xs text-text-muted">Recommendations based on profile + work mode</span>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {personalizedRecs.map((item) => (
-            <Card key={item.id}>
-              <div className="relative h-36 w-full shrink-0 overflow-hidden bg-[#f1f5f9]">
-                <img
-                  src={`https://images.unsplash.com/photo-${getRecImage(item)}?w=400&h=200&fit=crop&q=80`}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <CardBody className="space-y-2">
+      <div className="grid gap-6 lg:grid-cols-[1.45fr_0.85fr]">
+        <Card>
+          <CardBody className="space-y-3.5">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-text-primary">Recommended for you</h3>
+              <span className="text-xs text-text-muted">Explainable ranking</span>
+            </div>
+            {recs.map((item) => (
+              <article key={item.id} className="rounded-md bg-[rgba(255,255,255,0.76)] p-4 shadow-[var(--shadow-xs)]">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-lg font-semibold text-text-primary">{item.title}</p>
-                    <p className="text-sm text-text-secondary">{item.description}</p>
+                    <p className="text-base font-semibold text-text-primary">{item.title}</p>
+                    <p className="mt-1 text-sm text-text-secondary">{item.reason}</p>
                   </div>
-                  <span
-                    className={`inline-flex items-center gap-1 rounded-sm px-2.5 py-1 text-xs font-semibold ${
-                      item.score > 90
-                        ? "bg-green-tint text-green shadow-[0_0_10px_rgba(47,158,68,0.3)] ring-1 ring-green/20"
-                        : "bg-blue-tint text-blue"
-                    }`}
-                  >
-                    <Icon name={item.kind === "Experience" ? "users" : "spark"} className="h-3.5 w-3.5" />
-                    {item.score}% fit
-                  </span>
+                  <span className="rounded-sm bg-blue-tint px-2 py-1 text-[11px] font-semibold text-blue">{item.score}% fit</span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 text-xs">
-                  <span className="rounded-sm bg-violet-tint px-2 py-1 text-text-secondary">{profile.lifeStage}</span>
-                  <span className="rounded-sm bg-cyan-tint px-2 py-1 text-text-secondary">{workMode}</span>
-                  <span className="rounded-sm bg-green-tint px-2 py-1 text-green">{item.kind}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setExpandedId((prev) => (prev === item.id ? null : item.id))}
-                  className="text-xs font-semibold text-blue"
-                >
-                  {expandedId === item.id ? "Hide reasoning" : "Why this is recommended"}
-                </button>
-                {expandedId === item.id && (
-                  <div className="space-y-1 bg-[#f8fafc] p-3 text-xs text-text-secondary">
-                    <p><span className="font-semibold text-text-primary">Because you:</span> are {profile.lifeStage.toLowerCase()} and work {workMode.toLowerCase()}.</p>
-                    <p><span className="font-semibold text-text-primary">Also relevant because:</span> your priority is {primaryGoal.toLowerCase()}.</p>
-                    <p><span className="font-semibold text-text-primary">What changed:</span> {profile.dashboard.feed[0]?.text}</p>
-                  </div>
-                )}
-              </CardBody>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <Card>
-          <CardBody className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold tracking-tight text-text-primary">Trending in your organization</h2>
-              <div className="flex gap-1 rounded-lg bg-[#edf2f7] p-1">
-                {["similar", "company"].map((scope) => (
-                  <button
-                    key={scope}
-                    type="button"
-                    onClick={() => setTrendScope(scope)}
-                    className={`rounded-sm px-2 py-1 text-[11px] font-semibold capitalize ${trendScope === scope ? "bg-white text-text-primary" : "text-text-muted"}`}
-                  >
-                    {scope === "similar" ? "People like you" : "Company-wide"}
-                  </button>
-                ))}
-              </div>
-            </div>
-            {profile.dashboard.trending.map((t) => {
-              const value = trendScope === "similar" ? Math.round(t.value * 0.65) : t.value;
-              return (
-                <div key={t.label} className="rounded-sm bg-blue-tint p-4">
-                  <div className="flex items-center justify-between">
-                    <p className="text-3xl font-bold tracking-tight text-text-primary">{value}</p>
-                    <span className="inline-flex h-9 w-9 items-center justify-center bg-white text-blue">
-                      <Icon name={t.label.toLowerCase().includes("family") ? "family" : "wellness"} className="h-4.5 w-4.5" />
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary">{t.label}</p>
-                  <p className="mt-1 inline-flex items-center gap-1 rounded-sm bg-red-tint px-2.5 py-1 text-xs font-semibold text-red">
-                    <Icon name="exclamation" className="h-3.5 w-3.5" />
-                    {t.spots} spots left
-                  </p>
-                </div>
-              );
-            })}
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardBody className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold tracking-tight text-text-primary">Social activity feed</h2>
-              <span className="text-xs text-text-muted">Secondary signal</span>
-            </div>
-            {profile.dashboard.feed.map((item, index) => (
-              <article key={`${item.actor}-${index}`} className="flex items-start gap-3 rounded-lg bg-[#f8fafc] p-4">
-                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${getFeedMeta(item).tone}`}>
-                  <Icon name={getFeedMeta(item).icon} className="h-4.5 w-4.5" />
-                </div>
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue text-xs font-semibold text-white">
-                  {item.actor.slice(0, 2).toUpperCase()}
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-text-primary">
-                    <strong>{item.actor}</strong> <strong>{item.action}</strong>
-                  </p>
-                  <p className="mt-1 text-sm text-text-secondary">{item.text}</p>
-                </div>
-                <span className="rounded-sm bg-white px-2.5 py-1 text-xs font-medium text-text-muted">{item.time}</span>
+                <p className="mt-2 text-xs text-text-muted">
+                  Because you: {profile.lifeStage} · {workMode} · Goal: {primaryGoal}
+                </p>
               </article>
             ))}
           </CardBody>
         </Card>
-      </section>
-    </>
+
+        <div className="space-y-6">
+          <Card>
+            <CardBody className="space-y-3">
+              <h3 className="text-lg font-semibold text-text-primary">Tuning controls</h3>
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Work mode</p>
+                <div className="flex gap-2">
+                  {["Remote", "Hybrid", "On-site"].map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setWorkMode(mode)}
+                      className={`px-3 py-1.5 text-xs font-semibold ${workMode === mode ? "bg-blue text-white" : "bg-violet-tint text-text-secondary"}`}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Goal emphasis</p>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={goalWeight}
+                  onChange={(e) => setGoalWeight(Number(e.target.value))}
+                  className="w-full accent-blue"
+                  aria-label="Goal emphasis"
+                />
+              </div>
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Experience style</p>
+                <div className="flex gap-2">
+                  {["Focused", "Balanced", "Social"].map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setCommunityStyle(mode)}
+                      className={`px-3 py-1.5 text-xs font-semibold ${communityStyle === mode ? "bg-blue text-white" : "bg-violet-tint text-text-secondary"}`}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+
+          <Card>
+            <CardBody className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-text-primary">Trending</h3>
+                <div className="flex gap-1 bg-violet-tint p-1">
+                  {["similar", "company"].map((scope) => (
+                    <button
+                      key={scope}
+                      type="button"
+                      onClick={() => setTrendScope(scope)}
+                      className={`px-2 py-1 text-[11px] font-semibold ${trendScope === scope ? "bg-white text-text-primary" : "text-text-muted"}`}
+                    >
+                      {scope === "similar" ? "Like you" : "Company"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {profile.dashboard.trending.map((item) => {
+                const value = trendScope === "similar" ? Math.round(item.value * 0.64) : item.value;
+                return (
+                  <div key={item.label} className="rounded-md bg-violet-tint p-3">
+                    <p className="text-2xl font-semibold text-text-primary">{value}</p>
+                    <p className="text-sm text-text-secondary">{item.label}</p>
+                    <p className="mt-1 text-xs font-semibold text-red">{item.spots} spots left</p>
+                  </div>
+                );
+              })}
+            </CardBody>
+          </Card>
+        </div>
+      </div>
+
+      <Card>
+        <CardBody className="space-y-3">
+          <h3 className="text-lg font-semibold text-text-primary">Activity feed</h3>
+          <div className="grid gap-2.5 md:grid-cols-3">
+            {profile.dashboard.feed.map((item, i) => (
+              <article key={`${item.actor}-${i}`} className="rounded-md bg-[rgba(255,255,255,0.76)] p-3 shadow-[var(--shadow-xs)]">
+                <p className="text-sm font-semibold text-text-primary">{item.actor} {item.action}</p>
+                <p className="mt-1 text-xs text-text-secondary">{item.text}</p>
+                <p className="mt-2 text-[11px] text-text-muted">{item.time}</p>
+              </article>
+            ))}
+          </div>
+        </CardBody>
+      </Card>
+    </div>
   );
 }
