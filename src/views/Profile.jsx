@@ -20,7 +20,7 @@ const focusGoals = ["Wellbeing", "Learning", "Family", "Community", "Flexibility
 
 function ToggleRow({ icon, label, description, enabled, onToggle, actionLabel = "Manage" }) {
   return (
-    <div className="ui-panel flex items-center justify-between gap-3 p-3">
+    <div className="ui-panel shadow-none flex items-center justify-between gap-3 py-3 px-0">
       <div className="flex min-w-0 items-start gap-2.5">
         <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-violet-tint text-blue">
           <Icon name={icon} className="h-4 w-4" />
@@ -70,8 +70,8 @@ export default function Profile() {
 
       <div className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
         <Card>
-          <CardBody className="space-y-5">
-            <div className="rounded-xl bg-violet-tint p-4">
+          <CardBody className="-mx-6 flex flex-col gap-0 px-6 pt-0 pb-0">
+            <div className="rounded-none bg-violet-tint px-6 py-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-blue text-base font-semibold text-white">
@@ -86,18 +86,18 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="ui-panel border border-border p-4">
-              <div className="mb-3 flex items-center justify-between">
+            <div className="ui-panel shadow-none px-6 py-6">
+              <div className="mb-0 flex items-center justify-between">
                 <p className="inline-flex items-center gap-1 text-base font-semibold text-text-primary">
                   <Icon name="spark" className="h-4 w-4" />
                   Has life changed recently?
                 </p>
                 <Button variant="outline" size="sm">Update now</Button>
               </div>
-              <p className="text-sm text-text-secondary">Tell us so we can prioritize better benefits and adjust credit suggestions.</p>
             </div>
 
-            <div className="ui-panel border border-border p-4">
+            <div className="border-t border-border" aria-hidden />
+            <div className="ui-panel shadow-none px-6 py-6">
               <p className="mb-3 text-sm font-semibold text-text-primary">Life stage</p>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {lifeStages.map((item) => (
@@ -116,8 +116,9 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              <div className="ui-panel border border-border p-4">
+            <div className="border-t border-border" aria-hidden />
+            <div className="grid md:grid-cols-[1fr_1fr]">
+              <div className="ui-panel shadow-none px-6 py-6">
                 <p className="mb-2 text-xs font-medium text-text-muted">Work mode</p>
                 <div className="flex flex-wrap gap-2">
                   {workModes.map((mode) => (
@@ -134,8 +135,7 @@ export default function Profile() {
                   ))}
                 </div>
               </div>
-
-              <div className="ui-panel border border-border p-4">
+              <div className="border-l border-border ui-panel shadow-none rounded-none px-6 py-6" style={{ borderRadius: 0 }}>
                 <p className="mb-2 text-xs font-medium text-text-muted">Primary goal</p>
                 <select
                   value={focus}
@@ -149,7 +149,8 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="ui-panel border border-border p-4">
+            <div className="border-t border-border" aria-hidden />
+            <div className="ui-panel shadow-none px-6 py-6">
               <p className="mb-3 text-sm font-semibold text-text-primary">Visibility & contact preferences</p>
               <div className="space-y-2">
                 <ToggleRow
@@ -176,7 +177,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="ui-panel-tint bg-cyan-tint p-3">
+            <div className="ui-panel-tint rounded-none bg-cyan-tint px-6 py-6" style={{ borderRadius: 0 }}>
               <p className="text-xs font-medium text-text-muted">Community style</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{socialStyle}</p>
               <div className="mt-2 flex gap-2">
@@ -195,7 +196,12 @@ export default function Profile() {
               </div>
             </div>
 
-            {saved && <p className="text-sm font-semibold text-green">Recommendations refreshed.</p>}
+            {saved && (
+              <>
+                <div className="border-t border-border" aria-hidden />
+                <p className="px-6 pt-4 text-sm font-semibold text-green">Recommendations refreshed.</p>
+              </>
+            )}
           </CardBody>
         </Card>
 
@@ -230,9 +236,6 @@ export default function Profile() {
           {profile.recommended.map((item) => (
             <Card key={item.id}>
               <CardBody className="space-y-2">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-blue-tint text-blue">
-                  <Icon name={item.title.toLowerCase().includes("support") ? "wellness" : "spark"} className="h-4.5 w-4.5" />
-                </span>
                 <p className="text-lg font-semibold text-text-primary">{item.title}</p>
                 <p className="text-sm text-text-secondary">{item.reason}</p>
                 <p className="rounded-sm bg-violet-tint px-2 py-1 text-xs text-text-secondary">

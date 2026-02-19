@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/layout/PageHeader";
 import Button from "../components/ui/Button";
@@ -37,7 +37,7 @@ export default function BenefitRequests() {
       <PageHeader
         title="Requests"
         subtitle="Simplified approvals with clearer eligibility, timing, and required documents."
-        actions={<Button size="sm">Create request</Button>}
+        actions={<Button size="md">Create request</Button>}
       />
 
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
@@ -50,23 +50,23 @@ export default function BenefitRequests() {
           </Card>
 
           <Card>
-            <CardBody className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="ui-panel-tint bg-violet-tint p-4">
+            <CardBody className="p-0 gap-0 grid sm:grid-cols-2 lg:grid-cols-4">
+              <div className="ui-panel-tint p-4 rounded-none shadow-none">
                 <p className="text-xs font-medium text-text-muted">Available credits</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{profile.budget.remaining}</p>
                 <p className="mt-1 text-xs text-text-secondary">points available</p>
               </div>
-              <div className="ui-panel-tint bg-cyan-tint p-4">
+              <div className="ui-panel-tint bg-cyan-tint p-4 rounded-none shadow-none">
                 <p className="text-xs font-medium text-text-muted">Expiring soon</p>
-                <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{expiringSoon}</p>
+                <p className="mt-2 text-[32px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{expiringSoon}</p>
                 <p className="mt-1 text-xs text-text-secondary">next 30 days</p>
               </div>
-              <div className="ui-panel-tint bg-green-tint p-4">
+              <div className="ui-panel-tint bg-green-tint p-4 rounded-none shadow-none">
                 <p className="text-xs font-medium text-text-muted">Pending approvals</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{pendingCount}</p>
                 <p className="mt-1 text-xs text-text-secondary">active queue</p>
               </div>
-              <div className="ui-panel border border-border p-4">
+              <div className="ui-panel p-4 rounded-none shadow-none border-0">
                 <p className="text-xs font-medium text-text-muted">Avg. timeline</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">2-4</p>
                 <p className="mt-1 text-xs text-text-secondary">business days</p>
@@ -75,8 +75,8 @@ export default function BenefitRequests() {
           </Card>
 
           <Card>
-            <CardBody className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
+            <CardBody className="-mx-6 flex flex-col gap-0 px-6 pt-0 pb-0">
+              <div className="flex flex-wrap items-center gap-2 border-b border-border px-6 pb-4 pt-4">
                 {tabs.map((tab) => (
                   <button
                     key={tab}
@@ -89,28 +89,31 @@ export default function BenefitRequests() {
                 ))}
               </div>
 
-              <div className="space-y-2.5">
-                {filtered.map((item) => (
-                  <Link key={item.id} to={`/welfare/requests/${item.id}`} className="block">
-                    <article className="ui-panel ui-interactive border border-border p-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <p className="truncate text-lg font-semibold text-text-primary">{item.title}</p>
-                          <div className="mt-1 flex flex-wrap items-center gap-2">
-                            <Badge variant="neutral">{item.category}</Badge>
-                            <Badge variant={statusTone[item.status] || "neutral"}>{item.status}</Badge>
+              <div className="flex flex-col">
+                {filtered.map((item, index) => (
+                  <Fragment key={item.id}>
+                    {index > 0 && <div className="border-t border-border" aria-hidden />}
+                    <Link to={`/welfare/requests/${item.id}`} className="block">
+                      <article className="ui-interactive px-6 py-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <p className="truncate text-lg font-semibold text-text-primary">{item.title}</p>
+                            <div className="mt-1 flex flex-wrap items-center gap-2">
+                              <Badge variant="neutral">{item.category}</Badge>
+                              <Badge variant={statusTone[item.status] || "neutral"}>{item.status}</Badge>
+                            </div>
                           </div>
+                          <p className="text-base font-semibold text-blue">{item.amount} pts</p>
                         </div>
-                        <p className="text-base font-semibold text-blue">{item.amount} pts</p>
-                      </div>
 
-                      <div className="mt-3 grid gap-2 text-sm text-text-secondary sm:grid-cols-3">
-                        <p className="inline-flex items-center gap-1"><Icon name="calendar" className="h-4 w-4" /> {item.eta}</p>
-                        <p className="truncate">Policy: {item.policy}</p>
-                        <p className="truncate">Docs: {item.docs}</p>
-                      </div>
-                    </article>
-                  </Link>
+                        <div className="mt-3 grid gap-2 text-sm text-text-secondary sm:grid-cols-3">
+                          <p className="inline-flex items-center gap-1"><Icon name="calendar" className="h-4 w-4" /> {item.eta}</p>
+                          <p className="truncate">Policy: {item.policy}</p>
+                          <p className="truncate">Docs: {item.docs}</p>
+                        </div>
+                      </article>
+                    </Link>
+                  </Fragment>
                 ))}
               </div>
             </CardBody>

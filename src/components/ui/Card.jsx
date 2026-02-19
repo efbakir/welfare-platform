@@ -19,7 +19,8 @@ export function CardHeader({ children, className = "" }) {
 }
 
 export function CardBody({ children, className = "" }) {
-  return <div className={`p-6 ${className}`}>{children}</div>;
+  const basePadding = className.includes("p-0") ? "" : "p-6";
+  return <div className={`${basePadding} ${className}`.trim()}>{children}</div>;
 }
 
 export function CardFooter({ children, className = "" }) {

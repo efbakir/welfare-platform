@@ -114,7 +114,7 @@ export default function WelfareSidebar() {
 
   return (
     <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] border-r border-border bg-sidebar-bg transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
-      <div className="flex items-center gap-2 px-2 py-2.5">
+      <div className="flex items-center gap-2 px-2 pt-8 pb-2.5">
         <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-[var(--color-grey-tint-hover)] text-xs font-semibold text-text-secondary">W</div>
         <span className="text-sm font-semibold text-text-primary">Welfare</span>
       </div>

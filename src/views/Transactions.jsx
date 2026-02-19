@@ -81,7 +81,7 @@ export default function Transactions() {
       </div>
 
       <Card>
-        <CardBody className="-mx-6 flex flex-col gap-0 px-6 pt-0 pb-6">
+        <CardBody className="-mx-6 flex flex-col gap-0 px-6 pt-0 pb-0">
           {baseHistory.map((item, index) => (
             <Fragment key={item.id}>
               {index > 0 && <div className="border-t border-border" aria-hidden />}

@@ -236,9 +236,21 @@ input.rounded-full {
   box-shadow: var(--shadow-sm);
 }
 
+.ui-panel.shadow-none {
+  box-shadow: none;
+}
+
 .ui-panel-tint {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
+}
+
+.ui-panel-tint.rounded-none {
+  border-radius: 0;
+}
+
+.ui-panel-tint.shadow-none {
+  box-shadow: none;
 }
 
 .ui-interactive {
