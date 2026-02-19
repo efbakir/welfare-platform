@@ -3,291 +3,256 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welfare Platform — Design System</title>
+  <title>Welfare Platform — Modern Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --color-blue: #004080;
-      --color-blue-dark: #003366;
-      --color-blue-mid: #1d5a9e;
-      --color-blue-tint: #e6edf6;
-      --color-blue-glow: rgba(0, 64, 128, 0.2);
-      --color-secondary: #c00b6c;
-      --color-secondary-dark: #9e0859;
-      --color-secondary-tint: #fde8f3;
-      --color-cyan-tint: #e8f8ff;
-      --color-lime-tint: #eefbe7;
-      --color-violet-tint: #f1ecff;
-      --color-pink: #c00b6c;
-      --color-pink-dark: #9e0859;
-      --color-pink-tint: #fde8f3;
-      --color-orange: #737373;
-      --color-orange-tint: #f5f5f5;
-      --color-green: #2f9e44;
-      --color-green-tint: #eaf8ee;
-      --color-red: #e03131;
-      --color-red-tint: #fff1f1;
-      --color-bg: #f7f8fa;
-      --color-surface: #ffffff;
-      --color-surface-2: #f8fafc;
-      --color-border: #e5e7eb;
-      --color-border-dark: #d1d5db;
-      --color-text-primary: #0f172a;
-      --color-text-secondary: #334155;
-      --color-text-muted: #94a3b8;
-      --color-text-white: #ffffff;
-      --color-sidebar-bg: #0f172a;
-      --color-sidebar-hover: rgba(255,255,255,0.08);
-      --color-sidebar-active: rgba(0,64,128,0.34);
-      --color-sidebar-text: rgba(255,255,255,0.84);
-      --font-display: "Cairo", "Helvetica Neue", Arial, sans-serif;
-      --font-body: "Cairo", "Helvetica Neue", Arial, sans-serif;
+      --color-primary: #5B5BD6;
+      --color-primary-deep: #3B2E7E;
+      --color-primary-mid: #8A7BFF;
+      --color-lavender: #EAE9F6;
+      --color-bg: #F7F7FB;
+      --color-text: #1F1F2E;
+      --color-text-secondary: #4D4F66;
+      --color-text-muted: #8E91AD;
+      --color-surface: rgba(255,255,255,0.82);
+      --color-surface-2: #F6F5FF;
+      --color-border: #E8E8F3;
+      --color-green: #3D9E6F;
+      --color-green-tint: #EBF8F1;
+      --color-warning: #D85C75;
+      --color-warning-tint: #FFF2F4;
+
+      --gradient-brand: linear-gradient(135deg, #5B5BD6 0%, #8A7BFF 100%);
+      --gradient-hero: radial-gradient(1200px 680px at 82% -8%, rgba(138,123,255,0.28), transparent 58%),
+        radial-gradient(900px 560px at -10% 18%, rgba(111,102,232,0.18), transparent 62%),
+        #F7F7FB;
+
       --radius-sm: 4px;
       --radius-md: 8px;
       --radius-lg: 12px;
       --radius-xl: 16px;
-      --radius-2xl: 16px;
-      --radius-3xl: 16px;
-      --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
-      --shadow-sm: 0 3px 12px rgba(15, 23, 42, 0.035);
-      --shadow-md: 0 6px 22px rgba(15, 23, 42, 0.045);
-      --shadow-lg: 0 10px 28px rgba(15, 23, 42, 0.055);
-      --shadow-blue: 0 10px 28px rgba(0, 64, 128, 0.2);
-      --shadow-pink: 0 8px 24px rgba(15, 23, 42, 0.12);
-      --sidebar-w: 242px;
+
+      --shadow-xs: 0 2px 8px rgba(41, 35, 101, 0.04);
+      --shadow-sm: 0 8px 24px rgba(41, 35, 101, 0.06);
+      --shadow-md: 0 12px 28px rgba(41, 35, 101, 0.08);
+      --shadow-lg: 0 18px 34px rgba(41, 35, 101, 0.1);
+      --shadow-brand: 0 12px 28px rgba(91, 91, 214, 0.28);
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: var(--font-body);
-      background: var(--color-bg);
-      color: var(--color-text-primary);
+      padding: 32px 24px 56px;
+      font-family: "Cairo", "Helvetica Neue", Arial, sans-serif;
+      color: var(--color-text);
+      background: var(--gradient-hero);
       -webkit-font-smoothing: antialiased;
-      padding: 32px 24px 48px;
     }
 
-    .wrap { max-width: 960px; margin: 0 auto; }
+    .wrap { max-width: 1060px; margin: 0 auto; }
 
     h1 {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
+      margin: 0;
+      font-size: clamp(44px, 6vw, 62px);
+      line-height: 1.06;
       letter-spacing: -0.02em;
-      margin: 0 0 8px;
-      color: var(--color-text-primary);
+      font-weight: 700;
     }
-    .subtitle {
-      font-size: 15px;
+
+    .intro {
+      margin-top: 10px;
+      max-width: 760px;
+      font-size: 16px;
       color: var(--color-text-secondary);
-      margin: 0 0 40px;
     }
 
     section {
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: var(--radius-xl);
       background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
-      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.7);
       box-shadow: var(--shadow-sm);
-    }
-    section h2 {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0 0 20px;
-      color: var(--color-text-primary);
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--color-border);
+      backdrop-filter: blur(12px);
     }
 
-    .color-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 16px;
+    section h2 {
+      margin: 0 0 14px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      font-weight: 700;
     }
-    .color-swatch {
-      border-radius: var(--radius-md);
+
+    .muted { color: var(--color-text-muted); font-size: 13px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
+    }
+
+    .swatch {
+      border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--color-border);
       box-shadow: var(--shadow-xs);
-    }
-    .color-swatch .block {
-      height: 64px;
-    }
-    .color-swatch .label {
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      background: var(--color-surface-2);
-    }
-    .color-swatch .value {
-      font-size: 11px;
-      font-family: ui-monospace, monospace;
-      color: var(--color-text-muted);
-      padding: 0 10px 8px;
+      background: #fff;
     }
 
-    .font-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
-      align-items: baseline;
-    }
-    .font-sample { margin-bottom: 16px; }
-    .font-sample .name {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-text-muted);
-      margin-bottom: 4px;
-    }
-    .font-display-sample { font-family: var(--font-display); font-size: 22px; font-weight: 700; }
-    .font-body-sample { font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+    .block { height: 66px; }
+    .label { padding: 8px 10px 2px; font-size: 12px; font-weight: 700; color: var(--color-text-secondary); }
+    .value { padding: 0 10px 10px; font-size: 11px; color: var(--color-text-muted); font-family: ui-monospace, monospace; }
 
-    .radius-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: flex-end;
-    }
-    .radius-item {
-      text-align: center;
-    }
-    .radius-box {
-      width: 80px;
-      height: 80px;
-      background: var(--color-blue-tint);
-      border: 2px solid var(--color-blue-mid);
-      margin-bottom: 8px;
-    }
-    .radius-item .name { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); }
-    .radius-item .value { font-size: 11px; color: var(--color-text-muted); font-family: ui-monospace, monospace; }
-
-    .shadow-grid {
+    .tokens {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
     }
-    .shadow-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      min-height: 80px;
-    }
-    .shadow-card .name { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); }
-    .shadow-card .value { font-size: 10px; color: var(--color-text-muted); font-family: ui-monospace, monospace; margin-top: 4px; word-break: break-all; }
 
-    .layout-note {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      padding: 12px 16px;
-      background: var(--color-surface-2);
-      border-radius: var(--radius-md);
-      border-left: 4px solid var(--color-blue);
+    .token-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      background: #fff;
+      padding: 14px;
+      box-shadow: var(--shadow-xs);
     }
+
+    .token-card h3 { margin: 0 0 8px; font-size: 14px; }
+    .token-card p { margin: 0; font-size: 13px; color: var(--color-text-secondary); }
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      font: 700 13px/1 "Cairo", sans-serif;
+      cursor: pointer;
+    }
+
+    .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+    .btn-secondary { background: var(--color-lavender); color: var(--color-text); }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: var(--radius-md);
+      background: #ECEBFF;
+      color: var(--color-primary);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .glass {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.7);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+      padding: 18px;
+    }
+
+    .hero-mock {
+      margin-top: 12px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(165deg, #F2F0FF 0%, #ECEBFF 55%, #E5E3FF 100%);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      background: radial-gradient(circle at 30% 30%, #A89BFF, #5B5BD6);
+      box-shadow: 0 20px 35px rgba(91,91,214,0.22);
+    }
+
+    .orb.a { width: 120px; height: 120px; right: 36px; bottom: -18px; }
+    .orb.b { width: 72px; height: 72px; right: 148px; bottom: 24px; opacity: 0.65; }
+
+    .guide { margin-top: 8px; font-size: 13px; color: var(--color-text-secondary); }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Welfare Platform — Design System</h1>
-    <p class="subtitle">Tokens from <code>src/index.css</code> — single source of truth for the app.</p>
+    <h1>Welfare Platform<br />Modern Visual System</h1>
+    <p class="intro">
+      Soft premium fintech direction: lavender–indigo gradients, frosted glass surfaces, spacious layout rhythm, and minimal but clear typography hierarchy for a calm and trustworthy product experience.
+    </p>
 
     <section>
-      <h2>Colors</h2>
-      <h3 style="font-size:13px; color: var(--color-text-muted); margin: 0 0 12px;">Brand — Blue</h3>
-      <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#004080"></div><div class="label">blue</div><div class="value">#004080</div></div>
-        <div class="color-swatch"><div class="block" style="background:#003366"></div><div class="label">blue-dark</div><div class="value">#003366</div></div>
-        <div class="color-swatch"><div class="block" style="background:#1d5a9e"></div><div class="label">blue-mid</div><div class="value">#1d5a9e</div></div>
-        <div class="color-swatch"><div class="block" style="background:#eaf2fb"></div><div class="label">blue-tint</div><div class="value">#eaf2fb</div></div>
+      <h2>Color & Gradients</h2>
+      <div class="grid">
+        <div class="swatch"><div class="block" style="background:#5B5BD6"></div><div class="label">Primary Indigo</div><div class="value">#5B5BD6</div></div>
+        <div class="swatch"><div class="block" style="background:#3B2E7E"></div><div class="label">Deep Purple</div><div class="value">#3B2E7E</div></div>
+        <div class="swatch"><div class="block" style="background:#8A7BFF"></div><div class="label">Indigo Mid</div><div class="value">#8A7BFF</div></div>
+        <div class="swatch"><div class="block" style="background:#EAE9F6"></div><div class="label">Lavender</div><div class="value">#EAE9F6</div></div>
+        <div class="swatch"><div class="block" style="background:#F7F7FB"></div><div class="label">Off-white BG</div><div class="value">#F7F7FB</div></div>
+        <div class="swatch"><div class="block" style="background:#1F1F2E"></div><div class="label">Text Primary</div><div class="value">#1F1F2E</div></div>
       </div>
-      <h3 style="font-size:13px; color: var(--color-text-muted); margin: 24px 0 12px;">Semantic — Secondary / Orange / Green / Red</h3>
-      <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#c00b6c"></div><div class="label">secondary</div><div class="value">#c00b6c</div></div>
-        <div class="color-swatch"><div class="block" style="background:#9e0859"></div><div class="label">secondary-dark</div><div class="value">#9e0859</div></div>
-        <div class="color-swatch"><div class="block" style="background:#fde8f3"></div><div class="label">secondary-tint</div><div class="value">#fde8f3</div></div>
-        <div class="color-swatch"><div class="block" style="background:#737373"></div><div class="label">orange</div><div class="value">#737373</div></div>
-        <div class="color-swatch"><div class="block" style="background:#f5f5f5"></div><div class="label">orange-tint</div><div class="value">#f5f5f5</div></div>
-        <div class="color-swatch"><div class="block" style="background:#2f9e44"></div><div class="label">green</div><div class="value">#2f9e44</div></div>
-        <div class="color-swatch"><div class="block" style="background:#eaf8ee"></div><div class="label">green-tint</div><div class="value">#eaf8ee</div></div>
-        <div class="color-swatch"><div class="block" style="background:#e03131"></div><div class="label">red</div><div class="value">#e03131</div></div>
-        <div class="color-swatch"><div class="block" style="background:#fff1f1"></div><div class="label">red-tint</div><div class="value">#fff1f1</div></div>
-      </div>
-      <h3 style="font-size:13px; color: var(--color-text-muted); margin: 24px 0 12px;">UI — Background &amp; surface</h3>
-      <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#f7f8fa"></div><div class="label">bg</div><div class="value">#f7f8fa</div></div>
-        <div class="color-swatch"><div class="block" style="background:#ffffff; border: 1px solid #e5e7eb;"></div><div class="label">surface</div><div class="value">#ffffff</div></div>
-        <div class="color-swatch"><div class="block" style="background:#f8fafc"></div><div class="label">surface-2</div><div class="value">#f8fafc</div></div>
-        <div class="color-swatch"><div class="block" style="background:#e5e7eb"></div><div class="label">border</div><div class="value">#e5e7eb</div></div>
-        <div class="color-swatch"><div class="block" style="background:#d1d5db"></div><div class="label">border-dark</div><div class="value">#d1d5db</div></div>
-      </div>
-      <h3 style="font-size:13px; color: var(--color-text-muted); margin: 24px 0 12px;">Text</h3>
-      <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#0f172a"></div><div class="label">text-primary</div><div class="value">#0f172a</div></div>
-        <div class="color-swatch"><div class="block" style="background:#334155"></div><div class="label">text-secondary</div><div class="value">#334155</div></div>
-        <div class="color-swatch"><div class="block" style="background:#94a3b8"></div><div class="label">text-muted</div><div class="value">#94a3b8</div></div>
-        <div class="color-swatch"><div class="block" style="background:#ffffff; border: 1px solid #e5e7eb;"></div><div class="label">text-white</div><div class="value">#ffffff</div></div>
-      </div>
-      <h3 style="font-size:13px; color: var(--color-text-muted); margin: 24px 0 12px;">Sidebar</h3>
-      <div class="color-grid">
-        <div class="color-swatch"><div class="block" style="background:#0f172a"></div><div class="label">sidebar-bg</div><div class="value">#0f172a</div></div>
-        <div class="color-swatch"><div class="block" style="background:rgba(255,255,255,0.08)"></div><div class="label">sidebar-hover</div><div class="value">rgba(255,255,255,0.08)</div></div>
-        <div class="color-swatch"><div class="block" style="background:rgba(0,87,184,0.28)"></div><div class="label">sidebar-active</div><div class="value">rgba(0,87,184,0.28)</div></div>
-        <div class="color-swatch"><div class="block" style="background:rgba(255,255,255,0.84)"></div><div class="label">sidebar-text</div><div class="value">rgba(255,255,255,0.84)</div></div>
+      <div class="hero-mock">
+        <div style="font-size:12px; color:#6d6f87; text-transform:uppercase; letter-spacing:.08em;">Brand Gradient</div>
+        <div style="margin-top:6px; font-size:20px; font-weight:700; color:#1f1f2e;">linear-gradient(135deg, #5B5BD6 0%, #8A7BFF 100%)</div>
+        <div class="orb a"></div>
+        <div class="orb b"></div>
       </div>
     </section>
 
     <section>
-      <h2>Typography</h2>
-      <div class="font-row">
-        <div class="font-sample">
-          <div class="name">font-display</div>
-          <div class="font-display-sample">Dashboard</div>
-          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Cairo, Helvetica Neue, Arial, sans-serif</div>
-        </div>
-        <div class="font-sample">
-          <div class="name">font-body</div>
-          <div class="font-body-sample">The quick brown fox jumps over the lazy dog. 0123456789</div>
-          <div class="value" style="font-size:12px; color: var(--color-text-muted); margin-top:4px;">Cairo, Helvetica Neue, Arial, sans-serif</div>
-        </div>
+      <h2>Typography & Spacing</h2>
+      <div class="tokens">
+        <div class="token-card"><h3>Hero Heading</h3><p>48–64px, weight 700, tight tracking, generous top/bottom space.</p></div>
+        <div class="token-card"><h3>Section Title</h3><p>28–36px, weight 700, short and scannable.</p></div>
+        <div class="token-card"><h3>Body Copy</h3><p>14–16px, muted secondary text, avoid dense paragraphs.</p></div>
+        <div class="token-card"><h3>Rhythm</h3><p>80–120px spacing between major sections; roomy cards and gutters.</p></div>
+      </div>
+      <p class="guide">Typeface: Cairo (rounded geometric sans-serif) for modern fintech readability.</p>
+    </section>
+
+    <section>
+      <h2>Radius & Depth</h2>
+      <div class="tokens">
+        <div class="token-card"><h3>Radius System</h3><p>4 / 8 / 12 / 16 only. Cards use 16, interactive controls use 8.</p></div>
+        <div class="token-card"><h3>Shadow System</h3><p>Soft diffuse shadows: 0 8px 24px rgba(41,35,101,0.06) and up.</p></div>
+        <div class="token-card"><h3>Glass Panel</h3><p>rgba(255,255,255,0.82) + subtle border + 12px blur.</p></div>
       </div>
     </section>
 
     <section>
-      <h2>Border radius</h2>
-      <div class="radius-grid">
-        <div class="radius-item"><div class="radius-box" style="border-radius: 4px;"></div><div class="name">sm</div><div class="value">4px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 8px;"></div><div class="name">md</div><div class="value">8px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 12px;"></div><div class="name">lg</div><div class="value">12px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">xl</div><div class="value">16px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">2xl</div><div class="value">16px</div></div>
-        <div class="radius-item"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">3xl</div><div class="value">16px</div></div>
+      <h2>Component Style</h2>
+      <div class="component-row" style="margin-bottom:12px;">
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-secondary">Secondary Action</button>
+        <span class="chip">Recommended</span>
+      </div>
+      <div class="glass">
+        <strong style="display:block; margin-bottom:6px;">Frosted Feature Block</strong>
+        <span style="color:var(--color-text-secondary); font-size:14px;">Use subtle tint shifts and airy padding to separate content without heavy borders.</span>
       </div>
     </section>
 
     <section>
-      <h2>Shadows</h2>
-      <div class="shadow-grid">
-        <div class="shadow-card" style="box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);"><span class="name">xs</span><div class="value">0 1px 2px rgba(15,23,42,0.03)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);"><span class="name">sm</span><div class="value">0 3px 12px rgba(15,23,42,0.035)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 6px 22px rgba(15, 23, 42, 0.045);"><span class="name">md</span><div class="value">0 6px 22px rgba(15,23,42,0.045)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);"><span class="name">lg</span><div class="value">0 10px 28px rgba(15,23,42,0.055)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 10px 28px rgba(0, 64, 128, 0.2);"><span class="name">blue</span><div class="value">0 10px 28px rgba(0,64,128,0.2)</div></div>
-        <div class="shadow-card" style="box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);"><span class="name">pink</span><div class="value">0 8px 24px rgba(15,23,42,0.12)</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Layout</h2>
-      <div class="layout-note">
-        <strong>Sidebar width:</strong> <code>--sidebar-w: 242px</code> — used for main content margin (e.g. <code>md:ml-[var(--sidebar-w)]</code>).
+      <h2>Usage Rules</h2>
+      <div class="tokens">
+        <div class="token-card"><h3>Do</h3><p>Use gradients for hero backgrounds, button emphasis, and highlighted states.</p></div>
+        <div class="token-card"><h3>Do</h3><p>Pair data blocks with soft tone differences (lavender/white) for scannability.</p></div>
+        <div class="token-card"><h3>Don't</h3><p>Avoid flat corporate blues, harsh black shadows, and dense dashboard clutter.</p></div>
       </div>
     </section>
   </div>

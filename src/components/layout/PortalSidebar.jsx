@@ -85,7 +85,7 @@ export default function PortalSidebar({ compact = false }) {
 
   return (
     <aside
-      className={`peer group fixed left-4 top-4 z-50 h-[calc(100vh-2rem)] overflow-hidden rounded-2xl bg-sidebar-bg shadow-[0_14px_32px_rgba(2,6,23,0.26)] transition-all duration-300 ${
+      className={`peer group fixed left-4 top-4 z-50 h-[calc(100vh-2rem)] overflow-hidden rounded-2xl bg-sidebar-bg shadow-[0_14px_32px_rgba(59,46,126,0.28)] transition-all duration-300 ${
         compact ? "w-16 hover:w-56" : "w-56"
       }`}
     >
@@ -112,7 +112,7 @@ export default function PortalSidebar({ compact = false }) {
                 key={item.label}
                 to={item.to}
                 className={`flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-sm font-medium transition-all ${
-                  isActive ? "bg-transparent text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
+                  isActive ? "bg-white/10 text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
                 }`}
               >
                 <span className="w-[18px] shrink-0 text-center">
