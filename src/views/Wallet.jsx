@@ -60,7 +60,7 @@ export default function Wallet() {
         actions={<Button size="sm" onClick={() => navigate("/welfare/history")}>Open history</Button>}
       />
 
-      <Card>
+      <Card className="border-0">
         <CardBody className="rounded-xl bg-violet-tint p-4">
           <p className="text-sm font-semibold text-text-primary">{profile.walletCallout || "Use credits intentionally based on your constraints."}</p>
           {profile.id === "operator" && (
@@ -140,10 +140,10 @@ export default function Wallet() {
                   {profile.familyMembers.map((member) => {
                     const value = familyAllocations[member.id] || 0;
                     return (
-                      <div key={member.id} className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+                      <div key={member.id} className="rounded-xl bg-white/80 py-4 px-0 shadow-[var(--shadow-xs)]">
                         <div className="mb-2 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-2">
-                            <span className={`inline-flex h-8 w-8 items-center justify-center rounded-md text-xs font-semibold ${relationAvatarTone[member.relation] || "bg-blue-tint text-blue"}`}>
+                            <span className={`inline-flex h-8 w-8 items-center justify-center rounded-sm text-xs font-semibold ${relationAvatarTone[member.relation] || "bg-blue-tint text-blue"}`}>
                               {member.name.slice(0, 1)}
                             </span>
                             <div>
@@ -179,7 +179,7 @@ export default function Wallet() {
                   Personal plan
                 </p>
                 <p className="text-sm text-text-secondary">Family wallet is disabled for this profile. Set a monthly spend target instead.</p>
-                <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+                <div className="rounded-xl bg-white/80 py-4 px-0 shadow-[var(--shadow-xs)]">
                   <div className="mb-2 flex items-center justify-between">
                     <p className="text-sm font-semibold text-text-primary">Monthly credit goal</p>
                     <Badge variant="blue">{monthlyGoal} pts</Badge>
@@ -205,7 +205,7 @@ export default function Wallet() {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <div className="flex gap-3 rounded-xl border border-border bg-surface p-3 shadow-[var(--shadow-xs)]">
+            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-tint text-blue">
                 <Icon name="wellness" className="h-4 w-4" />
               </span>
@@ -218,7 +218,7 @@ export default function Wallet() {
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 rounded-xl border border-border bg-surface p-3 shadow-[var(--shadow-xs)]">
+            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-tint text-green">
                 <Icon name="education" className="h-4 w-4" />
               </span>
@@ -229,8 +229,8 @@ export default function Wallet() {
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 rounded-xl border border-border bg-surface p-3 shadow-[var(--shadow-xs)]">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-tint text-blue">
+            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-violet-tint text-blue">
                 <Icon name="spark" className="h-4 w-4" />
               </span>
               <div className="min-w-0">
@@ -257,7 +257,7 @@ export default function Wallet() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-border bg-surface-2 p-4 shadow-[var(--shadow-xs)]">
+      <div className="rounded-xl bg-violet-tint p-4 shadow-[var(--shadow-xs)]">
         <p className="text-sm font-semibold text-text-primary">Transparency</p>
         <p className="mt-1 text-xs text-text-secondary">Allocations help you spend credits before expiry. Changes apply instantly in this prototype.</p>
         <p className="mt-0.5 text-xs text-text-muted">Policy reference and eligibility checks are available in Requests.</p>

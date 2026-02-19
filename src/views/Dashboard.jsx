@@ -60,7 +60,7 @@ function RecommendationGrid({ profile }) {
 
       <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${minCardWidth}px, 1fr))` }}>
         {profile.recommended.slice(0, 5).map((item, index) => (
-          <Card key={item.id} className="border-0 shadow-none">
+          <Card key={item.id} className="border-0 shadow-none transition-shadow duration-200 hover:shadow-[var(--shadow-hover)]">
             <div className="aspect-[16/8] w-full overflow-hidden border-b border-border bg-surface-2">
               <img
                 src={recommendationImages[item.title] || fallbackImages[index % fallbackImages.length]}
@@ -200,7 +200,7 @@ export default function Dashboard() {
         </div>
 
         {(profile.communityPreference === "Solo" && profile.constraints?.privacyLevel === "High") ? (
-          <div className="flex items-center justify-between rounded-xl bg-surface p-3 shadow-[var(--shadow-sm)]">
+          <div className="flex items-center justify-between overflow-hidden rounded-xl bg-surface p-3 shadow-[var(--shadow-sm)]">
             <div>
               <p className="text-sm font-semibold text-text-primary">Quiet mode</p>
               <p className="text-xs text-text-secondary">Minimizes social modules and keeps recommendations calm.</p>
@@ -231,7 +231,7 @@ export default function Dashboard() {
         <div className="space-y-2">
           {orderedModules.map((module) => (
             <div key={module.key} className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
-              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-surface-2">
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-surface-2">
                 <img
                   src={moduleImages[module.key] || moduleImages.credits}
                   alt=""

@@ -142,7 +142,7 @@ export default function BenefitDetail() {
           <Card className="sticky top-24">
             <CardBody className="space-y-4 p-6">
               <div>
-                <p className="text-xs uppercase tracking-wider text-text-muted">Summary</p>
+                <p className="text-xs tracking-wider text-text-muted">Summary</p>
                 <h3 className="mt-1 font-display text-lg font-bold text-text-primary">Redeem this benefit</h3>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">

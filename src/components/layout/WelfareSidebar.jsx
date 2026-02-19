@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { usePov } from "../../context/PovContext";
+import PovSwitcher from "./PovSwitcher";
 
 const mainNavItems = [
   { to: "/welfare/dashboard", label: "Dashboard", icon: "dashboard" },
@@ -97,25 +99,26 @@ function NavIcon({ type }) {
 
 export default function WelfareSidebar() {
   const { profile } = usePov();
+  const [showPovControls, setShowPovControls] = useState(false);
 
   return (
-    <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] bg-surface transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
+    <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] border-r border-border bg-sidebar-bg transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
       <div className="flex items-center gap-2 px-2 py-2.5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-surface-2 text-xs font-semibold text-text-secondary">W</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-[var(--color-grey-tint-hover)] text-xs font-semibold text-text-secondary">W</div>
         <span className="text-sm font-semibold text-text-primary">Welfare</span>
       </div>
 
       <nav className="mt-2 flex-1 space-y-0 px-2">
         {mainNavItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
-                isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"
-              }`
-            }
-          >
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) =>
+            `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
+              isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"
+            }`
+          }
+        >
             <span className="shrink-0">
               <NavIcon type={item.icon} />
             </span>
@@ -124,21 +127,45 @@ export default function WelfareSidebar() {
         ))}
       </nav>
 
-      <div className="mt-auto space-y-1 border-t border-border px-2 pt-2">
-        {bottomNavItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
-                item.gradient
-                  ? `${isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"}`
-                  : isActive
-                    ? "bg-sidebar-active text-blue"
-                    : "text-text-secondary hover:bg-sidebar-hover"
-              }`
-            }
+      <div className="px-2 pt-3">
+        <div className="flex flex-col items-center gap-2 pb-4">
+          <button
+            type="button"
+            onClick={() => setShowPovControls((prev) => !prev)}
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-text-primary transition hover:bg-surface-2"
           >
+            <span className="shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" className="h-[16px] w-[16px]" stroke="currentColor" strokeWidth="1.8">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            Switch user
+          </button>
+          {showPovControls && (
+            <div className="rounded-lg border border-border bg-surface p-2 shadow-[var(--shadow-sm)]">
+              <PovSwitcher />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-auto space-y-1 border-t border-border px-2 pt-2">
+      {bottomNavItems.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) =>
+            `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
+              item.gradient
+                ? `${isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"}`
+                : isActive
+                  ? "bg-sidebar-active text-blue"
+                  : "text-text-secondary hover:bg-sidebar-hover"
+            }`
+          }
+        >
             <span className="shrink-0">
               <NavIcon type={item.icon} />
             </span>

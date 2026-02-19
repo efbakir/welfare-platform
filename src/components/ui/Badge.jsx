@@ -3,7 +3,7 @@ const variantClasses = {
   pink: "bg-secondary-tint text-secondary",
   orange: "bg-orange-tint text-orange",
   green: "bg-green-tint text-green",
-  neutral: "bg-surface-2 text-text-secondary",
+  neutral: "bg-[var(--color-grey-tint)] text-text-secondary",
   new: "bg-pink text-white",
 };
 

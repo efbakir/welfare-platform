@@ -127,10 +127,10 @@ export default function Marketplace() {
                   className={`flex w-full items-center gap-2 rounded-md border px-3 py-2 text-left text-sm font-medium transition ${
                     category === item
                       ? `${categoryMeta[item]?.active ?? "bg-blue-tint text-blue border-blue-tint"}`
-                      : "border-transparent text-text-secondary hover:bg-violet-tint"
+                      : "border-transparent text-text-secondary hover:bg-[var(--color-grey-tint)] hover:shadow-[var(--shadow-sm)]"
                   }`}
                 >
-                  <span className={`inline-flex h-7 w-7 items-center justify-center rounded-md ${categoryMeta[item]?.accent ?? "bg-violet-tint"}`}>
+                  <span className={`inline-flex h-7 w-7 items-center justify-center rounded-md ${category === item ? (categoryMeta[item]?.accent ?? "bg-blue-tint") : "bg-[var(--color-grey-tint)]"}`}>
                     <Icon name={categoryMeta[item]?.icon ?? "spark"} className="h-3.5 w-3.5" />
                   </span>
                   {item}
@@ -234,13 +234,11 @@ export default function Marketplace() {
                       <p className="text-sm text-text-secondary">
                         {item.category} · {item.points} pts · Expires {item.expiry}
                       </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).slice(0, 3).map((chip) => (
-                          <span key={`${item.id}-${chip}`} className="rounded-sm bg-violet-tint px-2 py-1 text-xs text-text-secondary">
-                            Because you said: {chip}
-                          </span>
-                        ))}
-                      </div>
+                      {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).length > 0 ? (
+                        <p className="text-xs text-text-muted opacity-90">
+                          Because you said: {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).slice(0, 3).join(", ")}.
+                        </p>
+                      ) : null}
                     </CardBody>
                   </Card>
                 </Link>
@@ -248,7 +246,7 @@ export default function Marketplace() {
             </div>
           </section>
 
-          <section className="space-y-3">
+          <section className="space-y-3 pt-6">
             <div className="flex items-center justify-between">
               <h3 className="text-2xl font-semibold tracking-tight text-text-primary">All benefits</h3>
               <Badge variant="neutral">{category === "All" ? "All categories" : category}</Badge>
@@ -257,30 +255,30 @@ export default function Marketplace() {
               {visible.map((item) => {
                 const isClickable = featuredSet.has(item.name) || item.points >= 120;
                 const card = (
-                  <Card className="h-full cursor-pointer transition hover:-translate-y-[1px]">
+                  <Card className="h-full cursor-pointer transition hover:-translate-y-[1px] hover:shadow-[var(--shadow-hover)]">
                     <CardBody className="space-y-3">
                       <div className="flex items-start gap-3">
-                        <span className={`mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md ${categoryMeta[item.category]?.accent ?? "bg-violet-tint"}`}>
-                          <Icon name={categoryMeta[item.category]?.icon ?? "spark"} className="h-5 w-5" />
-                        </span>
+                        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-surface-2">
+                          <img
+                            src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=96&h=96&fit=crop&q=80&auto=format`}
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
                         <div className="min-w-0 flex-1">
                           <p className="text-lg font-semibold text-text-primary">{item.name}</p>
-                          <p className="text-sm text-text-secondary">{item.category}</p>
+                          <p className="text-sm text-text-muted">{item.category}</p>
                         </div>
                         {featuredSet.has(item.name) && <Badge variant="blue">Recommended</Badge>}
                       </div>
 
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className={`inline-flex items-center gap-1 rounded-sm px-2 py-1 text-xs font-semibold ${categoryMeta[item.category]?.chip ?? "bg-blue-tint text-blue"}`}>
-                          <Icon name={categoryMeta[item.category]?.icon ?? "spark"} className="h-3.5 w-3.5" />
-                          {item.category}
-                        </span>
                         <Badge variant={item.eligible === "Recommended" ? "blue" : "green"}>{item.eligible}</Badge>
                       </div>
 
-                      <div className="grid gap-2 text-sm text-text-secondary sm:grid-cols-2">
-                        <p><span className="font-semibold text-text-primary">{item.points}</span> points</p>
-                        <p>Expires {item.expiry}</p>
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-secondary">
+                        <span><span className="font-semibold text-text-primary">{item.points}</span> points</span>
+                        <span>Expires {item.expiry}</span>
                       </div>
                     </CardBody>
                   </Card>

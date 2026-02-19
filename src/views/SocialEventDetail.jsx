@@ -76,15 +76,15 @@ export default function SocialEventDetail() {
             <p className="text-sm leading-6 text-text-secondary">{event.description}</p>
             <div className="grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">Date</p>
+                <p className="text-xs tracking-wide text-text-muted">Date</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.date}</p>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">Time</p>
+                <p className="text-xs tracking-wide text-text-muted">Time</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.time}</p>
               </div>
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">Location</p>
+                <p className="text-xs tracking-wide text-text-muted">Location</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.location}</p>
               </div>
             </div>
