@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import PageHeader from "../components/layout/PageHeader";
 import { Card, CardBody } from "../components/ui/Card";
 import Badge from "../components/ui/Badge";
@@ -80,10 +81,12 @@ export default function Transactions() {
       </div>
 
       <Card>
-        <CardBody className="space-y-3">
-          {baseHistory.map((item) => (
-            <article key={item.id} className="ui-panel ui-interactive space-y-4 border border-border p-4">
-              <header className="flex flex-wrap items-start justify-between gap-3">
+        <CardBody className="-mx-6 flex flex-col gap-0 px-6 pt-0 pb-6">
+          {baseHistory.map((item, index) => (
+            <Fragment key={item.id}>
+              {index > 0 && <div className="border-t border-border" aria-hidden />}
+              <article className="ui-panel shadow-none space-y-4 px-6 py-6">
+                <header className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-semibold text-text-primary">{item.title}</h3>
                   <p className="mt-1 text-sm text-text-muted">With {item.withWho}</p>
@@ -104,9 +107,10 @@ export default function Transactions() {
                 </span>
               </div>
               <p className="text-sm text-text-secondary border-l-2 border-border pl-3">{item.impact}</p>
-            </article>
+              </article>
+            </Fragment>
           ))}
-          <p className="text-xs text-text-muted">
+          <p className="pl-6 text-xs text-text-muted">
             Tip: Guild events return a portion of spent credits when attendance is confirmed.
           </p>
         </CardBody>

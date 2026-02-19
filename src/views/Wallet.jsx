@@ -77,19 +77,21 @@ export default function Wallet() {
       <div className="grid gap-4 xl:grid-cols-[1.7fr_1fr]">
         <div className="space-y-4">
           <Card>
-            <CardBody className="space-y-4">
-              <div className="ui-panel border border-border p-5">
-                <p className="text-sm font-semibold text-text-primary">Available now</p>
-                <p className="mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-text-primary">{remaining} pts</p>
-                <p className="mt-1 text-sm text-text-secondary">Points remaining</p>
+            <CardBody className="space-y-4 pt-0">
+              <div className="-mx-6 border-b border-border">
+                <div className="p-5 px-6">
+                  <p className="text-sm font-semibold text-text-primary">Available now</p>
+                  <p className="mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-text-primary">{remaining} pts</p>
+                  <p className="mt-1 text-sm text-text-secondary">Points remaining</p>
 
-                <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface-2 px-3 py-2.5">
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-text-secondary">
-                    <Icon name="clock" className="h-4 w-4" />
-                    Expiring in 30 days
-                  </span>
-                  <span className="text-sm font-semibold text-text-primary">{expiringSoon} pts</span>
-                  <Button variant="ghost" size="sm" className="ml-auto">See expiring</Button>
+                  <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md bg-surface-2 px-3 py-2.5">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-text-secondary">
+                      <Icon name="clock" className="h-4 w-4" />
+                      Expiring in 30 days
+                    </span>
+                    <span className="text-sm font-semibold text-text-primary">{expiringSoon} pts</span>
+                    <Button variant="ghost" size="sm" className="ml-auto">See expiring</Button>
+                  </div>
                 </div>
               </div>
 

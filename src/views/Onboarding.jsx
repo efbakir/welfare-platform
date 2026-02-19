@@ -180,8 +180,8 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <div className="flex min-h-[740px] flex-col gap-5">
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="flex min-h-[740px] w-full flex-col gap-5">
         <div>
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm font-semibold text-text-muted">Step {step + 1} / {totalSteps}</p>
