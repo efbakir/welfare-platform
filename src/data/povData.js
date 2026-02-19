@@ -625,10 +625,10 @@ export function createCustomProfileFromAnswers(answers) {
 
 const caregiverPreset = buildProfile({
   id: "caregiver",
-  name: "Elena Rossi",
-  avatar: "ER",
-  role: "People Operations Specialist",
-  tenure: "6 years",
+  name: "Giovanni Ricci",
+  avatar: "GR",
+  role: "Senior Operations Specialist",
+  tenure: "18 years",
   lifeStage: "Caregiver",
   workMode: "Hybrid",
   roleReality: "ic",
@@ -656,10 +656,10 @@ const caregiverPreset = buildProfile({
 
 const operatorPreset = buildProfile({
   id: "operator",
-  name: "Marco Bianchi",
-  avatar: "MB",
+  name: "Luca Ferri",
+  avatar: "LF",
   role: "Plant Operator",
-  tenure: "4 years",
+  tenure: "2 years",
   lifeStage: "Employee",
   workMode: "On-site",
   roleReality: "ic",
@@ -683,10 +683,10 @@ const operatorPreset = buildProfile({
 
 const managerPreset = buildProfile({
   id: "manager",
-  name: "Amina El-Sayed",
-  avatar: "AE",
+  name: "Sofia Moretti",
+  avatar: "SM",
   role: "Remote Team Manager",
-  tenure: "9 years",
+  tenure: "5 years",
   lifeStage: "Partnered",
   workMode: "Remote",
   roleReality: "manager",

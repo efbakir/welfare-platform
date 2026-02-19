@@ -369,11 +369,12 @@ export default function Onboarding() {
                     </span>
                     <button
                       type="button"
+                      aria-label="Toggle AI suggestions consent"
                       aria-pressed={form.aiConsent}
                       onClick={() => setForm((prev) => ({ ...prev, aiConsent: !prev.aiConsent }))}
                       className={`relative h-7 w-12 rounded-md transition ${form.aiConsent ? "bg-blue" : "bg-[#dfe3f3]"}`}
                     >
-                      <span className={`absolute top-1 h-5 w-5 rounded-sm bg-white shadow transition ${form.aiConsent ? "left-6" : "left-1"}`} />
+                      <span className={`toggle-thumb absolute top-1 h-5 w-5 rounded-sm bg-white shadow ${form.aiConsent ? "active left-6" : "left-1"}`} />
                     </button>
                   </label>
                 </div>

@@ -24,6 +24,23 @@ function RecommendationGrid({ profile }) {
       : profile.layoutVariant === "plan-first"
         ? "grid-cols-1 md:grid-cols-2"
         : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3";
+  const recommendationImages = {
+    "Backup Care Credits": "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=1200&q=80",
+    "Meal & Grocery Support": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+    "Stress Support Sessions": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
+    "Hybrid Home Office Support": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80",
+    "Concierge Errands": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
+    "Transport & Fuel Support": "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1200&q=80",
+    "Meal Vouchers Near Workplace": "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
+    "Pharmacy Essentials Credit": "https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=1200&q=80",
+    "Near-work Gym Access": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+    "Micro-rewards Marketplace": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
+    "Leadership Coaching": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    "Learning Stipend": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+    "Burnout Recovery Program": "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80",
+    "Remote Team Circles": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+    "Volunteering + Donation Match": "https://images.unsplash.com/photo-1469571486292-b53601020fbb?auto=format&fit=crop&w=1200&q=80",
+  };
 
   return (
     <section className="space-y-3">
@@ -35,6 +52,14 @@ function RecommendationGrid({ profile }) {
       <div className={`grid gap-3 ${gridClass}`}>
         {profile.recommended.slice(0, 5).map((item) => (
           <Card key={item.id}>
+            <div className="aspect-[16/8] w-full overflow-hidden border-b border-border bg-surface-2">
+              <img
+                src={recommendationImages[item.title] || "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"}
+                alt={item.title}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
             <CardBody className="space-y-2.5">
               <div className="flex items-center justify-between gap-2">
                 <p className="text-lg font-semibold text-text-primary">{item.title}</p>
@@ -135,41 +160,40 @@ export default function Dashboard() {
         )}
       />
 
-      <Card>
-        <CardBody className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="blue">{profile.workMode}</Badge>
-            <Badge variant="neutral">{profile.roleReality === "manager" ? "Manager" : "IC"}</Badge>
-            <Badge variant="green">{profile.lifeEvents?.[0] || "Context-based"}</Badge>
-            <Badge variant="neutral">{profile.constraints?.budgetComfort} budget comfort</Badge>
-            <Badge variant="neutral">{profile.constraints?.privacyLevel} privacy</Badge>
-            <Badge variant="neutral">Default filter: {profile.defaultFilters?.location}</Badge>
-          </div>
+      <section className="space-y-4 border-b border-border pb-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge variant="blue">{profile.workMode}</Badge>
+          <Badge variant="neutral">{profile.roleReality === "manager" ? "Manager" : "IC"}</Badge>
+          <Badge variant="green">{profile.lifeEvents?.[0] || "Context-based"}</Badge>
+          <Badge variant="neutral">{profile.constraints?.budgetComfort} budget comfort</Badge>
+          <Badge variant="neutral">{profile.constraints?.privacyLevel} privacy</Badge>
+          <Badge variant="neutral">Default filter: {profile.defaultFilters?.location}</Badge>
+        </div>
 
-          {(profile.communityPreference === "Solo" && profile.constraints?.privacyLevel === "High") ? (
-            <div className="flex items-center justify-between rounded-xl bg-violet-tint p-3">
-              <div>
-                <p className="text-sm font-semibold text-text-primary">Quiet mode</p>
-                <p className="text-xs text-text-secondary">Minimizes social modules and keeps recommendations calm.</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setQuietMode((prev) => !prev)}
-                className={`relative h-7 w-12 rounded-md transition ${quietMode ? "bg-blue" : "bg-[#dfe3f3]"}`}
-              >
-                <span className={`absolute top-1 h-5 w-5 rounded-sm bg-white shadow transition ${quietMode ? "left-6" : "left-1"}`} />
-              </button>
+        {(profile.communityPreference === "Solo" && profile.constraints?.privacyLevel === "High") ? (
+          <div className="flex items-center justify-between rounded-xl border border-border bg-surface p-3">
+            <div>
+              <p className="text-sm font-semibold text-text-primary">Quiet mode</p>
+              <p className="text-xs text-text-secondary">Minimizes social modules and keeps recommendations calm.</p>
             </div>
-          ) : null}
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <SummaryStat label="Available credits" value={`${profile.budget.remaining}`} sub="points ready" />
-            <SummaryStat label="Allocated" value={`${profile.budget.allocated}`} sub="this cycle" />
-            <SummaryStat label="Goal horizon" value={profile.goalHorizon} sub="planning window" />
-            <SummaryStat label="Community mode" value={profile.communityPreference} sub="adaptive visibility" />
+            <button
+              type="button"
+              aria-label="Toggle quiet mode"
+              onClick={() => setQuietMode((prev) => !prev)}
+              className={`relative h-7 w-12 rounded-md transition ${quietMode ? "bg-blue" : "bg-[#dfe3f3]"}`}
+            >
+              <span className={`toggle-thumb absolute top-1 h-5 w-5 rounded-sm bg-white shadow ${quietMode ? "active left-6" : "left-1"}`} />
+            </button>
           </div>
-        </CardBody>
-      </Card>
+        ) : null}
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <SummaryStat label="Available credits" value={`${profile.budget.remaining}`} sub="points ready" />
+          <SummaryStat label="Allocated" value={`${profile.budget.allocated}`} sub="this cycle" />
+          <SummaryStat label="Goal horizon" value={profile.goalHorizon} sub="planning window" />
+          <SummaryStat label="Community mode" value={profile.communityPreference} sub="adaptive visibility" />
+        </div>
+      </section>
 
       <RecommendationGrid profile={profile} />
 
@@ -220,15 +244,13 @@ export default function Dashboard() {
         )}
       </section>
 
-      <Card>
-        <CardBody className="flex flex-wrap items-center justify-between gap-3">
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
-            <Icon name="spark" className="h-4 w-4 text-blue" />
-            Personalization uses life events, work mode, role reality, and constraint levels. No salary or medical records required.
-          </p>
-          <Button variant="ghost" onClick={() => navigate("/welfare/profile")}>Adjust personalization inputs</Button>
-        </CardBody>
-      </Card>
+      <section className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5">
+        <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
+          <Icon name="spark" className="h-4 w-4 text-blue" />
+          Personalization uses life events, work mode, role reality, and constraint levels. No salary or medical records required.
+        </p>
+        <Button variant="ghost" onClick={() => navigate("/welfare/profile")}>Adjust personalization inputs</Button>
+      </section>
     </div>
   );
 }

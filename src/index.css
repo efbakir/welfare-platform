@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -43,8 +43,8 @@
   --color-sidebar-active: rgba(47, 79, 157, 0.1);
   --color-sidebar-text: #344054;
 
-  --font-display: "Plus Jakarta Sans", "Helvetica Neue", "Arial", sans-serif;
-  --font-body: "Plus Jakarta Sans", "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Sora", "Helvetica Neue", "Arial", sans-serif;
+  --font-body: "Sora", "Helvetica Neue", "Arial", sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -76,6 +76,29 @@
 
 .animate-fade-up {
   animation: fadeUp 320ms ease-out both;
+}
+
+@keyframes togglePop {
+  0% {
+    transform: translateX(0) scale(0.96);
+  }
+  55% {
+    transform: translateX(2px) scale(1.02);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+.toggle-thumb {
+  transition:
+    left 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms ease;
+}
+
+.toggle-thumb.active {
+  animation: togglePop 220ms ease-out;
 }
 
 * {
