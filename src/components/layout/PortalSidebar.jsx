@@ -62,7 +62,7 @@ function ItemIcon({ type, active = false }) {
   if (type === "welfare") {
     const heartPath = "M12 5.5c-1.2-1.4-3.2-2-5-2a5.5 5.5 0 0 0-5.5 5.5c0 4 4.5 8 10.5 12 6-4 10.5-8 10.5-12A5.5 5.5 0 0 0 17 3.5c-1.8 0-3.8.6-5 2Z";
     return (
-      <svg viewBox="0 0 24 24" fill="none" className={sharedClass} stroke="currentColor" strokeWidth="1.8">
+      <svg viewBox="0 0 24 24" fill={active ? "currentColor" : "none"} className={sharedClass} stroke="currentColor" strokeWidth="1.8">
         <path d={heartPath} />
       </svg>
     );

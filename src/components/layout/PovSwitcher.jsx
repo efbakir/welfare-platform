@@ -29,7 +29,7 @@ export default function PovSwitcher() {
         id="pov-select"
         value={povId}
         onChange={(e) => handleSwitch(e.target.value)}
-        className="mx-0 min-w-0 max-w-[220px] shrink rounded-md border border-border bg-surface py-1.5 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
+        className="mx-0 min-w-0 max-w-[220px] shrink rounded-md border border-border bg-surface py-1.5 pl-2.5 pr-8 text-sm font-semibold text-text-primary outline-none"
         aria-label="Select employee perspective"
       >
         {profiles.map((item) => (

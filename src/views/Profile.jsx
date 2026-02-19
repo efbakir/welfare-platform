@@ -35,10 +35,10 @@ function ToggleRow({ icon, label, description, enabled, onToggle, actionLabel = 
         aria-label={`Toggle ${label}`}
         aria-pressed={enabled}
         onClick={onToggle}
-        className={`relative h-7 w-12 rounded-md transition ${enabled ? "bg-blue" : "bg-[#dfe3f3]"}`}
+        className={`relative h-7 w-12 rounded-full transition ${enabled ? "bg-blue" : "bg-[#dfe3f3]"}`}
       >
         <span
-          className={`toggle-thumb absolute top-1 h-5 w-5 rounded-sm bg-white shadow ${enabled ? "active left-6" : "left-1"}`}
+          className={`toggle-thumb absolute top-1 h-5 w-5 rounded-full bg-white shadow ${enabled ? "active left-6" : "left-1"}`}
           aria-hidden="true"
         />
         <span className="sr-only">{actionLabel}</span>
@@ -63,13 +63,13 @@ export default function Profile() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        title="Profile & personalization"
+        title="Profile"
         subtitle="Update your context to keep recommendations accurate and explainable."
         actions={<Button size="sm" onClick={() => setSaved(true)}>Save changes</Button>}
       />
 
       <div className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-        <Card>
+        <Card className="border-0 shadow-none">
           <CardBody className="space-y-5">
             <div className="rounded-xl bg-violet-tint p-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -140,7 +140,7 @@ export default function Profile() {
                 <select
                   value={focus}
                   onChange={(e) => setFocus(e.target.value)}
-                  className="w-full rounded-md border border-[rgba(255,255,255,0.72)] bg-white px-3 py-2 text-sm text-text-primary outline-none"
+                  className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none"
                 >
                   {focusGoals.map((goal) => (
                     <option key={goal} value={goal}>{goal}</option>
@@ -176,7 +176,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="rounded-xl bg-cyan-tint p-3">
+            <div className="rounded-xl p-3">
               <p className="text-xs font-medium text-text-muted">Community style</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{socialStyle}</p>
               <div className="mt-2 flex gap-2">

@@ -111,7 +111,7 @@ export default function Marketplace() {
   return (
     <div className="flex h-[calc(100vh-116px)] w-full min-w-0 flex-col">
       <PageHeader
-        title="Benefit marketplace"
+        title="Marketplace"
       />
 
       <div className="grid min-h-0 flex-1 gap-6 pt-4 xl:grid-cols-[280px_1fr]">

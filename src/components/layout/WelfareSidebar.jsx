@@ -79,6 +79,13 @@ function NavIcon({ type }) {
       </svg>
     );
   }
+  if (type === "ai") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3.5 14.3 9l5.2 2.1-5.2 2.1L12 18.5l-2.3-5.3L4.5 11.1 9.7 9 12 3.5Z" />
+      </svg>
+    );
+  }
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
       <rect x="3.5" y="4.5" width="17" height="13" rx="2" />
@@ -92,7 +99,7 @@ export default function WelfareSidebar() {
   const { profile } = usePov();
 
   return (
-    <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] border-r border-border bg-surface transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
+    <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] bg-surface transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
       <div className="flex items-center gap-2 px-2 py-2.5">
         <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-surface-2 text-xs font-semibold text-text-secondary">W</div>
         <span className="text-sm font-semibold text-text-primary">Welfare</span>

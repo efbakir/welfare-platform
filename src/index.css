@@ -237,3 +237,33 @@ input.rounded-full {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Range slider: thumb same as blue tint, centered on 8px track */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 4px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-blue-tint);
+  border: 2px solid var(--color-blue);
+  cursor: pointer;
+  margin-top: -5px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-blue-tint);
+  border: 2px solid var(--color-blue);
+  cursor: pointer;
+}

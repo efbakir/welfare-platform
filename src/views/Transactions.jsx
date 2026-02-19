@@ -50,7 +50,7 @@ export default function Transactions() {
     <div className="mx-auto w-full max-w-[1220px] space-y-6">
       <PageHeader
         eyebrow="Credit journey"
-        title="History & Insights"
+        title="History"
         subtitle="Where your credits were used, who you joined, and what value you got back."
       />
 
