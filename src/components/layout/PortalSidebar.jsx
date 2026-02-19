@@ -87,14 +87,11 @@ export default function PortalSidebar({ compact = false }) {
     >
       <div className="flex h-full flex-col p-3">
         <div className="flex items-center gap-2 py-2.5 pl-[5px] pr-2">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border bg-surface-2 text-text-secondary">
-            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-              <path d="M4 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5Z" />
-              <path d="M14 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V5Z" />
-              <path d="M4 14a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4Z" />
-              <path d="M14 14a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4Z" />
-            </svg>
-          </div>
+          <img
+            src="/logo-ts.png"
+            alt="TeamSystem"
+            className="h-8 w-8 shrink-0 rounded-md object-contain"
+          />
           <span className={`text-sm font-semibold text-text-primary transition-all ${compact ? "max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:ml-1 group-hover:max-w-[140px] group-hover:opacity-100" : "opacity-100"}`}>
             Client Portal
           </span>

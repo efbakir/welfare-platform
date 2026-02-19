@@ -11,22 +11,56 @@ import { usePov } from "../context/PovContext";
 const categories = ["All", "Wellness", "Family", "Education", "Child & Education"];
 
 const categoryMeta = {
-  All: { icon: "spark", chip: "bg-violet-tint text-blue", accent: "bg-violet-tint text-text-primary" },
-  Wellness: { icon: "wellness", chip: "bg-green-tint text-green", accent: "bg-green-tint text-text-primary" },
-  Family: { icon: "family", chip: "bg-secondary-tint text-secondary", accent: "bg-secondary-tint text-text-primary" },
-  Education: { icon: "education", chip: "bg-violet-tint text-blue", accent: "bg-violet-tint text-text-primary" },
-  "Child & Education": { icon: "child", chip: "bg-cyan-tint text-text-secondary", accent: "bg-cyan-tint text-text-primary" },
+  All: {
+    icon: "spark",
+    chip: "bg-[#eef2ff] text-[#2946a0]",
+    accent: "bg-[#eef2ff] text-[#2946a0]",
+    active: "bg-[#e4ebff] text-[#1f3f95] border-[#b6c8ff]",
+  },
+  Wellness: {
+    icon: "wellness",
+    chip: "bg-[#ebf8ef] text-[#1f8a52]",
+    accent: "bg-[#ebf8ef] text-[#1f8a52]",
+    active: "bg-[#dff3e8] text-[#1d7a49] border-[#abdcbf]",
+  },
+  Family: {
+    icon: "family",
+    chip: "bg-[#fff3ea] text-[#b5581f]",
+    accent: "bg-[#fff3ea] text-[#b5581f]",
+    active: "bg-[#ffe8d8] text-[#9a491a] border-[#f7c8aa]",
+  },
+  Education: {
+    icon: "education",
+    chip: "bg-[#eef5ff] text-[#2d5ca6]",
+    accent: "bg-[#eef5ff] text-[#2d5ca6]",
+    active: "bg-[#dfeeff] text-[#274f8f] border-[#b7d2f5]",
+  },
+  "Child & Education": {
+    icon: "child",
+    chip: "bg-[#f2efff] text-[#5541b2]",
+    accent: "bg-[#f2efff] text-[#5541b2]",
+    active: "bg-[#e7e1ff] text-[#4a389e] border-[#c8bdf8]",
+  },
 };
 
 const cardImages = {
-  "Gym Membership": "photo-1571019613454-1cb2f99b2d8b",
-  "Mental Health Support": "photo-1506126613408-eca07ce68773",
-  "Family Wellness Package": "photo-1511895426328-dc8714191300",
-  "Little Stars Daycare": "photo-1588072432836-e10032774350",
-  "After-school Program": "photo-1503676260728-1c00da094a0b",
-  "Training Voucher": "photo-1454165804606-c3d57bc86b40",
-  "Language Classes": "photo-1481627834876-b7833e8f5570",
-  "Caregiver Support Sessions": "photo-1516307365426-bea591f05011",
+  "Backup Care Credits": "photo-1511895426328-dc8714191300",
+  "Meal Delivery Subsidy": "photo-1542838132-92c53300491e",
+  "Therapy & Stress Support": "photo-1506126613408-eca07ce68773",
+  "Hybrid Home-Office Support": "photo-1497366811353-6870744d04b2",
+  "Concierge Errands Service": "photo-1489515217757-5fd1be406fef",
+  "Transport Pass / Fuel Support": "photo-1474487548417-781cb71495f3",
+  "Meal Vouchers Near Workplace": "photo-1466978913421-dad2ebd01d17",
+  "Pharmacy Essentials Credit": "photo-1587854692152-cbe660dbde88",
+  "Near-work Gym Discount": "photo-1534438327276-14e5300c3a48",
+  "Micro-rewards Gift Cards": "photo-1556740738-b6a63e27c4df",
+  "Leadership Coaching Sessions": "photo-1552664730-d307ca884978",
+  "Learning Stipend": "photo-1434030216411-0b793f4b4173",
+  "Burnout Recovery Program": "photo-1499209974431-9dddcece7f88",
+  "Remote Team Circles": "photo-1522202176988-66273c2fd55f",
+  "Volunteering Day + Donation Match": "photo-1469571486292-b53601020fbb",
+  "Childcare Subsidy": "photo-1588072432836-e10032774350",
+  "Relocation Admin Support": "photo-1486406146926-c627a92ad1ab",
 };
 
 export default function Marketplace() {
@@ -75,49 +109,25 @@ export default function Marketplace() {
   }, [category, query, featuredSet, workModeFilter, locationFilter]);
 
   return (
-    <div className="mx-auto w-full max-w-[1240px] space-y-5">
+    <div className="flex h-[calc(100vh-116px)] w-full min-w-0 flex-col">
       <PageHeader
-        eyebrow="Discovery"
         title="Benefit marketplace"
-        subtitle="Explore, compare, and redeem benefits prioritized for your profile context."
       />
 
-      <Card>
-        <CardBody className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
-          <div className="relative">
-            <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search benefits, eligibility, or categories..."
-              className="w-full rounded-md border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.84)] py-2.5 pl-9 pr-3 text-sm text-text-primary outline-none"
-            />
-          </div>
-          <div className="inline-flex items-center rounded-md bg-violet-tint px-3 py-2 text-xs font-semibold text-text-secondary">
-            {visible.length} results
-          </div>
-          <div className="inline-flex items-center rounded-md bg-cyan-tint px-3 py-2 text-xs font-semibold text-text-secondary">
-            {workModeFilter} mode
-          </div>
-          <div className="inline-flex items-center rounded-md bg-green-tint px-3 py-2 text-xs font-semibold text-text-secondary">
-            {locationFilter}
-          </div>
-        </CardBody>
-      </Card>
-
-      <div className="grid gap-4 xl:grid-cols-[0.32fr_1fr]">
-        <aside className="space-y-4">
-          <Card>
-            <CardBody className="space-y-1">
-              <p className="mb-2 text-xl font-semibold tracking-tight text-text-primary">Categories</p>
+      <div className="grid min-h-0 flex-1 gap-6 pt-4 xl:grid-cols-[280px_1fr]">
+        <aside className="sticky top-0 self-start border-r border-border pr-5">
+          <div className="space-y-5">
+            <section className="space-y-1">
+              <p className="mb-2 text-lg font-semibold tracking-tight text-text-primary">Categories</p>
               {categories.map((item) => (
                 <button
                   key={item}
                   type="button"
                   onClick={() => setCategory(item)}
-                  className={`flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium transition ${
-                    category === item ? "bg-blue-tint text-blue" : "text-text-secondary hover:bg-violet-tint"
+                  className={`flex w-full items-center gap-2 rounded-md border px-3 py-2 text-left text-sm font-medium transition ${
+                    category === item
+                      ? `${categoryMeta[item]?.active ?? "bg-blue-tint text-blue border-blue-tint"}`
+                      : "border-transparent text-text-secondary hover:bg-violet-tint"
                   }`}
                 >
                   <span className={`inline-flex h-7 w-7 items-center justify-center rounded-md ${categoryMeta[item]?.accent ?? "bg-violet-tint"}`}>
@@ -126,11 +136,9 @@ export default function Marketplace() {
                   {item}
                 </button>
               ))}
-            </CardBody>
-          </Card>
+            </section>
 
-          <Card>
-            <CardBody className="space-y-3">
+            <section className="space-y-3 border-t border-border pt-4">
               <p className="text-sm font-semibold text-text-primary">Default filters</p>
               <div>
                 <p className="mb-1 text-xs text-text-muted">Work mode</p>
@@ -142,7 +150,7 @@ export default function Marketplace() {
                       [profile.id]: { ...(prev[profile.id] || {}), workMode: e.target.value },
                     }))
                   }
-                  className="w-full rounded-md bg-[#f1f5f9] px-3 py-2 text-sm text-text-primary outline-none"
+                  className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none"
                 >
                   {["All", "Remote", "Hybrid", "On-site"].map((mode) => (
                     <option key={mode} value={mode}>{mode}</option>
@@ -159,26 +167,49 @@ export default function Marketplace() {
                       [profile.id]: { ...(prev[profile.id] || {}), location: e.target.value },
                     }))
                   }
-                  className="w-full rounded-md bg-[#f1f5f9] px-3 py-2 text-sm text-text-primary outline-none"
+                  className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none"
                 >
                   {locationOptions.map((location) => (
                     <option key={location} value={location}>{location}</option>
                   ))}
                 </select>
               </div>
-            </CardBody>
-          </Card>
+            </section>
 
-          <Card>
-            <CardBody className="space-y-3">
+            <section className="space-y-3 border-t border-border pt-4">
               <p className="text-lg font-semibold text-text-primary">Request a benefit</p>
               <p className="text-sm text-text-secondary">Can’t find what you need? Submit a request and HR can review it.</p>
               <Button className="w-full" variant="outline">Submit request</Button>
-            </CardBody>
-          </Card>
+            </section>
+          </div>
         </aside>
 
-        <div className="space-y-4">
+        <div className="min-h-0 overflow-y-auto pr-1">
+          <div className="sticky top-0 z-20 mb-4 border-b border-border bg-bg pb-4">
+            <div className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
+              <div className="relative">
+                <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search benefits, eligibility, or categories..."
+                  className="w-full rounded-md border border-border bg-surface py-2.5 pl-9 pr-3 text-sm text-text-primary outline-none"
+                />
+              </div>
+              <div className="inline-flex items-center rounded-md border border-border bg-surface px-3 py-2 text-xs font-semibold text-text-secondary">
+                {visible.length} results
+              </div>
+              <div className="inline-flex items-center rounded-md border border-border bg-surface px-3 py-2 text-xs font-semibold text-text-secondary">
+                {workModeFilter} mode
+              </div>
+              <div className="inline-flex items-center rounded-md border border-border bg-surface px-3 py-2 text-xs font-semibold text-text-secondary">
+                {locationFilter}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 pb-4">
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold tracking-tight text-text-primary">Featured for you</h2>
@@ -190,7 +221,7 @@ export default function Marketplace() {
                   <Card className="h-full cursor-pointer transition hover:-translate-y-[1px]">
                     <div className="h-40 w-full overflow-hidden bg-[#eef1ff]">
                       <img
-                        src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=760&h=400&fit=crop&q=80`}
+                        src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=760&h=400&fit=crop&q=80&auto=format`}
                         alt={item.name}
                         className="h-full w-full object-cover"
                       />
@@ -271,6 +302,7 @@ export default function Marketplace() {
               })}
             </div>
           </section>
+          </div>
         </div>
       </div>
     </div>

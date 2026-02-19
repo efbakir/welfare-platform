@@ -1,5 +1,52 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("/fonts/SuisseIntl-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
   --color-blue: #2f4f9d;
@@ -43,8 +90,8 @@
   --color-sidebar-active: rgba(47, 79, 157, 0.1);
   --color-sidebar-text: #344054;
 
-  --font-display: "Sora", "Helvetica Neue", "Arial", sans-serif;
-  --font-body: "Sora", "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Suisse Intl", "Helvetica Neue", "Arial", sans-serif;
+  --font-body: "Suisse Intl", "Helvetica Neue", "Arial", sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;

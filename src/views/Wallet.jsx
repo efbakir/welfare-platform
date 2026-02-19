@@ -55,7 +55,6 @@ export default function Wallet() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        eyebrow="Credits & Allocation"
         title="Wallet intelligence"
         subtitle="Manage credits with clearer guardrails and faster allocation decisions."
         actions={<Button size="sm" onClick={() => navigate("/welfare/history")}>Open history</Button>}

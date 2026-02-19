@@ -63,7 +63,6 @@ export default function Profile() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        eyebrow="Life Stage Triggers"
         title="Profile & personalization"
         subtitle="Update your context to keep recommendations accurate and explainable."
         actions={<Button size="sm" onClick={() => setSaved(true)}>Save changes</Button>}

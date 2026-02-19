@@ -35,7 +35,6 @@ export default function BenefitRequests() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        eyebrow="Requests"
         title="Requests workspace"
         subtitle="Simplified approvals with clearer eligibility, timing, and required documents."
         actions={<Button size="sm">Create request</Button>}

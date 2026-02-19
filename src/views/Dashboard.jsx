@@ -18,12 +18,7 @@ function SummaryStat({ label, value, sub }) {
 }
 
 function RecommendationGrid({ profile }) {
-  const gridClass =
-    profile.layoutVariant === "list-first"
-      ? "grid-cols-1"
-      : profile.layoutVariant === "plan-first"
-        ? "grid-cols-1 md:grid-cols-2"
-        : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3";
+  const minCardWidth = profile.layoutVariant === "plan-first" ? 360 : 300;
   const recommendationImages = {
     "Backup Care Credits": "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=1200&q=80",
     "Meal & Grocery Support": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
@@ -49,7 +44,7 @@ function RecommendationGrid({ profile }) {
         <p className="text-sm text-text-muted">Why this is recommended</p>
       </div>
 
-      <div className={`grid gap-3 ${gridClass}`}>
+      <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${minCardWidth}px, 1fr))` }}>
         {profile.recommended.slice(0, 5).map((item) => (
           <Card key={item.id}>
             <div className="aspect-[16/8] w-full overflow-hidden border-b border-border bg-surface-2">
@@ -147,7 +142,6 @@ export default function Dashboard() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        eyebrow="Personalized Welfare"
         title={profile.hero?.title || "Decision Dashboard"}
         subtitle={profile.hero?.subtitle || "Recommendations based on your context."}
         actions={(

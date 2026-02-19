@@ -93,7 +93,6 @@ export default function AiAssistant() {
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
       <PageHeader
-        eyebrow="Decision support"
         title="AI Assistant"
         subtitle="Grounded guidance for recommendations, policy checks, and credit optimization."
       />
