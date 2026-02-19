@@ -12,7 +12,7 @@ export default function PovSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-2 shadow-[0_8px_20px_rgb(0,0,0,0.04)]">
+    <div className="flex items-center gap-1.5 rounded-md border border-[rgba(255,255,255,0.72)] bg-[rgba(255,255,255,0.82)] px-3 py-2 shadow-[var(--shadow-xs)] backdrop-blur-md">
       <label htmlFor="pov-select" className="shrink-0 text-xs font-semibold text-text-muted">
         Viewing as:
       </label>
@@ -20,7 +20,7 @@ export default function PovSwitcher() {
         id="pov-select"
         value={povId}
         onChange={(e) => setPovId(e.target.value)}
-        className="mx-0 min-w-0 max-w-[180px] shrink rounded-full bg-blue-tint py-1 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
+        className="mx-0 min-w-0 max-w-[180px] shrink rounded-md bg-blue-tint py-1.5 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
         aria-label="Select employee perspective"
       >
         {profiles.map((item) => (
@@ -32,7 +32,7 @@ export default function PovSwitcher() {
       <button
         type="button"
         onClick={restartOnboarding}
-        className="rounded-full bg-blue px-3 py-1 text-xs font-semibold text-white transition hover:bg-blue-dark"
+        className="rounded-md bg-[linear-gradient(135deg,var(--color-gradient-start)_0%,var(--color-gradient-end)_100%)] px-3 py-1.5 text-xs font-semibold text-white transition hover:brightness-105"
         aria-label="Restart onboarding flow"
       >
         Personalize

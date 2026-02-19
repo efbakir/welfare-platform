@@ -8,7 +8,7 @@ const variants = {
 
 const sizes = {
   sm: "px-4 py-2 text-xs",
-  md: "px-[18px] py-2.5 text-[13px]",
+  md: "px-5 py-2.5 text-[13px]",
   icon: "aspect-square p-2",
 };
 
@@ -23,7 +23,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md font-body font-semibold transition-all duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md font-body font-medium tracking-[0.01em] transition-all duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
       {...props}
     >
       {children}

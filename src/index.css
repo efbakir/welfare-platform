@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -43,8 +43,8 @@
   --color-sidebar-active: rgba(138, 123, 255, 0.28);
   --color-sidebar-text: rgba(255, 255, 255, 0.9);
 
-  --font-display: "Cairo", "Helvetica Neue", "Arial", sans-serif;
-  --font-body: "Cairo", "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Plus Jakarta Sans", "Helvetica Neue", "Arial", sans-serif;
+  --font-body: "Plus Jakarta Sans", "Helvetica Neue", "Arial", sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -91,6 +91,7 @@ body {
     var(--color-bg);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a,
@@ -145,6 +146,13 @@ a.rounded-full,
 select.rounded-full,
 input.rounded-full {
   border-radius: 8px !important;
+}
+
+.surface-premium {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
 }
 
 ::-webkit-scrollbar {

@@ -1,7 +1,7 @@
 export function Card({ children, className = "", ...props }) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.65)] bg-[rgba(255,255,255,0.82)] shadow-[var(--shadow-sm)] backdrop-blur-md transition-all duration-300 hover:shadow-[var(--shadow-md)] ${className}`}
+      className={`overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.75)] bg-[linear-gradient(165deg,rgba(255,255,255,0.9)_0%,rgba(250,249,255,0.84)_100%)] shadow-[var(--shadow-sm)] backdrop-blur-md transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[var(--shadow-md)] ${className}`}
       style={{ borderRadius: "var(--radius-2xl)" }}
       {...props}
     >
@@ -11,15 +11,15 @@ export function Card({ children, className = "", ...props }) {
 }
 
 export function CardHeader({ children, className = "" }) {
-  return <div className={`flex items-start justify-between gap-3 px-7 pt-7 ${className}`}>{children}</div>;
+  return <div className={`flex items-start justify-between gap-3 px-6 pt-6 ${className}`}>{children}</div>;
 }
 
 export function CardBody({ children, className = "" }) {
-  return <div className={`p-7 ${className}`}>{children}</div>;
+  return <div className={`p-6 ${className}`}>{children}</div>;
 }
 
 export function CardFooter({ children, className = "" }) {
-  return <div className={`mt-3 px-7 pb-7 pt-3 ${className}`}>{children}</div>;
+  return <div className={`mt-3 px-6 pb-6 pt-3 ${className}`}>{children}</div>;
 }
 
 export function CardTitle({ children, className = "" }) {
