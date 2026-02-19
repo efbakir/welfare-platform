@@ -33,6 +33,7 @@ export default function Marketplace() {
   const { profile } = usePov();
   const [category, setCategory] = useState("All");
   const [query, setQuery] = useState("");
+  const [filterOverrides, setFilterOverrides] = useState({});
 
   const featuredSet = useMemo(() => new Set(profile.marketplace.featured), [profile.marketplace.featured]);
 
@@ -41,19 +42,37 @@ export default function Marketplace() {
     [featuredSet]
   );
 
+  const workModeFilter = filterOverrides[profile.id]?.workMode ?? profile.defaultFilters?.workMode ?? "All";
+  const locationFilter = filterOverrides[profile.id]?.location ?? profile.defaultFilters?.location ?? "All";
+
+  const locationOptions = useMemo(() => {
+    const all = new Set(["All"]);
+    marketplaceCatalog.forEach((item) => (item.locations || []).forEach((location) => all.add(location)));
+    return [...all];
+  }, []);
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     const filteredByCategory = category === "All" ? marketplaceCatalog : marketplaceCatalog.filter((item) => item.category === category);
+    const filteredByWorkMode =
+      workModeFilter === "All"
+        ? filteredByCategory
+        : filteredByCategory.filter((item) => (item.workModes || []).includes(workModeFilter));
+    const filteredByLocation =
+      locationFilter === "All"
+        ? filteredByWorkMode
+        : filteredByWorkMode.filter((item) => (item.locations || []).includes(locationFilter));
+
     const filtered = q.length === 0
-      ? filteredByCategory
-      : filteredByCategory.filter((item) => `${item.name} ${item.category} ${item.eligible}`.toLowerCase().includes(q));
+      ? filteredByLocation
+      : filteredByLocation.filter((item) => `${item.name} ${item.category} ${item.eligible}`.toLowerCase().includes(q));
 
     return [...filtered].sort((a, b) => {
       const aScore = featuredSet.has(a.name) ? 1 : 0;
       const bScore = featuredSet.has(b.name) ? 1 : 0;
       return bScore - aScore;
     });
-  }, [category, query, featuredSet]);
+  }, [category, query, featuredSet, workModeFilter, locationFilter]);
 
   return (
     <div className="mx-auto w-full max-w-[1240px] space-y-5">
@@ -64,7 +83,7 @@ export default function Marketplace() {
       />
 
       <Card>
-        <CardBody className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
+        <CardBody className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
           <div className="relative">
             <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
             <input
@@ -79,7 +98,10 @@ export default function Marketplace() {
             {visible.length} results
           </div>
           <div className="inline-flex items-center rounded-md bg-cyan-tint px-3 py-2 text-xs font-semibold text-text-secondary">
-            Recommended for you
+            {workModeFilter} mode
+          </div>
+          <div className="inline-flex items-center rounded-md bg-green-tint px-3 py-2 text-xs font-semibold text-text-secondary">
+            {locationFilter}
           </div>
         </CardBody>
       </Card>
@@ -104,6 +126,46 @@ export default function Marketplace() {
                   {item}
                 </button>
               ))}
+            </CardBody>
+          </Card>
+
+          <Card>
+            <CardBody className="space-y-3">
+              <p className="text-sm font-semibold text-text-primary">Default filters</p>
+              <div>
+                <p className="mb-1 text-xs text-text-muted">Work mode</p>
+                <select
+                  value={workModeFilter}
+                  onChange={(e) =>
+                    setFilterOverrides((prev) => ({
+                      ...prev,
+                      [profile.id]: { ...(prev[profile.id] || {}), workMode: e.target.value },
+                    }))
+                  }
+                  className="w-full rounded-md bg-[#f1f5f9] px-3 py-2 text-sm text-text-primary outline-none"
+                >
+                  {["All", "Remote", "Hybrid", "On-site"].map((mode) => (
+                    <option key={mode} value={mode}>{mode}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <p className="mb-1 text-xs text-text-muted">Location</p>
+                <select
+                  value={locationFilter}
+                  onChange={(e) =>
+                    setFilterOverrides((prev) => ({
+                      ...prev,
+                      [profile.id]: { ...(prev[profile.id] || {}), location: e.target.value },
+                    }))
+                  }
+                  className="w-full rounded-md bg-[#f1f5f9] px-3 py-2 text-sm text-text-primary outline-none"
+                >
+                  {locationOptions.map((location) => (
+                    <option key={location} value={location}>{location}</option>
+                  ))}
+                </select>
+              </div>
             </CardBody>
           </Card>
 
@@ -141,9 +203,13 @@ export default function Marketplace() {
                       <p className="text-sm text-text-secondary">
                         {item.category} · {item.points} pts · Expires {item.expiry}
                       </p>
-                      <p className="rounded-sm bg-violet-tint px-2 py-1 text-xs text-text-secondary">
-                        Because you: {profile.profileAnswers.focus}
-                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).slice(0, 3).map((chip) => (
+                          <span key={`${item.id}-${chip}`} className="rounded-sm bg-violet-tint px-2 py-1 text-xs text-text-secondary">
+                            Because you said: {chip}
+                          </span>
+                        ))}
+                      </div>
                     </CardBody>
                   </Card>
                 </Link>

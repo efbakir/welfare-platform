@@ -1,9 +1,9 @@
 const variants = {
-  primary: "bg-[linear-gradient(135deg,var(--color-gradient-start)_0%,var(--color-gradient-end)_100%)] text-white shadow-[var(--shadow-blue)] hover:brightness-105 hover:-translate-y-px hover:shadow-md",
-  pink: "bg-[linear-gradient(135deg,var(--color-secondary)_0%,var(--color-blue-mid)_100%)] text-white shadow-[var(--shadow-pink)] hover:brightness-105 hover:-translate-y-px",
-  outline: "bg-[rgba(255,255,255,0.86)] text-text-primary shadow-[var(--shadow-xs)] backdrop-blur-sm hover:bg-white hover:-translate-y-px",
-  ghost: "bg-transparent text-text-secondary hover:bg-blue-tint hover:text-text-primary",
-  white: "bg-white/20 text-white backdrop-blur-sm hover:bg-white/35",
+  primary: "bg-blue text-white border border-blue hover:bg-blue-dark",
+  pink: "bg-secondary text-white border border-secondary hover:bg-secondary-dark",
+  outline: "bg-surface text-text-primary border border-border hover:bg-surface-2",
+  ghost: "bg-transparent text-text-secondary border border-transparent hover:bg-surface-2 hover:text-text-primary",
+  white: "bg-surface text-text-primary border border-border hover:bg-surface-2",
 };
 
 const sizes = {
@@ -23,7 +23,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md font-body font-medium tracking-[0.01em] transition-all duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md font-body font-medium tracking-[0.01em] shadow-[var(--shadow-xs)] transition-colors duration-200 ${variants[variant] ?? variants.primary} ${sizes[size] ?? sizes.md} ${className}`}
       {...props}
     >
       {children}

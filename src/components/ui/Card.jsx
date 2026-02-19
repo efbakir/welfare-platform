@@ -1,7 +1,7 @@
 export function Card({ children, className = "", ...props }) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.75)] bg-[linear-gradient(165deg,rgba(255,255,255,0.9)_0%,rgba(250,249,255,0.84)_100%)] shadow-[var(--shadow-sm)] backdrop-blur-md transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[var(--shadow-md)] ${className}`}
+      className={`overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-sm)] transition-colors duration-200 ${className}`}
       style={{ borderRadius: "var(--radius-2xl)" }}
       {...props}
     >

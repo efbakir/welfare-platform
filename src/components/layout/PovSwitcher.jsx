@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { usePov } from "../../context/PovContext";
 import { ONBOARDING_KEY } from "../../constants/onboarding";
+import { CUSTOM_PROFILE_ID } from "../../data/povData";
 
 export default function PovSwitcher() {
-  const { profiles, povId, setPovId } = usePov();
+  const { profiles, povId, setPovId, hasCustomProfile } = usePov();
   const navigate = useNavigate();
 
   const restartOnboarding = () => {
@@ -11,16 +12,24 @@ export default function PovSwitcher() {
     navigate("/welfare/onboarding");
   };
 
+  const handleSwitch = (nextValue) => {
+    if (nextValue === CUSTOM_PROFILE_ID && !hasCustomProfile) {
+      restartOnboarding();
+      return;
+    }
+    setPovId(nextValue);
+  };
+
   return (
-    <div className="flex items-center gap-1.5 rounded-md border border-[rgba(255,255,255,0.72)] bg-[rgba(255,255,255,0.82)] px-3 py-2 shadow-[var(--shadow-xs)] backdrop-blur-md">
+    <div className="flex items-center gap-1.5">
       <label htmlFor="pov-select" className="shrink-0 text-xs font-semibold text-text-muted">
-        Viewing as:
+        Switch user:
       </label>
       <select
         id="pov-select"
         value={povId}
-        onChange={(e) => setPovId(e.target.value)}
-        className="mx-0 min-w-0 max-w-[180px] shrink rounded-md bg-blue-tint py-1.5 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
+        onChange={(e) => handleSwitch(e.target.value)}
+        className="mx-0 min-w-0 max-w-[220px] shrink rounded-md border border-border bg-surface py-1.5 pl-2.5 pr-7 text-sm font-semibold text-text-primary outline-none"
         aria-label="Select employee perspective"
       >
         {profiles.map((item) => (
@@ -28,11 +37,14 @@ export default function PovSwitcher() {
             {item.name} — {item.role}
           </option>
         ))}
+        <option value={CUSTOM_PROFILE_ID}>
+          {hasCustomProfile ? "Custom profile — Personalized" : "Custom profile — Run onboarding"}
+        </option>
       </select>
       <button
         type="button"
         onClick={restartOnboarding}
-        className="rounded-md bg-[linear-gradient(135deg,var(--color-gradient-start)_0%,var(--color-gradient-end)_100%)] px-3 py-1.5 text-xs font-semibold text-white transition hover:brightness-105"
+        className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-text-primary transition hover:bg-surface-2"
         aria-label="Restart onboarding flow"
       >
         Personalize

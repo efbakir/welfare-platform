@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PageHeader from "../components/layout/PageHeader";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
@@ -36,28 +36,57 @@ const endpointCards = [
 export default function AiAssistant() {
   const { profile } = usePov();
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([
-    { id: "ai-1", role: "ai", text: profile.ai.starter },
-    {
-      id: "ai-2",
-      role: "ai",
-      text: `I can explain recommendations, check policy eligibility, and build a monthly plan for ${profile.profileAnswers.focus.toLowerCase()} benefits.`,
-    },
-  ]);
+  const [conversationByProfile, setConversationByProfile] = useState({});
+
+  const baseMessages = useMemo(
+    () => [
+      { id: `ai-1-${profile.id}`, role: "ai", text: profile.ai.starter },
+      {
+        id: `ai-2-${profile.id}`,
+        role: "ai",
+        text: profile.aiConsent
+          ? `I can explain recommendations, check policy eligibility, and build a monthly plan for ${profile.profileAnswers.focus.toLowerCase()} benefits.`
+          : "AI suggestions are currently off for this profile. You can still browse static policy and benefit info.",
+      },
+    ],
+    [profile]
+  );
+
+  const conversation = [...baseMessages, ...(conversationByProfile[profile.id] || [])];
 
   const sendMessage = () => {
     const text = message.trim();
     if (!text) return;
 
-    setMessages((prev) => [
+    if (!profile.aiConsent) {
+      setConversationByProfile((prev) => ({
+        ...prev,
+        [profile.id]: [
+          ...(prev[profile.id] || []),
+          { id: `user-${Date.now()}`, role: "user", text },
+          {
+            id: `ai-${Date.now() + 1}`,
+            role: "ai",
+            text: "AI personalization is disabled for this profile. Enable consent in onboarding/profile to receive tailored suggestions.",
+          },
+        ],
+      }));
+      setMessage("");
+      return;
+    }
+
+    setConversationByProfile((prev) => ({
       ...prev,
-      { id: `user-${Date.now()}`, role: "user", text },
-      {
-        id: `ai-${Date.now() + 1}`,
-        role: "ai",
-        text: `Noted. For ${profile.name}, I would start with ${profile.recommended[0]?.title ?? "high-fit benefits"} and then validate policy eligibility before redemption.`,
-      },
-    ]);
+      [profile.id]: [
+        ...(prev[profile.id] || []),
+        { id: `user-${Date.now()}`, role: "user", text },
+        {
+          id: `ai-${Date.now() + 1}`,
+          role: "ai",
+          text: `Noted. For ${profile.name}, I would start with ${profile.recommended[0]?.title ?? "high-fit benefits"} and then validate policy eligibility before redemption.`,
+        },
+      ],
+    }));
     setMessage("");
   };
 
@@ -124,6 +153,12 @@ export default function AiAssistant() {
               </p>
               <p className="mt-1 text-xs text-text-secondary">This context is used to rank answers and recommendations.</p>
             </div>
+
+            {!profile.aiConsent && (
+              <div className="rounded-xl bg-violet-tint p-3 text-xs text-text-secondary">
+                AI suggestions are off for this profile. You can still access non-personalized guidance.
+              </div>
+            )}
           </CardBody>
         </Card>
 
@@ -135,7 +170,7 @@ export default function AiAssistant() {
                 Conversation
               </p>
               <div className="inline-flex items-center gap-2">
-                <Badge variant="green">Grounded mode</Badge>
+                <Badge variant={profile.aiConsent ? "green" : "neutral"}>{profile.aiConsent ? "Grounded mode" : "Consent required"}</Badge>
                 <Badge variant="neutral">API status: healthy</Badge>
               </div>
             </div>
@@ -156,7 +191,7 @@ export default function AiAssistant() {
             </div>
 
             <div className="flex-1 space-y-3 overflow-y-auto bg-[#f7f8fd] p-4">
-              {messages.map((item) => (
+              {conversation.map((item) => (
                 <div key={item.id} className={`flex gap-2 ${item.role === "user" ? "justify-end" : "justify-start"}`}>
                   {item.role !== "user" && (
                     <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue text-xs font-semibold text-white">

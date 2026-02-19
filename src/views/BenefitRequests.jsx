@@ -44,6 +44,13 @@ export default function BenefitRequests() {
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-4">
           <Card>
+            <CardBody className="rounded-xl bg-violet-tint p-4">
+              <p className="text-xs font-medium text-text-muted">{profile.requestsEmphasis?.title || "Request emphasis"}</p>
+              <p className="mt-1 text-sm font-semibold text-text-primary">{profile.requestsEmphasis?.copy || "Requests adapt to your profile context."}</p>
+            </CardBody>
+          </Card>
+
+          <Card>
             <CardBody className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <div className="rounded-xl bg-violet-tint p-4">
                 <p className="text-xs font-medium text-text-muted">Available credits</p>

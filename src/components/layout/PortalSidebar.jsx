@@ -61,11 +61,7 @@ function ItemIcon({ type, active = false }) {
   }
   if (type === "welfare") {
     const heartPath = "M12 5.5c-1.2-1.4-3.2-2-5-2a5.5 5.5 0 0 0-5.5 5.5c0 4 4.5 8 10.5 12 6-4 10.5-8 10.5-12A5.5 5.5 0 0 0 17 3.5c-1.8 0-3.8.6-5 2Z";
-    return active ? (
-      <svg viewBox="0 0 24 24" fill="currentColor" className={sharedClass}>
-        <path d={heartPath} />
-      </svg>
-    ) : (
+    return (
       <svg viewBox="0 0 24 24" fill="none" className={sharedClass} stroke="currentColor" strokeWidth="1.8">
         <path d={heartPath} />
       </svg>
@@ -85,13 +81,13 @@ export default function PortalSidebar({ compact = false }) {
 
   return (
     <aside
-      className={`peer group fixed left-4 top-4 z-50 h-[calc(100vh-2rem)] overflow-hidden rounded-2xl bg-sidebar-bg shadow-[0_14px_32px_rgba(59,46,126,0.28)] transition-all duration-300 ${
+      className={`peer group fixed left-0 top-0 z-50 h-screen overflow-hidden border-r border-border bg-sidebar-bg transition-all duration-300 ${
         compact ? "w-16 hover:w-56" : "w-56"
       }`}
     >
       <div className="flex h-full flex-col p-3">
         <div className="flex items-center gap-2 py-2.5 pl-[5px] pr-2">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-white">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border bg-surface-2 text-text-secondary">
             <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="1.8" aria-hidden>
               <path d="M4 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5Z" />
               <path d="M14 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V5Z" />
@@ -99,7 +95,7 @@ export default function PortalSidebar({ compact = false }) {
               <path d="M14 14a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4Z" />
             </svg>
           </div>
-          <span className={`text-sm font-semibold text-white transition-all ${compact ? "max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:ml-1 group-hover:max-w-[140px] group-hover:opacity-100" : "opacity-100"}`}>
+          <span className={`text-sm font-semibold text-text-primary transition-all ${compact ? "max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:ml-1 group-hover:max-w-[140px] group-hover:opacity-100" : "opacity-100"}`}>
             Client Portal
           </span>
         </div>
@@ -112,7 +108,7 @@ export default function PortalSidebar({ compact = false }) {
                 key={item.label}
                 to={item.to}
                 className={`flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-sm font-medium transition-all ${
-                  isActive ? "bg-white/10 text-white" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
+                  isActive ? "bg-sidebar-active text-blue" : "bg-transparent text-sidebar-text hover:bg-sidebar-hover"
                 }`}
               >
                 <span className="w-[18px] shrink-0 text-center">

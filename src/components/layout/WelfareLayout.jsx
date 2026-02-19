@@ -18,23 +18,23 @@ export default function WelfareLayout() {
   }, [inOnboarding, navigate]);
 
   return (
-    <div className="min-h-screen bg-transparent px-4 py-5">
+    <div className="min-h-screen bg-bg">
       <PortalSidebar compact />
       {!inOnboarding && <WelfareSidebar />}
 
       <div
         className={
           inOnboarding
-            ? "ml-[5.25rem] min-h-[calc(100vh-2rem)] rounded-2xl border border-[rgba(255,255,255,0.58)] bg-[rgba(247,247,251,0.64)] p-4 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[15.5rem]"
-            : "ml-[calc(5.25rem+var(--sidebar-w)+1rem)] min-h-[calc(100vh-2rem)] rounded-2xl border border-[rgba(255,255,255,0.58)] bg-[rgba(247,247,251,0.64)] p-4 backdrop-blur-sm transition-all duration-300 peer-hover:ml-[calc(15.5rem+var(--sidebar-w)+1rem)]"
+            ? "ml-16 min-h-screen px-6 py-6 transition-all duration-300 peer-hover:ml-56"
+            : "ml-[calc(4rem+var(--sidebar-w))] min-h-screen px-8 py-6 transition-all duration-300 peer-hover:ml-[calc(14rem+var(--sidebar-w))]"
         }
       >
         {!inOnboarding && (
-          <div className="mb-3 flex justify-end">
+          <div className="mb-8 flex justify-end border-b border-border pb-4">
             <PovSwitcher />
           </div>
         )}
-        <main className="flex flex-col gap-6">
+        <main className="flex flex-col gap-10">
           <Outlet />
         </main>
       </div>

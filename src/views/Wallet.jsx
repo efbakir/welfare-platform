@@ -61,6 +61,17 @@ export default function Wallet() {
         actions={<Button size="sm" onClick={() => navigate("/welfare/history")}>Open history</Button>}
       />
 
+      <Card>
+        <CardBody className="rounded-xl bg-violet-tint p-4">
+          <p className="text-sm font-semibold text-text-primary">{profile.walletCallout || "Use credits intentionally based on your constraints."}</p>
+          {profile.id === "operator" && (
+            <p className="mt-1 text-xs text-text-secondary">
+              Value meter: {Math.max(62, Math.round((remaining / Math.max(profile.budget.total, 1)) * 100))}% optimization potential this month.
+            </p>
+          )}
+        </CardBody>
+      </Card>
+
       <div className="grid gap-4 xl:grid-cols-[1.7fr_1fr]">
         <div className="space-y-4">
           <Card>

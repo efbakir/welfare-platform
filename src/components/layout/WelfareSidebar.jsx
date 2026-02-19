@@ -92,20 +92,20 @@ export default function WelfareSidebar() {
   const { profile } = usePov();
 
   return (
-    <aside className="fixed left-[5.25rem] top-4 z-40 hidden h-[calc(100vh-2rem)] w-[var(--sidebar-w)] rounded-2xl border border-[rgba(255,255,255,0.65)] bg-[rgba(255,255,255,0.82)] p-3 shadow-[var(--shadow-sm)] backdrop-blur-md transition-all duration-300 peer-hover:left-[15.5rem] md:flex md:flex-col">
+    <aside className="fixed left-16 top-0 z-40 hidden h-screen w-[var(--sidebar-w)] border-r border-border bg-surface transition-all duration-300 peer-hover:left-56 md:flex md:flex-col">
       <div className="flex items-center gap-2 px-2 py-2.5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue text-xs font-semibold text-white">W</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-surface-2 text-xs font-semibold text-text-secondary">W</div>
         <span className="text-sm font-semibold text-text-primary">Welfare</span>
       </div>
 
-      <nav className="mt-2 flex-1 space-y-0">
+      <nav className="mt-2 flex-1 space-y-0 px-2">
         {mainNavItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
               `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
-                isActive ? "bg-blue-tint text-blue" : "text-text-secondary hover:bg-violet-tint"
+                isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"
               }`
             }
           >
@@ -117,7 +117,7 @@ export default function WelfareSidebar() {
         ))}
       </nav>
 
-      <div className="mt-auto space-y-1 border-t border-[#e8edf3] pt-2">
+      <div className="mt-auto space-y-1 border-t border-border px-2 pt-2">
         {bottomNavItems.map((item) => (
           <NavLink
             key={item.to}
@@ -125,10 +125,10 @@ export default function WelfareSidebar() {
             className={({ isActive }) =>
               `mb-1 flex items-center gap-2 rounded-sm px-3 py-2.5 text-sm font-medium transition-all ${
                 item.gradient
-                  ? `bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-violet-500/10 text-text-primary hover:from-blue-500/15 hover:via-indigo-500/15 hover:to-violet-500/15 ${isActive ? "ring-1 ring-blue-200" : ""}`
+                  ? `${isActive ? "bg-sidebar-active text-blue" : "text-text-secondary hover:bg-sidebar-hover"}`
                   : isActive
-                    ? "bg-blue-tint text-blue"
-                    : "text-text-secondary hover:bg-violet-tint"
+                    ? "bg-sidebar-active text-blue"
+                    : "text-text-secondary hover:bg-sidebar-hover"
               }`
             }
           >
@@ -140,7 +140,7 @@ export default function WelfareSidebar() {
         ))}
       </div>
 
-      <div className="mt-2 rounded-2xl bg-violet-tint p-2.5">
+      <div className="mt-2 border-t border-border p-2.5">
         <p className="text-xs font-semibold text-text-primary">{profile.name}</p>
         <p className="text-[11px] text-text-muted">{profile.lifeStage} · {profile.workMode}</p>
       </div>

@@ -4,6 +4,7 @@ import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import { Card, CardBody } from "../components/ui/Card";
 import mockData from "../data/mock.json";
+import { marketplaceCatalog } from "../data/povData";
 
 const detailImages = {
   dc1: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1400&q=80",
@@ -35,9 +36,18 @@ const defaultReviews = [
 
 export default function BenefitDetail() {
   const { benefitId } = useParams();
+  const catalogDetail = marketplaceCatalog.find((item) => item.id === benefitId);
   const detail =
     mockData.daycare.find((item) => item.id === benefitId) ||
-    mockData.benefits.find((item) => item.id === benefitId);
+    mockData.benefits.find((item) => item.id === benefitId) ||
+    (catalogDetail
+      ? {
+          id: catalogDetail.id,
+          name: catalogDetail.name,
+          pointsCost: catalogDetail.points,
+          description: `${catalogDetail.name} is designed for ${catalogDetail.workModes.join(", ")} employees and adapts to practical constraints.`,
+        }
+      : null);
 
   if (!detail) {
     return (
@@ -53,7 +63,7 @@ export default function BenefitDetail() {
   }
 
   const heroImage = detailImages[benefitId] ?? "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1400&q=80";
-  const pointsCost = detail.pointsCost ?? 200;
+  const pointsCost = detail.pointsCost ?? catalogDetail?.points ?? 200;
   const userBalance = mockData.budget.remaining;
   const included = [
     "Full-day care slots with structured learning",

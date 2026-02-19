@@ -31,10 +31,10 @@ function ModuleCardBody({
 }) {
   return (
     <div
-      className={`group relative flex cursor-pointer flex-col gap-4 overflow-hidden rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_10px_32px_rgb(0,0,0,0.05)] ${className}`}
+      className={`group relative flex cursor-pointer flex-col gap-4 overflow-hidden rounded-xl border border-border bg-surface p-6 shadow-[var(--shadow-sm)] transition-colors duration-200 hover:bg-surface-2 ${className}`}
       style={{ borderRadius: "var(--radius-2xl)" }}
     >
-      <div className={`absolute left-4 right-4 top-0 h-1 rounded-full ${accentBarColors[accent] ?? accentBarColors.blue}`} />
+      <div className={`absolute left-4 right-4 top-0 h-[2px] rounded-sm ${accentBarColors[accent] ?? accentBarColors.blue}`} />
       {image ? (
         <img src={image} alt={title} className="h-40 w-full rounded-2xl object-cover" />
       ) : (
