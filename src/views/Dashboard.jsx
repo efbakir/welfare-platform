@@ -209,9 +209,9 @@ export default function Dashboard() {
               type="button"
               aria-label="Toggle quiet mode"
               onClick={() => setQuietMode((prev) => !prev)}
-              className={`relative h-7 w-12 rounded-full transition ${quietMode ? "bg-blue" : "bg-[#dfe3f3]"}`}
+              className={`ui-toggle-track relative h-7 w-12 transition ${quietMode ? "bg-blue" : "bg-[#dfe3f3]"}`}
             >
-              <span className={`toggle-thumb absolute top-1 h-5 w-5 rounded-full bg-white shadow ${quietMode ? "active left-6" : "left-1"}`} />
+              <span className={`toggle-thumb ui-toggle-thumb absolute top-1 h-5 w-5 bg-white shadow ${quietMode ? "active left-6" : "left-1"}`} />
             </button>
           </div>
         ) : null}

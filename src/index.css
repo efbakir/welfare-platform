@@ -151,6 +151,14 @@
   animation: togglePop 220ms ease-out;
 }
 
+.ui-toggle-track {
+  border-radius: 9999px;
+}
+
+.ui-toggle-thumb {
+  border-radius: 9999px;
+}
+
 * {
   box-sizing: border-box;
 }

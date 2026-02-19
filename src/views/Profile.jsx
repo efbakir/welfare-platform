@@ -35,10 +35,10 @@ function ToggleRow({ icon, label, description, enabled, onToggle, actionLabel = 
         aria-label={`Toggle ${label}`}
         aria-pressed={enabled}
         onClick={onToggle}
-        className={`relative h-7 w-12 rounded-full transition ${enabled ? "bg-blue" : "bg-[#dfe3f3]"}`}
+        className={`ui-toggle-track relative h-7 w-12 transition ${enabled ? "bg-blue" : "bg-[#dfe3f3]"}`}
       >
         <span
-          className={`toggle-thumb absolute top-1 h-5 w-5 rounded-full bg-white shadow ${enabled ? "active left-6" : "left-1"}`}
+          className={`toggle-thumb ui-toggle-thumb absolute top-1 h-5 w-5 bg-white shadow ${enabled ? "active left-6" : "left-1"}`}
           aria-hidden="true"
         />
         <span className="sr-only">{actionLabel}</span>

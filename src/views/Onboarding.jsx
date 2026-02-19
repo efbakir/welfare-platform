@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Badge from "../components/ui/Badge";
-import { Card, CardBody } from "../components/ui/Card";
+import Button from "../components/ui/Button";
 import { usePov } from "../context/PovContext";
 import { ONBOARDING_ANSWERS_KEY, ONBOARDING_KEY } from "../constants/onboarding";
 import { createCustomProfileFromAnswers, CUSTOM_PROFILE_ID } from "../data/povData";
@@ -181,73 +181,72 @@ export default function Onboarding() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <Card>
-        <CardBody className="flex min-h-[740px] flex-col gap-5">
-          <div>
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-semibold text-text-muted">Step {step + 1} / {totalSteps}</p>
-              <p className="text-sm font-semibold text-text-muted">~3-5 min</p>
-            </div>
-            <div className="h-2 rounded-sm bg-[#e6ebf2]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label="Onboarding progress">
-              <div className="h-full rounded-sm bg-blue transition-all duration-300" style={{ width: `${progress}%` }} />
-            </div>
+      <div className="flex min-h-[740px] flex-col gap-5">
+        <div>
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-text-muted">Step {step + 1} / {totalSteps}</p>
+            <p className="text-sm font-semibold text-text-muted">~3-5 min</p>
           </div>
-
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight text-text-primary">{stepMeta.title}</h1>
-            <p className="mt-1 text-sm text-text-secondary">{stepMeta.helper}</p>
+          <div className="h-2 rounded-sm bg-[#e6ebf2]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label="Onboarding progress">
+            <div className="h-full rounded-sm bg-blue transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
+        </div>
 
-          <div className="flex-1 space-y-4">
-            {step === 0 && (
-              <>
+        <div>
+          <h1 className="text-3xl font-semibold tracking-tight text-text-primary">{stepMeta.title}</h1>
+          <p className="mt-1 text-sm text-text-secondary">{stepMeta.helper}</p>
+        </div>
+
+        <div className="flex-1 space-y-4">
+          {step === 0 && (
+            <>
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-text-primary">Preferred name</label>
+                <input
+                  value={form.preferredName}
+                  onChange={(e) => setForm((prev) => ({ ...prev, preferredName: e.target.value }))}
+                  className="w-full rounded-md bg-[#f1f5f9] px-4 py-2.5 text-sm outline-none"
+                  placeholder="e.g. Elena"
+                />
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-sm font-semibold text-text-primary">Preferred name</label>
-                  <input
-                    value={form.preferredName}
-                    onChange={(e) => setForm((prev) => ({ ...prev, preferredName: e.target.value }))}
+                  <label className="mb-1 block text-sm font-semibold text-text-primary">Work country</label>
+                  <select
+                    value={form.country}
+                    onChange={(e) => setForm((prev) => ({ ...prev, country: e.target.value }))}
                     className="w-full rounded-md bg-[#f1f5f9] px-4 py-2.5 text-sm outline-none"
-                    placeholder="e.g. Elena"
+                  >
+                    {countries.map((country) => (
+                      <option key={country} value={country}>{country}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-text-primary">Location mode</label>
+                  <ChoiceGroup
+                    options={locationModes}
+                    value={form.locationMode}
+                    onChange={(locationMode) => setForm((prev) => ({ ...prev, locationMode }))}
                   />
                 </div>
+              </div>
 
-                <div className="grid gap-3 md:grid-cols-2">
-                  <div>
-                    <label className="mb-1 block text-sm font-semibold text-text-primary">Work country</label>
-                    <select
-                      value={form.country}
-                      onChange={(e) => setForm((prev) => ({ ...prev, country: e.target.value }))}
-                      className="w-full rounded-md bg-[#f1f5f9] px-4 py-2.5 text-sm outline-none"
-                    >
-                      {countries.map((country) => (
-                        <option key={country} value={country}>{country}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="mb-1 block text-sm font-semibold text-text-primary">Location mode</label>
-                    <ChoiceGroup
-                      options={locationModes}
-                      value={form.locationMode}
-                      onChange={(locationMode) => setForm((prev) => ({ ...prev, locationMode }))}
-                    />
-                  </div>
+              {form.locationMode === "Office city" && (
+                <div>
+                  <label className="mb-1 block text-sm font-semibold text-text-primary">Office city</label>
+                  <input
+                    value={form.city}
+                    onChange={(e) => setForm((prev) => ({ ...prev, city: e.target.value }))}
+                    className="w-full rounded-md bg-[#f1f5f9] px-4 py-2.5 text-sm outline-none"
+                    placeholder="e.g. Milan"
+                  />
                 </div>
-
-                {form.locationMode === "Office city" && (
-                  <div>
-                    <label className="mb-1 block text-sm font-semibold text-text-primary">Office city</label>
-                    <input
-                      value={form.city}
-                      onChange={(e) => setForm((prev) => ({ ...prev, city: e.target.value }))}
-                      className="w-full rounded-md bg-[#f1f5f9] px-4 py-2.5 text-sm outline-none"
-                      placeholder="e.g. Milan"
-                    />
-                  </div>
-                )}
-              </>
-            )}
+              )}
+            </>
+          )}
 
             {step === 1 && (
               <>
@@ -376,9 +375,9 @@ export default function Onboarding() {
                       aria-label="Toggle AI suggestions consent"
                       aria-pressed={form.aiConsent}
                       onClick={() => setForm((prev) => ({ ...prev, aiConsent: !prev.aiConsent }))}
-                      className={`relative h-7 w-12 rounded-md transition ${form.aiConsent ? "bg-blue" : "bg-[#dfe3f3]"}`}
+                      className={`ui-toggle-track relative h-7 w-12 transition ${form.aiConsent ? "bg-blue" : "bg-[#dfe3f3]"}`}
                     >
-                      <span className={`toggle-thumb absolute top-1 h-5 w-5 rounded-sm bg-white shadow ${form.aiConsent ? "active left-6" : "left-1"}`} />
+                      <span className={`toggle-thumb ui-toggle-thumb absolute top-1 h-5 w-5 bg-white shadow ${form.aiConsent ? "active left-6" : "left-1"}`} />
                     </button>
                   </label>
                 </div>
@@ -421,43 +420,43 @@ export default function Onboarding() {
                 )}
               </>
             )}
+        </div>
+
+        <div className="mt-auto grid min-h-[56px] w-full grid-cols-[1fr_220px] items-center gap-4 border-t border-[#e8edf3] pt-4">
+          <div>
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={back}
+              disabled={step === 0}
+              className="px-4 py-2 text-sm disabled:opacity-40"
+            >
+              Back
+            </Button>
           </div>
 
-          <div className="sticky bottom-0 grid w-full grid-cols-[1fr_220px] items-center gap-4 border-t border-[#e8edf3] bg-white pt-4">
-            <div>
-              <button
+          <div className="flex justify-end">
+            {step < totalSteps - 1 ? (
+              <Button
                 type="button"
-                onClick={back}
-                disabled={step === 0}
-                className="rounded-md px-4 py-2 text-sm text-text-secondary disabled:opacity-40"
+                onClick={next}
+                disabled={!canContinue}
+                className="w-full min-w-[220px] max-w-[220px] justify-center disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Back
-              </button>
-            </div>
-
-            <div className="flex justify-end">
-              {step < totalSteps - 1 ? (
-                <button
-                  type="button"
-                  onClick={next}
-                  disabled={!canContinue}
-                  className="w-full min-w-[220px] max-w-[220px] rounded-md bg-blue px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Continue
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={finish}
-                  className="w-full min-w-[220px] max-w-[220px] rounded-md bg-blue px-4 py-2 text-sm font-semibold text-white"
-                >
-                  Start with this setup
-                </button>
-              )}
-            </div>
+                Continue
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                onClick={finish}
+                className="w-full min-w-[220px] max-w-[220px] justify-center"
+              >
+                Start with this setup
+              </Button>
+            )}
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
