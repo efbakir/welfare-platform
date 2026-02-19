@@ -44,7 +44,7 @@ export default function BenefitDetail() {
       <Card>
         <CardBody className="p-6">
           <p className="text-sm text-text-secondary">Benefit not found.</p>
-          <Link to="/marketplace" className="mt-3 inline-flex text-sm font-semibold text-blue hover:underline">
+          <Link to="/welfare/marketplace" className="mt-3 inline-flex text-sm font-semibold text-blue hover:underline">
             Back to marketplace
           </Link>
         </CardBody>
@@ -69,7 +69,7 @@ export default function BenefitDetail() {
         title={detail.name || "Little Stars Daycare"}
         subtitle="Review benefit details before redeeming points"
         actions={
-          <Link to="/marketplace">
+          <Link to="/welfare/marketplace">
             <Button variant="outline" size="sm">Back to marketplace</Button>
           </Link>
         }

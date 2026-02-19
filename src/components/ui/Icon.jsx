@@ -82,6 +82,14 @@ export default function Icon({ name, className = "h-4 w-4" }) {
       </svg>
     );
   }
+  if (name === "search") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+    );
+  }
   if (name === "exclamation") {
     return (
       <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

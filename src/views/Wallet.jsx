@@ -38,7 +38,7 @@ export default function Wallet() {
         eyebrow="Budget control"
         title="Wallet"
         subtitle="Allocations help you spend credits before expiry"
-        actions={<Button size="sm" onClick={() => navigate("/welfare/transactions")}>Open transactions</Button>}
+        actions={<Button size="sm" onClick={() => navigate("/welfare/history")}>Open history</Button>}
       />
 
       <Card>

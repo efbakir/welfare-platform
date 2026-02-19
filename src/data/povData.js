@@ -40,13 +40,6 @@ export const povProfiles = {
       featured: ["Language Classes", "Training Voucher", "Gym Membership"],
       quickNote: "Recommendations based on your profile + work mode",
     },
-    inbox: {
-      threads: [
-        { id: "i1", name: "Benefits Concierge", preview: "Want help planning this month credits?", time: "9m" },
-        { id: "i2", name: "HR Ops", preview: "Workshop seats are limited.", time: "1h" },
-      ],
-      context: "Learning-focused profile",
-    },
     ai: {
       starter: "Hi Mario, I can build a learning-first monthly benefit plan.",
       prompts: ["Which courses are best value?", "What expires this month?", "How to balance wellness + learning?"],
@@ -92,13 +85,6 @@ export const povProfiles = {
     marketplace: {
       featured: ["Family Planning Support", "Transport Pass", "Wellness Package"],
       quickNote: "Recommendations based on your profile + work mode",
-    },
-    inbox: {
-      threads: [
-        { id: "i1", name: "Benefits Concierge", preview: "Need flexibility-focused options?", time: "14m" },
-        { id: "i2", name: "HR Team", preview: "New partner benefits launched.", time: "2h" },
-      ],
-      context: "Flexibility + planning profile",
     },
     ai: {
       starter: "Hi Laura, I can optimize flexible benefits for your on-site schedule.",
@@ -150,13 +136,6 @@ export const povProfiles = {
       featured: ["Little Stars Daycare", "After-school Program", "Family Wellness Package"],
       quickNote: "Recommendations based on your profile + work mode",
     },
-    inbox: {
-      threads: [
-        { id: "i1", name: "Benefits Concierge", preview: "Want help splitting family budget?", time: "6m" },
-        { id: "i2", name: "Daycare Partner", preview: "Subsidy request updated.", time: "58m" },
-      ],
-      context: "Family wallet enabled",
-    },
     ai: {
       starter: "Hi Giulia, I can optimize your family allocations and childcare redemptions.",
       prompts: ["Best childcare options now", "How to split budget for family", "Which credits expire first?"],
@@ -202,13 +181,6 @@ export const povProfiles = {
     marketplace: {
       featured: ["Caregiver Support Sessions", "Async Therapy Program", "Remote Wellness Credits"],
       quickNote: "Recommendations based on your profile + work mode",
-    },
-    inbox: {
-      threads: [
-        { id: "i1", name: "Benefits Concierge", preview: "Need async-friendly options?", time: "11m" },
-        { id: "i2", name: "HR Wellbeing", preview: "Caregiver circle has 4 spots left.", time: "1h" },
-      ],
-      context: "Remote + caregiver context",
     },
     ai: {
       starter: "Hi Ahmed, I can suggest low-friction caregiving and mental health benefits.",

@@ -54,7 +54,7 @@ export default function Dashboard() {
         subtitle="Clean operational view with explainable recommendations for each employee POV."
         actions={
           <>
-            <Link to="/welfare/inbox"><Button variant="outline" size="sm">Open inbox</Button></Link>
+            <Link to="/welfare/history"><Button variant="outline" size="sm">Open history</Button></Link>
             <Link to="/welfare/marketplace"><Button variant="primary" size="sm">Explore benefits</Button></Link>
           </>
         }
@@ -198,6 +198,62 @@ export default function Dashboard() {
           </Card>
         </div>
       </div>
+
+      <Card>
+        <CardBody className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-text-primary">Guild Events</h3>
+            <span className="text-xs text-text-muted">Colleague-created experiences</span>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            {[
+              {
+                id: "ge1",
+                title: "Team Cooking Night",
+                createdBy: "Laura Rossi",
+                type: "Company Guild Event",
+                joinCost: 70,
+                creatorReward: 18,
+                joinerReturn: 20,
+              },
+              {
+                id: "ge2",
+                title: "Career Mentor Circle",
+                createdBy: "Ahmed El-Sayed",
+                type: "Peer Event",
+                joinCost: 55,
+                creatorReward: 12,
+                joinerReturn: 0,
+              },
+            ].map((event) => (
+              <article key={event.id} className="rounded-md bg-[rgba(255,255,255,0.78)] p-4 shadow-[var(--shadow-xs)]">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="text-base font-semibold text-text-primary">{event.title}</p>
+                    <p className="mt-1 text-sm text-text-secondary">Created by {event.createdBy}</p>
+                  </div>
+                  <span className="rounded-sm bg-violet-tint px-2 py-1 text-xs font-semibold text-text-secondary">{event.type}</span>
+                </div>
+                <div className="mt-3 grid gap-2 text-sm md:grid-cols-3">
+                  <p className="text-text-secondary">Join cost: <span className="font-semibold text-text-primary">{event.joinCost} pts</span></p>
+                  <p className="text-text-secondary">Creator earns: <span className="font-semibold text-green">{event.creatorReward} pts</span></p>
+                  <p className="text-text-secondary">
+                    Joiner return: <span className="font-semibold text-green">{event.joinerReturn} pts</span>
+                  </p>
+                </div>
+                <p className="mt-2 text-xs text-text-muted">
+                  {event.type === "Company Guild Event"
+                    ? "Company guild rule: when attendance is confirmed, joiners automatically get part of credits back."
+                    : "Peer event rule: creator earns credits when others join; no automatic cashback for joiners."}
+                </p>
+                <div className="mt-3">
+                  <Button size="sm">Join event</Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </CardBody>
+      </Card>
 
       <Card>
         <CardBody className="space-y-3">

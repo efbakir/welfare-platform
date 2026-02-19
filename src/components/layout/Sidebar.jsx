@@ -5,9 +5,8 @@ const navItems = [
   { to: "/wallet", label: "Wallet", icon: "wallet" },
   { to: "/profile", label: "Profile", icon: "user" },
   { to: "/marketplace", label: "Marketplace", icon: "store" },
-  { to: "/inbox", label: "Inbox", icon: "inbox" },
   { to: "/requests", label: "Requests", icon: "list" },
-  { to: "/transactions", label: "Transactions", icon: "ledger" },
+  { to: "/history", label: "History", icon: "ledger" },
   { to: "/ai-assistant", label: "AI Assistant", icon: "spark" },
 ];
 
@@ -21,8 +20,6 @@ const iconSvg = (icon) => {
       return <path d="M2 7h20v12H2zM2 10h20M18 14h2" />;
     case "store":
       return <path d="M3 9l9-6 9 6v11H3zM9 20v-6h6v6" />;
-    case "inbox":
-      return <path d="M22 12h-4l-3 4H9l-3-4H2M5 5h14l3 7v7H2v-7z" />;
     case "list":
       return <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />;
     case "ledger":

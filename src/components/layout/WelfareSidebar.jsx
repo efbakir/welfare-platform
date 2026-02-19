@@ -6,9 +6,8 @@ const mainNavItems = [
   { to: "/welfare/wallet", label: "Wallet", icon: "wallet" },
   { to: "/welfare/profile", label: "Profile", icon: "profile" },
   { to: "/welfare/marketplace", label: "Marketplace", icon: "marketplace" },
-  { to: "/welfare/inbox", label: "Inbox", icon: "inbox" },
   { to: "/welfare/requests", label: "Requests", icon: "requests" },
-  { to: "/welfare/transactions", label: "Transactions", icon: "transactions" },
+  { to: "/welfare/history", label: "History", icon: "transactions" },
 ];
 
 const bottomNavItems = [
@@ -50,14 +49,6 @@ function NavIcon({ type }) {
       <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
         <path d="M4.5 8.5h15l-1 10h-13l-1-10Z" />
         <path d="M8 8.5V7a4 4 0 0 1 8 0v1.5" />
-      </svg>
-    );
-  }
-  if (type === "inbox") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
-        <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
-        <path d="m4.5 8.5 7.5 5 7.5-5" />
       </svg>
     );
   }
