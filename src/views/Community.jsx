@@ -65,24 +65,42 @@ function EventCard({ event, joined, onJoin }) {
   const isPeople = event.createdBy === "people";
   return (
     <Card className="h-full">
-      <CardBody className="space-y-3">
+      <CardBody className="space-y-4">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-lg font-semibold text-text-primary">{event.title}</p>
-            <p className="text-sm text-text-secondary">{event.description}</p>
+          <div className="min-w-0">
+            <p className="truncate text-lg font-semibold text-text-primary">{event.title}</p>
+            <p className="mt-0.5 text-xs text-text-muted">Created by {event.creator}</p>
+            <p className="mt-2 text-sm text-text-secondary">{event.description}</p>
           </div>
           <Badge variant={creatorTypeTone[event.createdBy] ?? "neutral"}>
             {isPeople ? "People created" : "HR created"}
           </Badge>
         </div>
 
-        <div className="grid gap-2 text-sm text-text-secondary sm:grid-cols-3">
-          <p className="inline-flex items-center gap-1"><Icon name="calendar" className="h-4 w-4" /> {event.date} · {event.time}</p>
-          <p className="truncate">{event.location}</p>
-          <p className="inline-flex items-center gap-1"><Icon name="users" className="h-4 w-4" /> {event.spotsLeft} spots left</p>
+        <div className="grid gap-2 rounded-md bg-surface-2 p-3 text-sm text-text-secondary sm:grid-cols-3">
+          <p className="inline-flex items-center gap-1.5"><Icon name="calendar" className="h-4 w-4" /> {event.date} · {event.time}</p>
+          <p className="inline-flex items-center gap-1.5 truncate"><Icon name="location" className="h-4 w-4" /> {event.location}</p>
+          <p className="inline-flex items-center gap-1.5"><Icon name="users" className="h-4 w-4" /> {event.spotsLeft} spots left</p>
         </div>
 
-        <div className="rounded-md bg-surface-2 p-2.5 text-xs text-text-secondary">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-md bg-blue-tint p-3">
+            <p className="text-xs font-medium text-text-muted">Join cost</p>
+            <p className="mt-1 inline-flex items-center gap-1 text-xl font-semibold text-text-primary">
+              <Icon name="wallet" className="h-4 w-4" />
+              {event.pointsCost} pts
+            </p>
+          </div>
+          <div className="rounded-md bg-green-tint p-3">
+            <p className="text-xs font-medium text-text-muted">Credit back after attendance</p>
+            <p className="mt-1 inline-flex items-center gap-1 text-xl font-semibold text-green">
+              <Icon name="spark" className="h-4 w-4" />
+              {event.cashback} pts
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-md border border-border bg-surface-2 p-2.5 text-xs text-text-secondary">
           {isPeople ? (
             <>
               <p className="font-semibold text-text-primary">Colleague-created event rules</p>
@@ -96,8 +114,7 @@ function EventCard({ event, joined, onJoin }) {
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-xs text-text-muted">Created by {event.creator}</p>
+        <div className="flex items-center justify-end gap-2 border-t border-border pt-2">
           <Button size="sm" variant={joined ? "outline" : "primary"} onClick={() => onJoin(event.id)}>
             {joined ? "Joined" : "Join event"}
           </Button>

@@ -3,7 +3,7 @@ export function Card({ children, className = "", interactive = false, ...props }
 
   return (
     <div
-      className={`overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-sm)] transition-[box-shadow,transform,background-color,border-color] duration-200 ${
+      className={`overflow-hidden rounded-xl bg-surface shadow-[var(--shadow-sm)] transition-[box-shadow,transform,background-color,border-color] duration-200 ${
         resolvedInteractive ? "hover:-translate-y-px hover:shadow-[var(--shadow-hover)]" : ""
       } ${className}`}
       style={{ borderRadius: "var(--radius-2xl)" }}

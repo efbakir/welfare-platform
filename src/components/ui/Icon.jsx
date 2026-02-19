@@ -74,6 +74,14 @@ export default function Icon({ name, className = "h-4 w-4" }) {
       </svg>
     );
   }
+  if (name === "location") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 21s6.5-6.2 6.5-11a6.5 6.5 0 1 0-13 0c0 4.8 6.5 11 6.5 11Z" />
+        <circle cx="12" cy="10" r="2.4" />
+      </svg>
+    );
+  }
   if (name === "user") {
     return (
       <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">

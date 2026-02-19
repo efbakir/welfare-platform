@@ -306,8 +306,8 @@ export default function Onboarding() {
                 </div>
 
                 <div className="rounded-xl bg-violet-tint p-4">
-                  <p className="text-sm font-semibold text-text-primary">Budget comfort</p>
-                  <p className="text-xs text-text-secondary">Need tangible support now / Can optimize for long-term value</p>
+                  <p className="text-sm font-semibold text-text-primary">Financial breathing room</p>
+                  <p className="text-xs text-text-secondary">How much short-term financial support would help you right now?</p>
                   <input
                     type="range"
                     min={0}
@@ -317,6 +317,10 @@ export default function Onboarding() {
                     className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-sm"
                     style={{ background: `linear-gradient(90deg, var(--color-blue) 0%, var(--color-blue-mid) ${form.budgetComfort}%, #e8eaf7 ${form.budgetComfort}%, #e8eaf7 100%)` }}
                   />
+                  <div className="mt-2 flex items-center justify-between text-xs text-text-secondary">
+                    <span>I need support now</span>
+                    <span>I&apos;m financially stable</span>
+                  </div>
                 </div>
 
                 {followUpConfig && (
