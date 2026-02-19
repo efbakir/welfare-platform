@@ -165,7 +165,7 @@ export default function Marketplace() {
                       [profile.id]: { ...(prev[profile.id] || {}), workMode: e.target.value },
                     }))
                   }
-                  className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none"
+                  className="w-full rounded-md border border-border bg-surface px-3 py-2 pr-10 text-sm text-text-primary outline-none"
                 >
                   {["All", "Remote", "Hybrid", "On-site"].map((mode) => (
                     <option key={mode} value={mode}>{mode}</option>
@@ -182,7 +182,7 @@ export default function Marketplace() {
                       [profile.id]: { ...(prev[profile.id] || {}), location: e.target.value },
                     }))
                   }
-                  className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none"
+                  className="w-full rounded-md border border-border bg-surface px-3 py-2 pr-10 text-sm text-text-primary outline-none"
                 >
                   {locationOptions.map((location) => (
                     <option key={location} value={location}>{location}</option>
@@ -203,13 +203,12 @@ export default function Marketplace() {
           <section className="ui-panel-tint mb-4 bg-surface-2 p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-xl font-semibold text-text-primary">{personalizedTitle}</h2>
-              <Badge variant="blue">AI recommendations</Badge>
             </div>
             <p className="mt-1 text-sm text-text-secondary">Based on your profile: {personalizationLine}</p>
 
             <div
               key={`personalized-${category}-${workModeFilter}-${locationFilter}`}
-              className="animate-fade-up mt-4 flex gap-3 overflow-x-auto pb-1"
+              className="animate-fade-up scrollbar-hide mt-4 flex gap-3 overflow-x-auto pb-1"
             >
               {personalizedItems.map((item) => (
                 <Link key={item.id} to={`/welfare/marketplace/${item.id}`} className="ui-panel ui-interactive min-w-[300px] shrink-0 bg-surface">

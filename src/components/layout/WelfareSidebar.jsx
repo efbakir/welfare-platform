@@ -165,7 +165,7 @@ export default function WelfareSidebar() {
               id="sidebar-switch-user-panel"
               className="absolute bottom-[calc(100%+8px)] left-2 right-2 rounded-lg border border-border bg-surface p-2 shadow-[var(--shadow-sm)]"
             >
-              <PovSwitcher compact showPersonalize={false} />
+              <PovSwitcher compact showPersonalize={true} />
             </div>
           )}
         </div>

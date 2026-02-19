@@ -66,7 +66,7 @@ export default function BenefitRequests() {
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{pendingCount}</p>
                 <p className="mt-1 text-xs text-text-secondary">active queue</p>
               </div>
-              <div className="ui-panel p-4">
+              <div className="ui-panel border border-border p-4">
                 <p className="text-xs font-medium text-text-muted">Avg. timeline</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">2-4</p>
                 <p className="mt-1 text-xs text-text-secondary">business days</p>
@@ -82,7 +82,7 @@ export default function BenefitRequests() {
                     key={tab}
                     type="button"
                     onClick={() => setActiveTab(tab)}
-                    className={`rounded-md px-4 py-2 text-sm font-semibold ${tab === activeTab ? "bg-blue text-white" : "bg-violet-tint text-text-secondary"}`}
+                    className={`rounded-md px-4 py-2 text-sm font-semibold ${tab === activeTab ? "filter-tab-selected" : "bg-violet-tint text-text-secondary"}`}
                   >
                     {tab}
                   </button>
@@ -92,7 +92,7 @@ export default function BenefitRequests() {
               <div className="space-y-2.5">
                 {filtered.map((item) => (
                   <Link key={item.id} to={`/welfare/requests/${item.id}`} className="block">
-                    <article className="ui-panel ui-interactive p-4">
+                    <article className="ui-panel ui-interactive border border-border p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <p className="truncate text-lg font-semibold text-text-primary">{item.title}</p>
@@ -141,10 +141,10 @@ export default function BenefitRequests() {
           <Card>
             <CardBody className="space-y-3">
               <p className="text-lg font-semibold text-text-primary">Smart suggestions</p>
-              <div className="ui-panel p-3 text-sm text-text-secondary">
+              <div className="ui-panel border border-border p-3 text-sm text-text-secondary">
                 Based on your profile, request <span className="font-semibold text-text-primary">{profile.recommended[0]?.title}</span> first to reduce expiry risk.
               </div>
-              <div className="ui-panel p-3 text-sm text-text-secondary">
+              <div className="ui-panel border border-border p-3 text-sm text-text-secondary">
                 People in your role often request <span className="font-semibold text-text-primary">{profile.profileAnswers.focus}</span> benefits before month-end.
               </div>
             </CardBody>
@@ -153,15 +153,15 @@ export default function BenefitRequests() {
           <Card>
             <CardBody className="space-y-3">
               <p className="text-lg font-semibold text-text-primary">Transparency</p>
-              <div className="ui-panel p-3">
+              <div className="ui-panel border border-border p-3">
                 <p className="text-xs font-medium text-text-muted">Approval timeline</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">Typical review in 2-4 business days</p>
               </div>
-              <div className="ui-panel ui-interactive p-3">
+              <div className="ui-panel ui-interactive border border-border p-3">
                 <p className="text-xs font-medium text-text-muted">Policy reference</p>
                 <p className="mt-1 text-sm font-semibold text-blue">Open benefit policy guide</p>
               </div>
-              <div className="ui-panel p-3">
+              <div className="ui-panel border border-border p-3">
                 <p className="text-xs font-medium text-text-muted">Required documents</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">Invoice, eligibility proof, and optional attendance proof</p>
               </div>

@@ -82,7 +82,7 @@ export default function Transactions() {
       <Card>
         <CardBody className="space-y-3">
           {baseHistory.map((item) => (
-            <article key={item.id} className="ui-panel space-y-4 p-5">
+            <article key={item.id} className="ui-panel ui-interactive space-y-4 border border-border p-4">
               <header className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-semibold text-text-primary">{item.title}</h3>

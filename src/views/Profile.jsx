@@ -86,7 +86,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="ui-panel p-4">
+            <div className="ui-panel border border-border p-4">
               <div className="mb-3 flex items-center justify-between">
                 <p className="inline-flex items-center gap-1 text-base font-semibold text-text-primary">
                   <Icon name="spark" className="h-4 w-4" />
@@ -97,7 +97,7 @@ export default function Profile() {
               <p className="text-sm text-text-secondary">Tell us so we can prioritize better benefits and adjust credit suggestions.</p>
             </div>
 
-            <div className="ui-panel p-4">
+            <div className="ui-panel border border-border p-4">
               <p className="mb-3 text-sm font-semibold text-text-primary">Life stage</p>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {lifeStages.map((item) => (
@@ -106,7 +106,7 @@ export default function Profile() {
                     type="button"
                     onClick={() => setLifeStage(item)}
                     className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition ${
-                      item === lifeStage ? "bg-blue text-white" : "bg-[#f3f5ff] text-text-secondary hover:bg-blue-tint"
+                      item === lifeStage ? "bg-blue text-white" : "bg-cyan-tint text-text-secondary hover:bg-blue-tint"
                     }`}
                   >
                     <Icon name={lifeIcons[item]} className="h-4 w-4" />
@@ -117,7 +117,7 @@ export default function Profile() {
             </div>
 
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="ui-panel p-4">
+              <div className="ui-panel border border-border p-4">
                 <p className="mb-2 text-xs font-medium text-text-muted">Work mode</p>
                 <div className="flex flex-wrap gap-2">
                   {workModes.map((mode) => (
@@ -135,7 +135,7 @@ export default function Profile() {
                 </div>
               </div>
 
-              <div className="ui-panel p-4">
+              <div className="ui-panel border border-border p-4">
                 <p className="mb-2 text-xs font-medium text-text-muted">Primary goal</p>
                 <select
                   value={focus}
@@ -149,7 +149,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="ui-panel p-4">
+            <div className="ui-panel border border-border p-4">
               <p className="mb-3 text-sm font-semibold text-text-primary">Visibility & contact preferences</p>
               <div className="space-y-2">
                 <ToggleRow

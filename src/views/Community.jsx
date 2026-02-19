@@ -78,8 +78,8 @@ function EventCard({ event, joined, onJoin }) {
         </div>
 
         <div className="grid gap-2 rounded-md bg-surface-2 p-3 text-sm text-text-secondary sm:grid-cols-3">
-          <p className="inline-flex items-center gap-1.5"><Icon name="calendar" className="h-4 w-4" /> {event.date} · {event.time}</p>
           <p className="inline-flex items-center gap-1.5 truncate"><Icon name="location" className="h-4 w-4" /> {event.location}</p>
+          <p className="inline-flex items-center gap-1.5"><Icon name="calendar" className="h-4 w-4" /> {event.date} · {event.time}</p>
           <p className="inline-flex items-center gap-1.5"><Icon name="users" className="h-4 w-4" /> {event.spotsLeft} spots left</p>
         </div>
 
@@ -100,7 +100,7 @@ function EventCard({ event, joined, onJoin }) {
           </div>
         </div>
 
-        <div className="rounded-md border border-border bg-surface-2 p-2.5 text-xs text-text-secondary">
+        <div className="rounded-md border border-border p-2.5 text-xs text-text-secondary">
           {isPeople ? (
             <>
               <p className="font-semibold text-text-primary">Colleague-created event rules</p>
@@ -114,7 +114,7 @@ function EventCard({ event, joined, onJoin }) {
           )}
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-border pt-2">
+        <div className="flex items-center justify-end gap-2 pt-2">
           <Button size="sm" variant={joined ? "outline" : "primary"} onClick={() => onJoin(event.id)}>
             {joined ? "Joined" : "Join event"}
           </Button>
@@ -225,7 +225,7 @@ export default function Community() {
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={`rounded-md px-3 py-1.5 text-sm font-semibold transition ${
-                activeTab === tab.id ? "bg-blue text-white" : "bg-surface-2 text-text-secondary hover:bg-surface"
+                activeTab === tab.id ? "filter-tab-selected" : "bg-surface-2 text-text-secondary hover:bg-surface"
               }`}
             >
               {tab.label}

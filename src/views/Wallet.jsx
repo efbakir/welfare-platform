@@ -78,7 +78,7 @@ export default function Wallet() {
         <div className="space-y-4">
           <Card>
             <CardBody className="space-y-4">
-              <div className="ui-panel p-5">
+              <div className="ui-panel border border-border p-5">
                 <p className="text-sm font-semibold text-text-primary">Available now</p>
                 <p className="mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-text-primary">{remaining} pts</p>
                 <p className="mt-1 text-sm text-text-secondary">Points remaining</p>
@@ -93,7 +93,7 @@ export default function Wallet() {
                 </div>
               </div>
 
-              <div className="ui-panel p-4">
+              <div className="ui-panel pt-4">
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-base font-semibold text-text-primary">This month</h3>
                   <Badge variant="neutral">{usagePct}% used</Badge>

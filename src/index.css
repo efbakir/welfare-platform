@@ -255,6 +255,20 @@ input.rounded-full {
   transform: translateY(-1px);
 }
 
+/* Filter / tab selected state: dark primary, not blue */
+.filter-tab-selected {
+  background-color: var(--color-text-primary);
+  color: var(--color-text-white);
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
