@@ -180,8 +180,8 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-4xl">
-      <div className="flex min-h-[740px] w-full flex-col gap-5">
+    <div className="mx-auto w-full max-w-[597px] pb-24">
+      <div className="flex min-h-[min(740px,calc(100vh-8rem))] w-full flex-col gap-5">
         <div>
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm font-semibold text-text-muted">Step {step + 1} / {totalSteps}</p>
@@ -398,13 +398,11 @@ export default function Onboarding() {
                     <div key={item.id} className="ui-panel p-4">
                       <p className="text-base font-semibold text-text-primary">{item.title}</p>
                       <p className="mt-1 text-sm text-text-secondary">{item.reason}</p>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {(item.chips || []).slice(0, 3).map((chip) => (
-                          <span key={`${item.id}-${chip}`} className="rounded-sm bg-violet-tint px-2 py-1 text-[11px] font-medium text-text-secondary">
-                            Because you said: {chip}
-                          </span>
-                        ))}
-                      </div>
+                      {(item.chips || []).length > 0 && (
+                        <p className="mt-2 text-[11px] font-medium text-text-secondary">
+                          Because you said: {(item.chips || []).slice(0, 3).join(", ")}.
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -422,39 +420,37 @@ export default function Onboarding() {
             )}
         </div>
 
-        <div className="mt-auto grid min-h-[56px] w-full grid-cols-[1fr_220px] items-center gap-4 border-t border-[#e8edf3] pt-4">
-          <div>
+      </div>
+
+      <div className="fixed bottom-0 left-16 right-0 border-t border-[var(--color-border,#e8edf3)] bg-bg py-4 transition-all duration-300 peer-hover:left-56">
+        <div className="mx-auto flex min-h-[56px] w-full max-w-[597px] items-center justify-between gap-4 px-6">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={back}
+            disabled={step === 0}
+            className="px-4 py-2 text-sm disabled:opacity-40"
+          >
+            Back
+          </Button>
+          {step < totalSteps - 1 ? (
             <Button
               type="button"
-              variant="ghost"
-              onClick={back}
-              disabled={step === 0}
-              className="px-4 py-2 text-sm disabled:opacity-40"
+              onClick={next}
+              disabled={!canContinue}
+              className="min-w-[220px] justify-center disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Back
+              Continue
             </Button>
-          </div>
-
-          <div className="flex justify-end">
-            {step < totalSteps - 1 ? (
-              <Button
-                type="button"
-                onClick={next}
-                disabled={!canContinue}
-                className="w-full min-w-[220px] max-w-[220px] justify-center disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Continue
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                onClick={finish}
-                className="w-full min-w-[220px] max-w-[220px] justify-center"
-              >
-                Start with this setup
-              </Button>
-            )}
-          </div>
+          ) : (
+            <Button
+              type="button"
+              onClick={finish}
+              className="min-w-[220px] justify-center"
+            >
+              Start with this setup
+            </Button>
+          )}
         </div>
       </div>
     </div>
