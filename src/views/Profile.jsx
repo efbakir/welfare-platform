@@ -20,7 +20,7 @@ const focusGoals = ["Wellbeing", "Learning", "Family", "Community", "Flexibility
 
 function ToggleRow({ icon, label, description, enabled, onToggle, actionLabel = "Manage" }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+    <div className="ui-panel flex items-center justify-between gap-3 p-3">
       <div className="flex min-w-0 items-start gap-2.5">
         <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-violet-tint text-blue">
           <Icon name={icon} className="h-4 w-4" />
@@ -69,7 +69,7 @@ export default function Profile() {
       />
 
       <div className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-        <Card className="border-0 shadow-none">
+        <Card>
           <CardBody className="space-y-5">
             <div className="rounded-xl bg-violet-tint p-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -86,7 +86,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-4">
               <div className="mb-3 flex items-center justify-between">
                 <p className="inline-flex items-center gap-1 text-base font-semibold text-text-primary">
                   <Icon name="spark" className="h-4 w-4" />
@@ -97,7 +97,7 @@ export default function Profile() {
               <p className="text-sm text-text-secondary">Tell us so we can prioritize better benefits and adjust credit suggestions.</p>
             </div>
 
-            <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-4">
               <p className="mb-3 text-sm font-semibold text-text-primary">Life stage</p>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {lifeStages.map((item) => (
@@ -117,7 +117,7 @@ export default function Profile() {
             </div>
 
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-4">
                 <p className="mb-2 text-xs font-medium text-text-muted">Work mode</p>
                 <div className="flex flex-wrap gap-2">
                   {workModes.map((mode) => (
@@ -135,7 +135,7 @@ export default function Profile() {
                 </div>
               </div>
 
-              <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-4">
                 <p className="mb-2 text-xs font-medium text-text-muted">Primary goal</p>
                 <select
                   value={focus}
@@ -149,7 +149,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-4">
               <p className="mb-3 text-sm font-semibold text-text-primary">Visibility & contact preferences</p>
               <div className="space-y-2">
                 <ToggleRow
@@ -176,7 +176,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="rounded-xl p-3">
+            <div className="ui-panel-tint bg-cyan-tint p-3">
               <p className="text-xs font-medium text-text-muted">Community style</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{socialStyle}</p>
               <div className="mt-2 flex gap-2">
@@ -202,15 +202,15 @@ export default function Profile() {
         <Card>
           <CardBody className="space-y-3">
             <h3 className="text-lg font-semibold text-text-primary">Personalization logic</h3>
-            <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-3">
               <p className="text-xs font-medium text-text-muted">Because you are</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{lifeStage} · {workMode}</p>
             </div>
-            <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-3">
               <p className="text-xs font-medium text-text-muted">Because your focus is</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{focus}</p>
             </div>
-            <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+            <div className="ui-panel p-3">
               <p className="text-xs font-medium text-text-muted">Because your community preference is</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{socialStyle}</p>
             </div>

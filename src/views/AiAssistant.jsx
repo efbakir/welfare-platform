@@ -116,7 +116,7 @@ export default function AiAssistant() {
                     key={card.id}
                     type="button"
                     onClick={() => setMessage(card.sample)}
-                    className="rounded-xl bg-white/80 p-3 text-left shadow-[var(--shadow-xs)] transition hover:bg-white"
+                    className="ui-panel ui-interactive p-3 text-left"
                   >
                     <p className="text-sm font-semibold text-text-primary">{card.title}</p>
                     <p className="mt-0.5 text-xs text-text-secondary">{card.subtitle}</p>
@@ -136,7 +136,7 @@ export default function AiAssistant() {
                     key={prompt}
                     type="button"
                     onClick={() => setMessage(prompt)}
-                    className="w-full rounded-xl bg-white/80 p-3 text-left text-sm text-text-secondary shadow-[var(--shadow-xs)] transition hover:bg-white"
+                    className="ui-panel ui-interactive w-full p-3 text-left text-sm text-text-secondary"
                   >
                     <Icon name="spark" className="mr-1 inline h-4 w-4" />
                     {prompt}
@@ -175,15 +175,15 @@ export default function AiAssistant() {
             </div>
 
             <div className="grid gap-2 border-b border-[rgba(255,255,255,0.6)] bg-white/50 px-4 py-3 md:grid-cols-3">
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-3">
                 <p className="text-xs font-medium text-text-muted">Profile loaded</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{profile.name}</p>
               </div>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-3">
                 <p className="text-xs font-medium text-text-muted">This month budget</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{profile.budget.remaining} pts remaining</p>
               </div>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-3">
                 <p className="text-xs font-medium text-text-muted">Top suggestion</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{profile.recommended[0]?.title}</p>
               </div>
@@ -201,7 +201,7 @@ export default function AiAssistant() {
                     className={`max-w-[82%] rounded-xl px-3 py-2.5 text-sm leading-relaxed ${
                       item.role === "user"
                         ? "bg-blue text-white"
-                        : "bg-white text-text-primary shadow-[var(--shadow-xs)]"
+                        : "ui-panel text-text-primary"
                     }`}
                   >
                     {item.text}
@@ -212,12 +212,12 @@ export default function AiAssistant() {
 
             <div className="border-t border-[rgba(255,255,255,0.6)] px-4 py-3">
               <div className="mb-2 flex flex-wrap gap-2">
-                <button type="button" onClick={() => setMessage("Check what credits expire first")} className="rounded-md bg-violet-tint px-3 py-1.5 text-xs font-medium text-text-secondary">Expiring credits</button>
-                <button type="button" onClick={() => setMessage("What can I redeem this week?")} className="rounded-md bg-violet-tint px-3 py-1.5 text-xs font-medium text-text-secondary">Best this week</button>
-                <button type="button" onClick={() => setMessage("Explain why this recommendation is shown")} className="rounded-md bg-violet-tint px-3 py-1.5 text-xs font-medium text-text-secondary">Explain recommendation</button>
+                <button type="button" onClick={() => setMessage("Check what credits expire first")} className="ui-panel ui-interactive rounded-md px-3 py-1.5 text-xs font-medium text-text-secondary">Expiring credits</button>
+                <button type="button" onClick={() => setMessage("What can I redeem this week?")} className="ui-panel ui-interactive rounded-md px-3 py-1.5 text-xs font-medium text-text-secondary">Best this week</button>
+                <button type="button" onClick={() => setMessage("Explain why this recommendation is shown")} className="ui-panel ui-interactive rounded-md px-3 py-1.5 text-xs font-medium text-text-secondary">Explain recommendation</button>
               </div>
 
-              <div className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel flex items-center gap-2 p-2">
                 <input
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}

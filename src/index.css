@@ -223,6 +223,33 @@ input.rounded-full {
   box-shadow: var(--shadow-sm);
 }
 
+.ui-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-panel-tint {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-interactive {
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease;
+  cursor: pointer;
+}
+
+.ui-interactive:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

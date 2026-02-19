@@ -56,7 +56,6 @@ export default function SocialEventDetail() {
   return (
     <>
       <PageHeader
-        eyebrow="Team experience"
         title={event.title}
         subtitle="Coordinate and join with your colleagues"
         actions={
@@ -66,7 +65,7 @@ export default function SocialEventDetail() {
         }
       />
 
-      <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+      <div className="ui-panel overflow-hidden">
         <img src={meta.image} alt={event.title} className="h-72 w-full object-cover" />
       </div>
 
@@ -75,15 +74,15 @@ export default function SocialEventDetail() {
           <CardBody className="space-y-5 p-6">
             <p className="text-sm leading-6 text-text-secondary">{event.description}</p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+              <div className="ui-panel p-4">
                 <p className="text-xs tracking-wide text-text-muted">Date</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.date}</p>
               </div>
-              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+              <div className="ui-panel p-4">
                 <p className="text-xs tracking-wide text-text-muted">Time</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.time}</p>
               </div>
-              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+              <div className="ui-panel p-4">
                 <p className="text-xs tracking-wide text-text-muted">Location</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{meta.location}</p>
               </div>
@@ -102,14 +101,14 @@ export default function SocialEventDetail() {
               {attendeeList.map((attendee, index) => (
                 <div
                   key={`${attendee}-${index}`}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white bg-gradient-to-br from-blue to-pink text-xs font-bold text-white shadow-sm"
+                  className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-blue text-xs font-bold text-white shadow-[var(--shadow-sm)]"
                   title={attendee}
                 >
                   {attendee}
                 </div>
               ))}
             </div>
-            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-3 text-sm text-text-secondary">
+            <div className="ui-panel p-3 text-sm text-text-secondary">
               {attendeeList.length} colleagues already joined.
             </div>
           </CardBody>

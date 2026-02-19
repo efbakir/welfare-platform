@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/layout/PageHeader";
-import { Card, CardBody } from "../components/ui/Card";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import Icon from "../components/ui/Icon";
@@ -71,11 +70,6 @@ export default function Marketplace() {
 
   const featuredSet = useMemo(() => new Set(profile.marketplace.featured), [profile.marketplace.featured]);
 
-  const featuredItems = useMemo(
-    () => marketplaceCatalog.filter((item) => featuredSet.has(item.name)).slice(0, 4),
-    [featuredSet]
-  );
-
   const workModeFilter = filterOverrides[profile.id]?.workMode ?? profile.defaultFilters?.workMode ?? "All";
   const locationFilter = filterOverrides[profile.id]?.location ?? profile.defaultFilters?.location ?? "All";
 
@@ -85,34 +79,55 @@ export default function Marketplace() {
     return [...all];
   }, []);
 
+  const scopedByContext = useMemo(() => {
+    const byWorkMode =
+      workModeFilter === "All"
+        ? marketplaceCatalog
+        : marketplaceCatalog.filter((item) => (item.workModes || []).includes(workModeFilter));
+    return locationFilter === "All"
+      ? byWorkMode
+      : byWorkMode.filter((item) => (item.locations || []).includes(locationFilter));
+  }, [workModeFilter, locationFilter]);
+
+  const personalizedItems = useMemo(() => {
+    const scopedByCategory =
+      category === "All" ? scopedByContext : scopedByContext.filter((item) => item.category === category);
+
+    return [...scopedByCategory]
+      .sort((a, b) => {
+        const aFeatured = featuredSet.has(a.name) ? 2 : 0;
+        const bFeatured = featuredSet.has(b.name) ? 2 : 0;
+        const aRecommended = a.eligible === "Recommended" ? 1 : 0;
+        const bRecommended = b.eligible === "Recommended" ? 1 : 0;
+        return (bFeatured + bRecommended) - (aFeatured + aRecommended);
+      })
+      .slice(0, 8);
+  }, [category, scopedByContext, featuredSet]);
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const filteredByCategory = category === "All" ? marketplaceCatalog : marketplaceCatalog.filter((item) => item.category === category);
-    const filteredByWorkMode =
-      workModeFilter === "All"
-        ? filteredByCategory
-        : filteredByCategory.filter((item) => (item.workModes || []).includes(workModeFilter));
-    const filteredByLocation =
-      locationFilter === "All"
-        ? filteredByWorkMode
-        : filteredByWorkMode.filter((item) => (item.locations || []).includes(locationFilter));
+    const scopedByCategory =
+      category === "All" ? scopedByContext : scopedByContext.filter((item) => item.category === category);
 
     const filtered = q.length === 0
-      ? filteredByLocation
-      : filteredByLocation.filter((item) => `${item.name} ${item.category} ${item.eligible}`.toLowerCase().includes(q));
+      ? scopedByCategory
+      : scopedByCategory.filter((item) => `${item.name} ${item.category} ${item.eligible}`.toLowerCase().includes(q));
 
-    return [...filtered].sort((a, b) => {
-      const aScore = featuredSet.has(a.name) ? 1 : 0;
-      const bScore = featuredSet.has(b.name) ? 1 : 0;
-      return bScore - aScore;
-    });
-  }, [category, query, featuredSet, workModeFilter, locationFilter]);
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  }, [category, query, scopedByContext]);
+
+  const personalizationLine = [
+    profile.workMode,
+    profile.lifeEvents?.[0] || "No life event",
+    profile.constraints?.budgetComfort === "Low" ? "Financial pressure" : `${profile.constraints?.budgetComfort || "Medium"} budget comfort`,
+  ].join(" • ");
+
+  const personalizedTitle = category === "All" ? "Personalized for you" : `${category} picks for you`;
+  const allBenefitsTitle = category === "All" ? "All Benefits" : `All ${category} Benefits`;
 
   return (
     <div className="flex h-[calc(100vh-116px)] w-full min-w-0 flex-col">
-      <PageHeader
-        title="Marketplace"
-      />
+      <PageHeader title="Marketplace" />
 
       <div className="grid min-h-0 flex-1 gap-6 pt-4 xl:grid-cols-[280px_1fr]">
         <aside className="sticky top-0 self-start border-r border-border pr-5">
@@ -185,6 +200,38 @@ export default function Marketplace() {
         </aside>
 
         <div className="min-h-0 overflow-y-auto pr-1">
+          <section className="ui-panel-tint mb-4 bg-surface-2 p-4">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-xl font-semibold text-text-primary">{personalizedTitle}</h2>
+              <Badge variant="blue">AI recommendations</Badge>
+            </div>
+            <p className="mt-1 text-sm text-text-secondary">Based on your profile: {personalizationLine}</p>
+
+            <div
+              key={`personalized-${category}-${workModeFilter}-${locationFilter}`}
+              className="animate-fade-up mt-4 flex gap-3 overflow-x-auto pb-1"
+            >
+              {personalizedItems.map((item) => (
+                <Link key={item.id} to={`/welfare/marketplace/${item.id}`} className="ui-panel ui-interactive min-w-[300px] shrink-0 bg-surface">
+                  <div className="h-36 w-full overflow-hidden border-b border-border bg-surface-2">
+                    <img
+                      src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=700&h=360&fit=crop&q=80&auto=format`}
+                      alt={item.name}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="space-y-2 p-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-base font-semibold text-text-primary">{item.name}</p>
+                      <Badge variant="blue">Recommended</Badge>
+                    </div>
+                    <p className="text-sm text-text-secondary">{item.category} · {item.points} pts</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
           <div className="sticky top-0 z-20 mb-4 border-b border-border bg-bg pb-4">
             <div className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
               <div className="relative">
@@ -209,98 +256,52 @@ export default function Marketplace() {
             </div>
           </div>
 
-          <div className="space-y-4 pb-4">
-          <section className="space-y-3">
+          <section className="space-y-3 border-t border-border pt-5 pb-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold tracking-tight text-text-primary">Featured for you</h2>
-              <p className="text-sm text-text-muted">{profile.marketplace.quickNote}</p>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              {featuredItems.map((item) => (
-                <Link key={item.id} to={`/welfare/marketplace/${item.id}`} className="block">
-                  <Card className="h-full cursor-pointer transition hover:-translate-y-[1px]">
-                    <div className="h-40 w-full overflow-hidden bg-[#eef1ff]">
-                      <img
-                        src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=760&h=400&fit=crop&q=80&auto=format`}
-                        alt={item.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <CardBody className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-lg font-semibold text-text-primary">{item.name}</p>
-                        <Badge variant="blue">Recommended</Badge>
-                      </div>
-                      <p className="text-sm text-text-secondary">
-                        {item.category} · {item.points} pts · Expires {item.expiry}
-                      </p>
-                      {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).length > 0 ? (
-                        <p className="text-xs text-text-muted opacity-90">
-                          Because you said: {(profile.recommendationChipsByBenefit?.[item.name] || [profile.profileAnswers.focus]).slice(0, 3).join(", ")}.
-                        </p>
-                      ) : null}
-                    </CardBody>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section className="space-y-3 pt-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-semibold tracking-tight text-text-primary">All benefits</h3>
+              <h3 className="text-2xl font-semibold tracking-tight text-text-primary">{allBenefitsTitle}</h3>
               <Badge variant="neutral">{category === "All" ? "All categories" : category}</Badge>
             </div>
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="divide-y divide-border border-y border-border">
               {visible.map((item) => {
                 const isClickable = featuredSet.has(item.name) || item.points >= 120;
-                const card = (
-                  <Card className="h-full cursor-pointer transition hover:-translate-y-[1px] hover:shadow-[var(--shadow-hover)]">
-                    <CardBody className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-surface-2">
-                          <img
-                            src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=96&h=96&fit=crop&q=80&auto=format`}
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-lg font-semibold text-text-primary">{item.name}</p>
-                          <p className="text-sm text-text-muted">{item.category}</p>
-                        </div>
-                        {featuredSet.has(item.name) && <Badge variant="blue">Recommended</Badge>}
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant={item.eligible === "Recommended" ? "blue" : "green"}>{item.eligible}</Badge>
-                      </div>
-
-                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-secondary">
-                        <span><span className="font-semibold text-text-primary">{item.points}</span> points</span>
-                        <span>Expires {item.expiry}</span>
-                      </div>
-                    </CardBody>
-                  </Card>
+                const row = (
+                  <div className="group flex items-center gap-3 px-2 py-3 transition hover:bg-surface-2">
+                    <div className="h-12 w-12 shrink-0 overflow-hidden rounded-md bg-surface-2">
+                      <img
+                        src={`https://images.unsplash.com/${cardImages[item.name] ?? "photo-1521737604893-d14cc237f11d"}?w=96&h=96&fit=crop&q=80&auto=format`}
+                        alt=""
+                        className="h-full w-full object-cover object-center"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-base font-semibold text-text-primary">{item.name}</p>
+                      <p className="text-sm text-text-secondary">{item.category} · Expires {item.expiry}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {featuredSet.has(item.name) ? <Badge variant="blue">Recommended</Badge> : null}
+                      <Badge variant={item.eligible === "Recommended" ? "blue" : "green"}>{item.eligible}</Badge>
+                      <span className="text-sm font-semibold text-text-primary">{item.points} pts</span>
+                    </div>
+                  </div>
                 );
 
                 if (isClickable) {
                   return (
-                    <Link key={item.id} to={`/welfare/marketplace/${item.id}`} className="block h-full">
-                      {card}
+                    <Link key={item.id} to={`/welfare/marketplace/${item.id}`} className="block">
+                      {row}
                     </Link>
                   );
                 }
 
                 return (
-                  <div key={item.id} className="h-full cursor-pointer">
-                    {card}
+                  <div key={item.id}>
+                    {row}
                   </div>
                 );
               })}
             </div>
+            <p className="text-xs text-text-muted">Manual browsing results are shown here. Personalized picks above are AI-ranked for your profile.</p>
           </section>
-          </div>
         </div>
       </div>
     </div>

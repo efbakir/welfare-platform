@@ -14,6 +14,7 @@ import Transactions from "./views/Transactions";
 import BenefitDetail from "./views/BenefitDetail";
 import Onboarding from "./views/Onboarding";
 import Settings from "./views/Settings";
+import Community from "./views/Community";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="wallet" element={<Wallet />} />
             <Route path="wallet/add-family-member" element={<Wallet />} />
             <Route path="marketplace" element={<Marketplace />} />
+            <Route path="community" element={<Community />} />
             <Route path="marketplace/:benefitId" element={<BenefitDetail />} />
             <Route path="ai" element={<AiAssistant />} />
             <Route path="requests" element={<BenefitRequests />} />

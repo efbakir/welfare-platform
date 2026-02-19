@@ -1,7 +1,11 @@
-export function Card({ children, className = "", ...props }) {
+export function Card({ children, className = "", interactive = false, ...props }) {
+  const resolvedInteractive = interactive || className.includes("cursor-pointer");
+
   return (
     <div
-      className={`overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-sm)] transition-colors duration-200 ${className}`}
+      className={`overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-sm)] transition-[box-shadow,transform,background-color,border-color] duration-200 ${
+        resolvedInteractive ? "hover:-translate-y-px hover:shadow-[var(--shadow-hover)]" : ""
+      } ${className}`}
       style={{ borderRadius: "var(--radius-2xl)" }}
       {...props}
     >

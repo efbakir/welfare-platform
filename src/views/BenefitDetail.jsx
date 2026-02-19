@@ -75,7 +75,6 @@ export default function BenefitDetail() {
   return (
     <>
       <PageHeader
-        eyebrow="Marketplace benefit"
         title={detail.name || "Little Stars Daycare"}
         subtitle="Review benefit details before redeeming points"
         actions={
@@ -85,7 +84,7 @@ export default function BenefitDetail() {
         }
       />
 
-      <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+      <div className="ui-panel overflow-hidden">
         <img src={heroImage} alt={detail.name} className="h-72 w-full object-cover" />
       </div>
 
@@ -118,7 +117,7 @@ export default function BenefitDetail() {
           <Card>
             <CardBody className="p-6">
               <h3 className="mb-3 text-sm font-semibold text-text-primary">Location</h3>
-              <div className="flex h-56 items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-gradient-to-br from-blue-tint to-white text-sm text-text-secondary">
+              <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-border bg-surface-2 text-sm text-text-secondary">
                 Map placeholder: 14 Riverfront Plaza, Downtown Campus
               </div>
             </CardBody>
@@ -128,7 +127,7 @@ export default function BenefitDetail() {
             <CardBody className="space-y-4 p-6">
               <h3 className="text-sm font-semibold text-text-primary">Reviews from colleagues</h3>
               {defaultReviews.map((review) => (
-                <div key={review.id} className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+                <div key={review.id} className="ui-panel p-4">
                   <div className="text-sm font-semibold text-text-primary">{review.name}</div>
                   <div className="text-xs text-text-muted">{review.role}</div>
                   <p className="mt-2 text-sm text-text-secondary">{review.text}</p>
@@ -145,7 +144,7 @@ export default function BenefitDetail() {
                 <p className="text-xs tracking-wider text-text-muted">Summary</p>
                 <h3 className="mt-1 font-display text-lg font-bold text-text-primary">Redeem this benefit</h3>
               </div>
-              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+              <div className="ui-panel p-4">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-text-muted">Point cost</span>
                   <span className="font-semibold text-text-primary">{pointsCost} pts</span>

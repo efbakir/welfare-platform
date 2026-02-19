@@ -9,7 +9,7 @@ import { usePov } from "../context/PovContext";
 
 function SummaryStat({ label, value, sub }) {
   return (
-    <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-sm)]">
+    <div className="ui-panel p-4">
       <p className="text-xs font-medium text-text-muted">{label}</p>
       <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{value}</p>
       {sub ? <p className="mt-1 text-xs text-text-secondary">{sub}</p> : null}
@@ -60,7 +60,7 @@ function RecommendationGrid({ profile }) {
 
       <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(auto-fit, minmax(${minCardWidth}px, 1fr))` }}>
         {profile.recommended.slice(0, 5).map((item, index) => (
-          <Card key={item.id} className="border-0 shadow-none transition-shadow duration-200 hover:shadow-[var(--shadow-hover)]">
+          <Card key={item.id} interactive>
             <div className="aspect-[16/8] w-full overflow-hidden border-b border-border bg-surface-2">
               <img
                 src={recommendationImages[item.title] || fallbackImages[index % fallbackImages.length]}
@@ -200,7 +200,7 @@ export default function Dashboard() {
         </div>
 
         {(profile.communityPreference === "Solo" && profile.constraints?.privacyLevel === "High") ? (
-          <div className="flex items-center justify-between overflow-hidden rounded-xl bg-surface p-3 shadow-[var(--shadow-sm)]">
+          <div className="ui-panel flex items-center justify-between overflow-hidden p-3">
             <div>
               <p className="text-sm font-semibold text-text-primary">Quiet mode</p>
               <p className="text-xs text-text-secondary">Minimizes social modules and keeps recommendations calm.</p>
@@ -230,7 +230,7 @@ export default function Dashboard() {
         <h3 className="text-2xl font-semibold tracking-tight text-text-primary">Adaptive modules</h3>
         <div className="space-y-2">
           {orderedModules.map((module) => (
-            <div key={module.key} className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
+            <div key={module.key} className="ui-panel flex gap-3 p-3">
               <div className="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-surface-2">
                 <img
                   src={moduleImages[module.key] || moduleImages.credits}
@@ -255,9 +255,13 @@ export default function Dashboard() {
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold tracking-tight text-text-primary">Community</h3>
-          {profile.communityModule !== "collapsed" ? (
-            <Badge variant="neutral">{profile.communityModule}</Badge>
-          ) : null}
+          <div className="flex items-center gap-2">
+            {profile.communityModule !== "collapsed" ? (
+              <Badge variant="neutral">{profile.communityModule}</Badge>
+            ) : null}
+            <Button variant="outline" size="sm" onClick={() => navigate("/welfare/community")}>Open community</Button>
+            <Button size="sm" onClick={() => navigate("/welfare/community?create=1")}>Create event</Button>
+          </div>
         </div>
 
         {profile.communityModule === "collapsed" || quietMode ? (

@@ -52,26 +52,25 @@ export default function Transactions() {
   return (
     <div className="mx-auto w-full max-w-[1220px] space-y-6">
       <PageHeader
-        eyebrow="Credit journey"
         title="History"
       />
 
       <div className="grid gap-3 md:grid-cols-3">
-        <div className="rounded-md bg-surface p-4">
+        <div className="ui-panel p-4">
           <p className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-text-muted">
             <Icon name="wallet" className="h-4 w-4 shrink-0" />
             Credits spent
           </p>
           <p className="mt-1 text-2xl font-semibold text-text-primary">{summary.spent} pts</p>
         </div>
-        <div className="rounded-md bg-surface p-4">
+        <div className="ui-panel p-4">
           <p className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-text-muted">
             <Icon name="spark" className="h-4 w-4 shrink-0" />
             Credits returned
           </p>
           <p className="mt-1 text-2xl font-semibold text-text-primary">{summary.cashback} pts</p>
         </div>
-        <div className="rounded-md bg-surface p-4">
+        <div className="ui-panel p-4">
           <p className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-text-muted">
             <Icon name="users" className="h-4 w-4 shrink-0" />
             Social activities
@@ -80,10 +79,10 @@ export default function Transactions() {
         </div>
       </div>
 
-      <Card className="border-0 shadow-none">
+      <Card>
         <CardBody className="space-y-3">
           {baseHistory.map((item) => (
-            <article key={item.id} className="rounded-xl bg-surface p-5 shadow-[var(--shadow-sm)] space-y-4">
+            <article key={item.id} className="ui-panel space-y-4 p-5">
               <header className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h3 className="text-lg font-semibold text-text-primary">{item.title}</h3>
@@ -113,7 +112,7 @@ export default function Transactions() {
         </CardBody>
       </Card>
 
-      <Card className="border-0 shadow-none">
+      <Card>
         <CardBody className="space-y-2">
           <h3 className="text-lg font-semibold text-text-primary">Personal impact summary</h3>
           <p className="text-sm text-text-secondary">

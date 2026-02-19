@@ -361,7 +361,7 @@ export default function Onboarding() {
                   />
                 </div>
 
-                <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+                <div className="ui-panel p-4">
                   <label className="flex items-center justify-between gap-3">
                     <span>
                       <p className="text-sm font-semibold text-text-primary">AI suggestions consent</p>
@@ -392,7 +392,7 @@ export default function Onboarding() {
 
                 <div className="grid gap-3 md:grid-cols-2">
                   {previewProfile.recommended.slice(0, 5).map((item) => (
-                    <div key={item.id} className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+                    <div key={item.id} className="ui-panel p-4">
                       <p className="text-base font-semibold text-text-primary">{item.title}</p>
                       <p className="mt-1 text-sm text-text-secondary">{item.reason}</p>
                       <div className="mt-2 flex flex-wrap gap-1.5">

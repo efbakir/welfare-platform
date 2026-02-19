@@ -39,7 +39,10 @@ export default function Wallet() {
 
   const remaining = Math.max(0, profile.budget.total - allocated);
   const expiringSoon = Math.max(20, Math.round(profile.budget.total * 0.18));
-  const usagePct = Math.min(100, Math.round((allocated / profile.budget.total) * 100));
+  const monthlyAllowance = profile.budget.total;
+  const usedThisMonth = allocated;
+  const usagePct = Math.min(100, Math.round((usedThisMonth / Math.max(monthlyAllowance, 1)) * 100));
+  const planPct = Math.min(100, Math.round((monthlyGoal / Math.max(monthlyAllowance, 1)) * 100));
 
   const autoSplit = () => {
     if (!profile.familyEnabled) return;
@@ -60,8 +63,8 @@ export default function Wallet() {
         actions={<Button size="sm" onClick={() => navigate("/welfare/history")}>Open history</Button>}
       />
 
-      <Card className="border-0">
-        <CardBody className="rounded-xl bg-violet-tint p-4">
+      <Card>
+        <CardBody className="ui-panel-tint bg-violet-tint p-4">
           <p className="text-sm font-semibold text-text-primary">{profile.walletCallout || "Use credits intentionally based on your constraints."}</p>
           {profile.id === "operator" && (
             <p className="mt-1 text-xs text-text-secondary">
@@ -73,54 +76,87 @@ export default function Wallet() {
 
       <div className="grid gap-4 xl:grid-cols-[1.7fr_1fr]">
         <div className="space-y-4">
-          <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-                <p className="flex items-center gap-1.5 text-xs font-medium text-text-muted">
-                  <Icon name="wallet" className="h-4 w-4 shrink-0" />
-                  <span>Available credits</span>
+          <Card>
+            <CardBody className="space-y-4">
+              <div className="ui-panel p-5">
+                <p className="text-sm font-semibold text-text-primary">Available now</p>
+                <p className="mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-text-primary">{remaining} pts</p>
+                <p className="mt-1 text-sm text-text-secondary">Points remaining</p>
+
+                <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface-2 px-3 py-2.5">
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-text-secondary">
+                    <Icon name="clock" className="h-4 w-4" />
+                    Expiring in 30 days
+                  </span>
+                  <span className="text-sm font-semibold text-text-primary">{expiringSoon} pts</span>
+                  <Button variant="ghost" size="sm" className="ml-auto">See expiring</Button>
+                </div>
+              </div>
+
+              <div className="ui-panel p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-base font-semibold text-text-primary">This month</h3>
+                  <Badge variant="neutral">{usagePct}% used</Badge>
+                </div>
+
+                <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                  <div>
+                    <p className="text-xs text-text-muted">Used this month</p>
+                    <p className="mt-1 text-xl font-semibold text-text-primary">{usedThisMonth} pts</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-text-muted">Credits granted (this month)</p>
+                    <p className="mt-1 text-xl font-semibold text-text-primary">{monthlyAllowance} pts</p>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1">
+                      <p className="text-xs text-text-muted">Spend plan</p>
+                      <span
+                        className="inline-flex h-4 w-4 items-center justify-center rounded-sm border border-border text-[10px] font-bold text-text-muted"
+                        title="Spend plan is a personal target to guide usage. It doesn’t change your available points."
+                      >
+                        i
+                      </span>
+                    </div>
+                    <p className="mt-1 text-xl font-semibold text-text-primary">{monthlyGoal} pts</p>
+                  </div>
+                </div>
+
+                <p className="mt-2 text-xs text-text-secondary">
+                  A personal target to help you use credits before they expire. Does not affect your balance.
                 </p>
-                <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{remaining}</p>
-                <p className="mt-1 text-xs text-text-secondary">points remaining</p>
-              </div>
-              <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-                <p className="flex items-center gap-1.5 text-xs font-medium text-text-muted">
-                  <Icon name="spark" className="h-4 w-4 shrink-0" />
-                  <span>Allocated</span>
+                <p className="text-xs text-text-muted">
+                  Spend plan is a personal target to guide usage. It doesn’t change your available points.
                 </p>
-                <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{allocated}</p>
-                <p className="mt-1 text-xs text-text-secondary">{usagePct}% utilization</p>
+
+                <div className="mt-4">
+                  <div className="mb-2 flex items-center justify-between text-xs text-text-muted">
+                    <span>Usage vs monthly allowance</span>
+                    <span>{usedThisMonth} / {monthlyAllowance} pts</span>
+                  </div>
+                  <div className="relative h-2 overflow-visible rounded-sm bg-[#e6e9f5]">
+                    <div
+                      className="h-full rounded-sm bg-[linear-gradient(90deg,var(--color-blue)_0%,var(--color-blue-mid)_100%)] transition-all"
+                      style={{ width: `${usagePct}%` }}
+                    />
+                    <span
+                      className="absolute -top-1 h-4 w-[2px] bg-text-primary"
+                      style={{ left: `${planPct}%` }}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
+                    <span>Fill = used</span>
+                    <span>Line marker = spend plan</span>
+                    <span>Base = credits granted (this month)</span>
+                  </div>
+                </div>
               </div>
-              <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-                <p className="flex items-center gap-1.5 text-xs font-medium text-text-muted">
-                  <Icon name="clock" className="h-4 w-4 shrink-0" />
-                  <span>Expiring in 30 days</span>
-                </p>
-                <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{expiringSoon}</p>
-                <p className="mt-1 text-xs text-text-secondary">prioritize redemption</p>
-              </div>
-              <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-                <p className="flex items-center gap-1.5 text-xs font-medium text-text-muted">
-                  <Icon name="calendar" className="h-4 w-4 shrink-0" />
-                  <span>Monthly goal</span>
-                </p>
-                <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{monthlyGoal}</p>
-                <p className="mt-1 text-xs text-text-secondary">target usage</p>
-              </div>
-            </div>
-            <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-              <div className="mb-1 flex items-center justify-between text-xs text-text-muted">
-                <span>Budget utilization</span>
-                <span>{usagePct}%</span>
-              </div>
-              <div className="h-2 overflow-hidden rounded-sm bg-[#e6e9f5]">
-                <div className="h-full rounded-sm bg-[linear-gradient(90deg,var(--color-blue)_0%,var(--color-blue-mid)_100%)] transition-all" style={{ width: `${usagePct}%` }} />
-              </div>
-            </div>
-          </div>
+            </CardBody>
+          </Card>
 
           {profile.familyEnabled ? (
-            <Card className="border-0 shadow-none">
+            <Card>
               <CardBody className="space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
@@ -140,7 +176,7 @@ export default function Wallet() {
                   {profile.familyMembers.map((member) => {
                     const value = familyAllocations[member.id] || 0;
                     return (
-                      <div key={member.id} className="rounded-xl bg-white/80 py-4 px-0 shadow-[var(--shadow-xs)]">
+                      <div key={member.id} className="ui-panel py-4 px-0">
                         <div className="mb-2 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-2">
                             <span className={`inline-flex h-8 w-8 items-center justify-center rounded-sm text-xs font-semibold ${relationAvatarTone[member.relation] || "bg-blue-tint text-blue"}`}>
@@ -172,16 +208,16 @@ export default function Wallet() {
               </CardBody>
             </Card>
           ) : (
-            <Card className="border-0 shadow-none">
+            <Card>
               <CardBody className="space-y-4">
                 <p className="inline-flex items-center gap-1 text-lg font-semibold text-text-primary">
                   <Icon name="wallet" className="h-5 w-5" />
                   Personal plan
                 </p>
                 <p className="text-sm text-text-secondary">Family wallet is disabled for this profile. Set a monthly spend target instead.</p>
-                <div className="rounded-xl bg-white/80 py-4 px-0 shadow-[var(--shadow-xs)]">
+                <div className="ui-panel py-4 px-0">
                   <div className="mb-2 flex items-center justify-between">
-                    <p className="text-sm font-semibold text-text-primary">Monthly credit goal</p>
+                    <p className="text-sm font-semibold text-text-primary">Spend plan</p>
                     <Badge variant="blue">{monthlyGoal} pts</Badge>
                   </div>
                   <div className="flex items-center">
@@ -196,7 +232,7 @@ export default function Wallet() {
                       style={{ background: SliderTrack({ value: monthlyGoal, min: 80, max: profile.budget.total }) }}
                     />
                   </div>
-                  <p className="mt-2 text-xs text-text-muted">Target-driven guidance helps avoid unused credits before expiry.</p>
+                  <p className="mt-2 text-xs text-text-muted">Spend plan is guidance only and does not change your available points.</p>
                 </div>
               </CardBody>
             </Card>
@@ -204,60 +240,37 @@ export default function Wallet() {
         </div>
 
         <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-tint text-blue">
-                <Icon name="wellness" className="h-4 w-4" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-xs font-medium text-text-muted">Eligibility snapshot</p>
-                <p className="mt-0.5 text-sm font-semibold text-text-primary">
-                  {profile.familyEnabled
-                    ? "You are eligible for Family Support reimbursements this month."
-                    : "You are currently mapped to individual wellbeing and learning benefits."}
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-tint text-green">
-                <Icon name="education" className="h-4 w-4" />
-              </span>
-              <div className="min-w-0">
+          <div className="ui-panel p-3">
+            <p className="text-xs font-medium text-text-muted">Eligibility snapshot</p>
+            <p className="mt-1 text-sm font-semibold text-text-primary">
+              {profile.familyEnabled
+                ? "You are eligible for Family Support reimbursements this month."
+                : "You are currently mapped to individual wellbeing and learning benefits."}
+            </p>
+          </div>
+
+          <details className="ui-panel group p-3">
+            <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-text-primary">
+              More insights
+              <span className="text-xs text-text-muted transition group-open:rotate-180">⌄</span>
+            </summary>
+            <div className="mt-3 space-y-2 border-t border-border pt-3">
+              <div className="rounded-md bg-surface-2 p-3">
                 <p className="text-xs font-medium text-text-muted">Category cap watch</p>
                 <p className="mt-0.5 text-sm font-semibold text-text-primary">
                   Learning cap usage: {Math.min(95, 55 + Math.round(usagePct * 0.3))}%
                 </p>
               </div>
-            </div>
-            <div className="flex gap-3 rounded-xl bg-surface p-3 shadow-[var(--shadow-xs)]">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-violet-tint text-blue">
-                <Icon name="spark" className="h-4 w-4" />
-              </span>
-              <div className="min-w-0">
+              <div className="rounded-md bg-surface-2 p-3">
                 <p className="text-xs font-medium text-text-muted">Smart suggestion</p>
                 <p className="mt-0.5 text-sm font-semibold text-text-primary">People in your role usually redeem before week 3 each month.</p>
               </div>
             </div>
-          </div>
+          </details>
         </div>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-3">
-        <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-          <p className="text-xs text-text-muted">This month used</p>
-          <p className="mt-1 text-xl font-semibold text-text-primary">{allocated} pts</p>
-        </div>
-        <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-          <p className="text-xs text-text-muted">Upcoming expiries</p>
-          <p className="mt-1 text-xl font-semibold text-text-primary">{expiringSoon} pts</p>
-        </div>
-        <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-xs)]">
-          <p className="text-xs text-text-muted">Best-fit category</p>
-          <p className="mt-1 text-xl font-semibold text-text-primary">{profile.profileAnswers.focus}</p>
-        </div>
-      </div>
-
-      <div className="rounded-xl bg-violet-tint p-4 shadow-[var(--shadow-xs)]">
+      <div className="ui-panel-tint bg-violet-tint p-4">
         <p className="text-sm font-semibold text-text-primary">Transparency</p>
         <p className="mt-1 text-xs text-text-secondary">Allocations help you spend credits before expiry. Changes apply instantly in this prototype.</p>
         <p className="mt-0.5 text-xs text-text-muted">Policy reference and eligibility checks are available in Requests.</p>

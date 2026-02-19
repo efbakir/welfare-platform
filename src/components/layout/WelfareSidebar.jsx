@@ -8,6 +8,7 @@ const mainNavItems = [
   { to: "/welfare/wallet", label: "Wallet", icon: "wallet" },
   { to: "/welfare/profile", label: "Profile", icon: "profile" },
   { to: "/welfare/marketplace", label: "Marketplace", icon: "marketplace" },
+  { to: "/welfare/community", label: "Community", icon: "community" },
   { to: "/welfare/requests", label: "Requests", icon: "requests" },
   { to: "/welfare/history", label: "History", icon: "transactions" },
 ];
@@ -70,6 +71,13 @@ function NavIcon({ type }) {
         <path d="m13 4 4 3-4 3" />
         <path d="M18 17H7" />
         <path d="m11 14-4 3 4 3" />
+      </svg>
+    );
+  }
+  if (type === "community") {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 20s-6.5-3.7-8.5-7.9A4.8 4.8 0 0 1 12 7a4.8 4.8 0 0 1 8.5 5.1C18.5 16.3 12 20 12 20Z" />
       </svg>
     );
   }

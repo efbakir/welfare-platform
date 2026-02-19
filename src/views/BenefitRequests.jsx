@@ -43,7 +43,7 @@ export default function BenefitRequests() {
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="space-y-4">
           <Card>
-            <CardBody className="rounded-xl bg-violet-tint p-4">
+            <CardBody className="ui-panel-tint bg-violet-tint p-4">
               <p className="text-xs font-medium text-text-muted">{profile.requestsEmphasis?.title || "Request emphasis"}</p>
               <p className="mt-1 text-sm font-semibold text-text-primary">{profile.requestsEmphasis?.copy || "Requests adapt to your profile context."}</p>
             </CardBody>
@@ -51,22 +51,22 @@ export default function BenefitRequests() {
 
           <Card>
             <CardBody className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-xl bg-violet-tint p-4">
+              <div className="ui-panel-tint bg-violet-tint p-4">
                 <p className="text-xs font-medium text-text-muted">Available credits</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{profile.budget.remaining}</p>
                 <p className="mt-1 text-xs text-text-secondary">points available</p>
               </div>
-              <div className="rounded-xl bg-cyan-tint p-4">
+              <div className="ui-panel-tint bg-cyan-tint p-4">
                 <p className="text-xs font-medium text-text-muted">Expiring soon</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{expiringSoon}</p>
                 <p className="mt-1 text-xs text-text-secondary">next 30 days</p>
               </div>
-              <div className="rounded-xl bg-green-tint p-4">
+              <div className="ui-panel-tint bg-green-tint p-4">
                 <p className="text-xs font-medium text-text-muted">Pending approvals</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">{pendingCount}</p>
                 <p className="mt-1 text-xs text-text-secondary">active queue</p>
               </div>
-              <div className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-4">
                 <p className="text-xs font-medium text-text-muted">Avg. timeline</p>
                 <p className="mt-2 text-[30px] font-semibold leading-none tracking-[-0.02em] text-text-primary">2-4</p>
                 <p className="mt-1 text-xs text-text-secondary">business days</p>
@@ -92,7 +92,7 @@ export default function BenefitRequests() {
               <div className="space-y-2.5">
                 {filtered.map((item) => (
                   <Link key={item.id} to={`/welfare/requests/${item.id}`} className="block">
-                    <article className="rounded-xl bg-white/80 p-4 shadow-[var(--shadow-xs)] transition hover:bg-white">
+                    <article className="ui-panel ui-interactive p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <p className="truncate text-lg font-semibold text-text-primary">{item.title}</p>
@@ -121,17 +121,17 @@ export default function BenefitRequests() {
           <Card>
             <CardBody className="space-y-3">
               <p className="text-lg font-semibold text-text-primary">Eligibility snapshot</p>
-              <div className="rounded-xl bg-violet-tint p-3">
+              <div className="ui-panel-tint bg-violet-tint p-3">
                 <p className="text-xs font-medium text-text-muted">Family support</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">
                   {profile.familyEnabled ? "Eligible for Family Support reimbursement" : "Not enabled for this profile"}
                 </p>
               </div>
-              <div className="rounded-xl bg-cyan-tint p-3">
+              <div className="ui-panel-tint bg-cyan-tint p-3">
                 <p className="text-xs font-medium text-text-muted">Learning budget usage</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{learningUsage}% consumed</p>
               </div>
-              <div className="rounded-xl bg-green-tint p-3">
+              <div className="ui-panel-tint bg-green-tint p-3">
                 <p className="text-xs font-medium text-text-muted">Approval readiness</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">{approvedCount} requests are ready for fulfillment</p>
               </div>
@@ -141,10 +141,10 @@ export default function BenefitRequests() {
           <Card>
             <CardBody className="space-y-3">
               <p className="text-lg font-semibold text-text-primary">Smart suggestions</p>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)] text-sm text-text-secondary">
+              <div className="ui-panel p-3 text-sm text-text-secondary">
                 Based on your profile, request <span className="font-semibold text-text-primary">{profile.recommended[0]?.title}</span> first to reduce expiry risk.
               </div>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)] text-sm text-text-secondary">
+              <div className="ui-panel p-3 text-sm text-text-secondary">
                 People in your role often request <span className="font-semibold text-text-primary">{profile.profileAnswers.focus}</span> benefits before month-end.
               </div>
             </CardBody>
@@ -153,15 +153,15 @@ export default function BenefitRequests() {
           <Card>
             <CardBody className="space-y-3">
               <p className="text-lg font-semibold text-text-primary">Transparency</p>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-3">
                 <p className="text-xs font-medium text-text-muted">Approval timeline</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">Typical review in 2-4 business days</p>
               </div>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel ui-interactive p-3">
                 <p className="text-xs font-medium text-text-muted">Policy reference</p>
                 <p className="mt-1 text-sm font-semibold text-blue">Open benefit policy guide</p>
               </div>
-              <div className="rounded-xl bg-white/80 p-3 shadow-[var(--shadow-xs)]">
+              <div className="ui-panel p-3">
                 <p className="text-xs font-medium text-text-muted">Required documents</p>
                 <p className="mt-1 text-sm font-semibold text-text-primary">Invoice, eligibility proof, and optional attendance proof</p>
               </div>
